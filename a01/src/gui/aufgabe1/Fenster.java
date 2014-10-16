@@ -23,7 +23,15 @@ public class Fenster extends JFrame {
     private int breite;
     private int hoehe;
     
-    
+    /**
+     * Fesnterinstanz erzeugen. 
+     * 
+     * @param titel 
+     * @param xPos
+     * @param yPos
+     * @param breite
+     * @param hoehe 
+     */
     public Fenster (String titel, int xPos, int yPos, int breite, int hoehe) {
         super ();
         this.initFenster(titel, xPos, yPos, breite, hoehe);
@@ -31,6 +39,15 @@ public class Fenster extends JFrame {
     }
 
  
+    /**
+     * Initialisierung der Fensterwerte, Position, Titel, Breite und Höhe.
+     * 
+     * @param titel
+     * @param xPos
+     * @param yPos
+     * @param breite
+     * @param hoehe 
+     */
     private void initFenster (String titel, int xPos, int yPos, 
                               int breite, int hoehe) {
         
@@ -42,6 +59,9 @@ public class Fenster extends JFrame {
     
     }
     
+    /**
+     * Erzeugt das Fenster mit den festgelegten Werten.
+     */
    private void erzeugeFenster () {
        this.setTitle(titel);
        this.setLocation(xPos,yPos);
