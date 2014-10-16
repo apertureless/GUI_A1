@@ -1,7 +1,9 @@
 
 package gui.aufgabe1;
 
+import java.io.IOException;
 import javax.swing.JFrame;
+import utilities.TastaturEingabe;
 
 /**
  * Klasse für die Darstellung des Fensters für das Balkendiagramm, der 
@@ -64,6 +66,19 @@ public class Fenster extends JFrame {
        this.setLocation(xPos,yPos);
        this.setSize(breite, hoehe);
        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+   }
+   
+   public void zeichneKomponenten(Komponenten komponenten) throws IOException {
+       this.add(komponenten);
+       
+       TastaturEingabe te = new TastaturEingabe();
+       
+       while (true) {
+           te.pruefeEingabe();
+           komponenten.diagramm.setEingabe(te.jahrgang(),te.lagerdauer());
+           this.repaint();
+       }
+       
    }
     
 }
