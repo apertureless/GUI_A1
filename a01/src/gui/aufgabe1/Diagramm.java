@@ -52,5 +52,13 @@ public class Diagramm {
         this.g.draw(new Rectangle.Double(this.x, this.y, this.b, this.h));
     }
     
+    private void zeichneAktuellesJahr(){
+        
+    }
+    
+    private void zeichneReifeStadien() {
+        
+    }
+    
     
 }
