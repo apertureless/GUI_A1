@@ -1,0 +1,52 @@
+/*
+ * To change this template, choose Tools | Templates and open the template in
+ * the editor.
+ */
+package gui.aufgabe1;
+
+import javax.swing.JFrame;
+
+/**
+ * Klasse für die Darstellung des Fensters für das Balkendiagramm, der 
+ * Trinkreife des Weines.
+ * 
+ * @author Jakub Juszczak
+ */
+public class Fenster extends JFrame {
+    
+    /*
+     * Variablen deklaration für die Erstellung des Fensters
+     */
+    private String titel;
+    private int xPos;
+    private int yPos;
+    private int breite;
+    private int hoehe;
+    
+    
+    public Fenster (String titel, int xPos, int yPos, int breite, int hoehe) {
+        super ();
+        this.initFenster(titel, xPos, yPos, breite, hoehe);
+        this.erzeugeFenster();
+    }
+
+ 
+    private void initFenster (String titel, int xPos, int yPos, 
+                              int breite, int hoehe) {
+        
+       this.titel = titel;
+       this.xPos = xPos;
+       this.yPos = yPos;
+       this.breite = breite;
+       this.hoehe = hoehe;
+    
+    }
+    
+   private void erzeugeFenster () {
+       this.setTitle(titel);
+       this.setLocation(xPos,yPos);
+       this.setSize(breite, hoehe);
+       this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+   }
+    
+}
