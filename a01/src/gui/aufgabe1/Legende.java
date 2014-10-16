@@ -10,4 +10,12 @@ package gui.aufgabe1;
  */
 public class Legende {
     
+    public Legende() {
+        
+    }
+    
+    public void erzeugeLegende() {
+        
+    }   
+    
 }
