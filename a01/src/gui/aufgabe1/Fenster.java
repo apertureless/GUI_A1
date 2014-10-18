@@ -68,6 +68,13 @@ public class Fenster extends JFrame {
        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
    }
    
+   /**
+    * Methode die die Tastatureingabe abfragt und die Eingegebene Lagerdauer
+    * und Jahrgang des Weines übergibt und repaint aufruft.
+    * 
+    * @param komponenten
+    * @throws IOException 
+    */
    public void zeichneKomponenten(Komponenten komponenten) throws IOException {
        this.add(komponenten);
        
