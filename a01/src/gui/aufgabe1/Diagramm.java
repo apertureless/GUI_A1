@@ -91,7 +91,9 @@ public class Diagramm {
         this.setDiagramm();
     }
     
-    
+    /**
+     * Diabgramm Größe setzen.
+     */
     private void setDiagramm(){
         this.x = (this.fensterBreite * 10) / 100;
         this.y = (this.fensterHoehe * 10) / 100;
@@ -102,6 +104,11 @@ public class Diagramm {
         this.h -= this.schriftgroesse;
     }
     
+    /**
+     * Methode um das aktuelle Jahr hervorzuheben und in das Diagramm 
+     * einzuzeichnen.
+     */
+ 
     private void zeichneAktuellesJahr(){
         
     }
