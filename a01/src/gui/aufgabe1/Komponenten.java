@@ -49,13 +49,16 @@ public class Komponenten extends JPanel {
         // Aktiviere Antialiasing (Schriftenglaettung)
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
         RenderingHints.VALUE_ANTIALIAS_ON);
-        // Setze weisse Hintergrundfarbe
         
+        // Setze weisse Hintergrundfarbe
         this.setBackground(FARBE_HINTERGRUND);
         
+        // Setzt die Schriftgröße und Stil.
         this.setTextStil(g2);
         
+        // Setzt die Werte des Diagramms
         this.diagramm.setWerte(this.getSize(), g2);
+        
         
         super.paintComponent(g2);
         
