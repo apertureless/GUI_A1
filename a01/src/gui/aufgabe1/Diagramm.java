@@ -12,10 +12,8 @@ import java.util.Calendar;
 
 public class Diagramm {
     
-    /*
-     * Definition der Farben für die Darstellung des Diagramms und für die
-     * einzelnen Stadien der Lagerung
-     */
+    
+    // Konstanten zur Festlegung der Farben
     private static final Color FARBE_RAHMEN = Color.BLACK;
     private static final Color FARBE_AKTUELLES_JAHR = Color.RED;
     
@@ -23,19 +21,27 @@ public class Diagramm {
     private static final Color FARBE_OPTIMAL = Color.GREEN;
     private static final Color FARBE_UEBERLAGERT = Color.YELLOW;
 
+    // Konstanten zur Festlegung der Berechnung ob ein Wein Reif ist oder nicht.
     private static final float ANTEIL_ZU_FRUEH = 8f;
     private static final float ANTEIL_OPTIMAL = 2f;
     
     private Graphics2D g;
     
+    // Fenstergrößen und Schriftgrößen
     private int schriftgroesse;
     private double x, y, b, h;
     private double fensterBreite, fensterHoehe;
     
+    // Zeitvariablen 
     private int lagerdauer, jahrgang;
     private int beginnStadium;
     
     private int aktuellesJahr;
+   
+    // Reifestadien 
+    private double unreif, optimal, ueberlagert, steigerungsfaehig;
+    private double[] reifeStadien;
+   
     
     /**
      * Konstruktor mit Testdaten für das Diagramm.
@@ -108,6 +114,16 @@ public class Diagramm {
      * Methode um das aktuelle Jahr hervorzuheben und in das Diagramm 
      * einzuzeichnen.
      */
+    
+    private void setzteReifeStatien() {
+        
+        this.unreif = Math.round(this.lagerdauer / ANTEIL_ZU_FRUEH );
+        this.optimal = Math.round(this.lagerdauer / ANTEIL_OPTIMAL);
+        this.steigerungsfaehig = Math.round(this.lagerdauer - 
+                                (this.optimal + this.unreif));
+        this.ueberlagert = 1;
+        
+    }
  
     private void zeichneAktuellesJahr(){
         
