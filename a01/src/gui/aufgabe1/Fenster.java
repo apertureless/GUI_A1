@@ -76,6 +76,7 @@ public class Fenster extends JFrame {
     * @throws IOException 
     */
    public void zeichneKomponenten(Komponenten komponenten) throws IOException {
+       
        this.add(komponenten);
        
        TastaturEingabe te = new TastaturEingabe();

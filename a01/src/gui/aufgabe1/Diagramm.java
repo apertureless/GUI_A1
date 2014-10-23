@@ -101,20 +101,20 @@ public class Diagramm {
      * Diabgramm Größe setzen.
      */
     private void setDiagramm(){
+        // Position des Diagramms
         this.x = (this.fensterBreite * 10) / 100;
         this.y = (this.fensterHoehe * 10) / 100;
-        
+        // Höhe und Breite des Diagramms
         this.b = (this.fensterBreite * 80) / 100;
-        this.h = (this.fensterHoehe * 25) / 100;
+        this.h = (this.fensterHoehe * 50) / 100;
         
+        // Abzug für die Legende
         this.h -= this.schriftgroesse;
     }
     
     /**
-     * Methode um das aktuelle Jahr hervorzuheben und in das Diagramm 
-     * einzuzeichnen.
+     * Berechnet und setzt die einzelnen Stadien der Trinkreife
      */
-    
     private void setzteReifeStatien() {
         
         this.unreif = Math.round(this.lagerdauer / ANTEIL_ZU_FRUEH );
@@ -123,14 +123,29 @@ public class Diagramm {
                                 (this.optimal + this.unreif));
         this.ueberlagert = 1;
         
+        this.reifeStadien = new double[4];
+        this.reifeStadien[0] = this.unreif;
+        this.reifeStadien[1] = this.steigerungsfaehig;
+        this.reifeStadien[2] = this.optimal;
+        this.reifeStadien[3] = this.ueberlagert;
+  
+        
     }
  
     private void zeichneAktuellesJahr(){
         
+        
     }
     
+    /**
+     * Zeichnet die einzelnen Stadien der Trinkreife und stellt diese
+     * farblich mit einem Verlauf dar.
+     */
     private void zeichneReifeStadien() {
         
+        // Berechnet die Reifestadien
+        this.setzteReifeStatien();
+        this.beginnStadium = this.jahrgang;
     }
     
     
