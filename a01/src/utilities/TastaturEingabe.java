@@ -27,6 +27,7 @@ public class TastaturEingabe {
     private static final String MSG_ERR_FORMAT = "Fehler\n Falsches Format!";
     private static final String MSG_ERR_BEREICH = "Fehler\n\t Gültigkeitsbereich"
                                                     + "nicht eingehalten.";
+    private static final String MSG_ERR_KURZ = "Lagerdauer zu Kurz.";
     
     
 
@@ -60,7 +61,50 @@ public class TastaturEingabe {
      * @throws IOException Fehlerbehandlung zur Benutzereingabe
      */
     public void pruefeEingabe() throws IOException {
-       
+        String sJahrgang;
+        String sLagerdauer;
+
+        this.jahrgang = 0;
+        this.lagerdauer = 0;
+
+        InputStreamReader rdr = new InputStreamReader(System.in);
+        BufferedReader reader = new BufferedReader(rdr);
+
+        do {
+            System.out.printf("Jahrgang (%d - %d): ",
+                    this.MIN_JAHRGANG, this.MAX_JAHRGANG);
+            sJahrgang = reader.readLine();
+            try {
+                this.jahrgang = Integer.parseInt(sJahrgang);
+
+                if (this.jahrgang > this.MAX_JAHRGANG
+                        || this.jahrgang < this.MIN_JAHRGANG) {
+                    this.jahrgang = 0;
+                    System.out.println(MSG_ERR_BEREICH);
+                }
+            } catch (NumberFormatException nfe) {
+                System.out.println(MSG_ERR_FORMAT);
+            }
+        } while (this.jahrgang == 0);
+
+        do {
+            System.out.printf("Lagerdauer (%d - %d): ",
+                    this.MIN_LAGERDAUER, this.MAX_LAGERDAUER);
+            sLagerdauer = reader.readLine();
+            try {
+                this.lagerdauer = Integer.parseInt(sLagerdauer);
+                if (this.lagerdauer == 0) {
+                    System.out.println(MSG_ERR_KURZ);
+                }
+                if (this.lagerdauer > this.MAX_LAGERDAUER
+                        || this.lagerdauer < this.MIN_LAGERDAUER) {
+                    this.lagerdauer = 0;
+                    System.out.println(MSG_ERR_BEREICH);
+                }
+            } catch (NumberFormatException nfe) {
+                System.out.println(MSG_ERR_FORMAT);
+            }
+        } while (this.lagerdauer == 0);
     }
 
 }

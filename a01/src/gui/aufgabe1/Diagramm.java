@@ -14,12 +14,12 @@ public class Diagramm {
     
     
     // Konstanten zur Festlegung der Farben
-    private static final Color FARBE_RAHMEN = Color.BLACK;
-    private static final Color FARBE_AKTUELLES_JAHR = Color.RED;
+    private static final Color FARBE_RAHMEN = Color.black;
+    private static final Color FARBE_AKTUELLES_JAHR = Color.red;
     
-    private static final Color FARBE_ZU_FRUEH = Color.GRAY;
-    private static final Color FARBE_OPTIMAL = Color.GREEN;
-    private static final Color FARBE_UEBERLAGERT = Color.YELLOW;
+    private static final Color FARBE_ZU_FRUEH = Color.gray;
+    private static final Color FARBE_OPTIMAL = Color.green;
+    private static final Color FARBE_UEBERLAGERT = Color.yellow;
 
     // Konstanten zur Festlegung der Berechnung ob ein Wein Reif ist oder nicht.
     private static final float ANTEIL_ZU_FRUEH = 8f;
@@ -42,25 +42,27 @@ public class Diagramm {
     private double unreif, optimal, ueberlagert, steigerungsfaehig;
     private double[] reifeStadien;
    
+     // Sammlung der Farben aller Stadien
+    private final Object[] COLORS = {Color.gray,
+        new GradientPaint(0, 0, Color.gray, 0, 0, Color.green),
+        Color.green, Color.yellow};
     
     /**
      * Konstruktor mit Testdaten für das Diagramm.
      */
-    public Diagramm() {
-//        this.lagerdauer = 1;
-//        this.jahrgang = 2011;
-    }
+    public Diagramm() {}
     
     /**
      * 
      */
     public void erzeugeDiagramm() {
         
+        this.g.setPaint(FARBE_RAHMEN);
         // Zeichnet den Rahmen des Diagramms.
         this.g.draw(new Rectangle.Double(this.x, this.y, this.b, this.h));
         
         // Zeichnet die Reifestadien des Weins
-        zeichneReifeStadien();
+       zeichneReifeStadien();
         
         // Zeichnet das aktuelle Jahr ein.
         zeichneAktuellesJahr();
@@ -106,7 +108,7 @@ public class Diagramm {
         this.y = (this.fensterHoehe * 10) / 100;
         // Höhe und Breite des Diagramms
         this.b = (this.fensterBreite * 80) / 100;
-        this.h = (this.fensterHoehe * 50) / 100;
+        this.h = (this.fensterHoehe * 40) / 100;
         
         // Abzug für die Legende
         this.h -= this.schriftgroesse;
@@ -128,14 +130,10 @@ public class Diagramm {
         this.reifeStadien[1] = this.steigerungsfaehig;
         this.reifeStadien[2] = this.optimal;
         this.reifeStadien[3] = this.ueberlagert;
-  
-        
+      
     }
  
-    private void zeichneAktuellesJahr(){
-        
-        
-    }
+  
     
     /**
      * Zeichnet die einzelnen Stadien der Trinkreife und stellt diese
@@ -146,7 +144,68 @@ public class Diagramm {
         // Berechnet die Reifestadien
         this.setzteReifeStatien();
         this.beginnStadium = this.jahrgang;
+        
+        double aktuellePosition = this.x;
+        
+        for (int i = 0; i < this.reifeStadien.length; i++) {
+            // Berechnung der Breite
+            double breite = this.b * this.reifeStadien[i] / (this.lagerdauer + 1);
+
+            // Setze Fuellfarbe
+            if (this.COLORS[i] instanceof GradientPaint) {
+                this.COLORS[i] = new GradientPaint(
+                        (int) aktuellePosition, (int) this.y, Color.gray,
+                        (int) (aktuellePosition + breite), (int) this.y, Color.green);
+            }
+            this.g.setPaint((Paint) this.COLORS[i]);
+            this.g.fill(
+                    new Rectangle.Double(aktuellePosition, this.y, breite, this.h));
+
+            // Zuruecksetzen der Farbe
+            this.g.setPaint(Color.black);
+
+            // Zeichne Rahmen des aktuellen Stadiums und setze die Beschriftung
+            this.g.draw(
+                    new Rectangle.Double(aktuellePosition, this.y, breite, this.h));
+            //System.out.println(stadiumBeginn);
+            if(beginnStadium != this.aktuellesJahr) {
+                this.g.drawString(
+                        Integer.toString(beginnStadium),
+                        (int) aktuellePosition,
+                        (int) (this.y + this.h + this.schriftgroesse));
+            }
+
+            // Berechnet Startjahr des naechsten Stadiums
+            beginnStadium += this.reifeStadien[i];
+
+            // Berechne neue Startposition
+            aktuellePosition += breite;
+        }
+        
+        
     }
     
+      private void zeichneAktuellesJahr(){
+        
+        double aktuellesJahrBreite = this.b / (this.lagerdauer + 1);
+        double aktuellesJahrPosition = (this.aktuellesJahr - this.jahrgang) 
+                                        * aktuellesJahrBreite;
+        if(this.aktuellesJahr >= this.jahrgang && this.aktuellesJahr < beginnStadium) {
+            // Zeichne Rahmen des aktuellen Jahrs und setze Beschriftung
+            this.g.setPaint(FARBE_AKTUELLES_JAHR);
+            this.g.draw(new Rectangle.Double(
+                    this.x + aktuellesJahrPosition,
+                    this.y - 1,
+                    aktuellesJahrBreite,
+                    this.h + 2));
+            this.g.drawString(
+                    Integer.toString(this.aktuellesJahr),
+                    (int) (this.x + aktuellesJahrPosition),
+                    (int) (this.y + this.h + this.schriftgroesse));
+
+            // Zuruecksetzen der Farbe
+            this.g.setPaint(FARBE_RAHMEN);
+        }
+    }
     
 }

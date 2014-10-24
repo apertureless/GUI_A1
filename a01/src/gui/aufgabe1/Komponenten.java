@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 public class Komponenten extends JPanel {
     
     final Diagramm diagramm;
-    final Legende legende;
+
     
     private static final Color FARBE_HINTERGRUND = Color.white;
     
@@ -26,8 +26,6 @@ public class Komponenten extends JPanel {
         // Das Diagramm wird erzeugt.
         this.diagramm = new Diagramm();
         
-        // Die Legende wird erzeugt.
-        this.legende = new Legende();
     }
     
     /**
@@ -60,9 +58,11 @@ public class Komponenten extends JPanel {
         this.diagramm.setWerte(this.getSize(), g2);
         
         
+        
         super.paintComponent(g2);
         
         this.diagramm.erzeugeDiagramm();
+        
     }
     
 }

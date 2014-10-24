@@ -8,14 +8,6 @@ package gui.aufgabe1;
  *
  * @author Jakub Juszczak <juszczak.j@googlemail.com>
  */
-public class Legende {
-    
-    public Legende() {
-        
-    }
-    
-    public void erzeugeLegende() {
-        
-    }   
+public class MausEvents {
     
 }
