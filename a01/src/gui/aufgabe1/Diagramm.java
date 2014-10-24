@@ -3,6 +3,7 @@ package gui.aufgabe1;
 
 import java.awt.*;
 import java.util.Calendar;
+import javax.swing.JPanel;
 
 /**
  * Klasse zur Darstellung des Trink-Reife Diagramms.
@@ -10,7 +11,7 @@ import java.util.Calendar;
  * @author Jakub Juszczak <juszczak.j@googlemail.com>
  */
 
-public class Diagramm {
+public class Diagramm extends JPanel {
     
     
     // Konstanten zur Festlegung der Farben
@@ -20,6 +21,8 @@ public class Diagramm {
     private static final Color FARBE_ZU_FRUEH = Color.gray;
     private static final Color FARBE_OPTIMAL = Color.green;
     private static final Color FARBE_UEBERLAGERT = Color.yellow;
+    
+    private static final Color FARBE_HINTERGRUND = Color.white;
 
     // Konstanten zur Festlegung der Berechnung ob ein Wein Reif ist oder nicht.
     private static final float ANTEIL_ZU_FRUEH = 8f;
@@ -208,4 +211,40 @@ public class Diagramm {
         }
     }
     
+    /**
+     * Methode legt die Schriftart sowie die Schriftgröße fest.
+     * @param g 
+     */
+    public void setTextStil(Graphics2D g) {
+        // Festlegen von Schriftart und Größe
+        int fontSize = (int)Math.round(1.5 * this.getWidth() / 72.0);
+        Font font = new Font("Arial", Font.PLAIN, fontSize);
+        g.setFont(font);
+    }
+    
+    @Override
+    public void paintComponent(Graphics g) {
+        
+        Graphics2D g2 = (Graphics2D) g;
+        
+        // Aktiviere Antialiasing (Schriftenglaettung)
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+        RenderingHints.VALUE_ANTIALIAS_ON);
+        
+        // Setze weisse Hintergrundfarbe
+        this.setBackground(FARBE_HINTERGRUND);
+        
+        // Setzt die Schriftgröße und Stil.
+        this.setTextStil(g2);
+        
+        // Setzt die Werte des Diagramms
+        this.setWerte(this.getSize(), g2);
+        
+        
+        
+        super.paintComponent(g2);
+        
+        this.erzeugeDiagramm();
+        
+    }
 }

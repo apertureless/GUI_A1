@@ -17,6 +17,6 @@ public class Aufgabe1 {
         
         Fenster f = new Fenster("GUI Aufgabe" , 20, 20, 500, 300);
         f.setVisible(true);   
-        f.zeichneKomponenten(new Komponenten());
+        f.zeichneKomponenten(new Diagramm());
     }
 }

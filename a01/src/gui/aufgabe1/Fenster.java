@@ -75,15 +75,15 @@ public class Fenster extends JFrame {
     * @param komponenten
     * @throws IOException 
     */
-   public void zeichneKomponenten(Komponenten komponenten) throws IOException {
+   public void zeichneKomponenten(Diagramm diagramm) throws IOException {
        
-       this.add(komponenten);
+       this.add(diagramm);
        
        TastaturEingabe te = new TastaturEingabe();
        
        while (true) {
            te.pruefeEingabe();
-           komponenten.diagramm.setEingabe(te.jahrgang(),te.lagerdauer());
+           diagramm.setEingabe(te.jahrgang(),te.lagerdauer());
            this.repaint();
        }
        
