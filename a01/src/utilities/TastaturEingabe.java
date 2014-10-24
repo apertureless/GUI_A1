@@ -6,12 +6,15 @@ import java.io.InputStreamReader;
 import java.util.Calendar;
 
 /**
- * 
+ * Tastatur Eingabe und Werte Überprüfung für die Berechnung 
+ * der Trinkreife eines Weines.
  *
  * @author Jakub Juszczak
  */
 public class TastaturEingabe {
 
+    // Konstante Eigenschaften zur berechnung der Trinkreife.
+    
     private final int MIN_LAGERDAUER = 1;
     private final int MAX_LAGERDAUER = 25;
     
@@ -24,12 +27,14 @@ public class TastaturEingabe {
     private int jahrgang;
     private int lagerdauer;
     
+    // Fehler und Informations Nachrichten
     private static final String MSG_ERR_FORMAT = "Fehler\n Falsches Format!";
     private static final String MSG_ERR_BEREICH = "Fehler\n\t Gültigkeitsbereich"
                                                     + "nicht eingehalten.";
     private static final String MSG_ERR_KURZ = "Lagerdauer zu Kurz.";
     
-    
+    private static final String MSG_INFO_LAGER = "Lagerdauer (%d - %d): ";
+    private static final String MSG_INFO_JAHRGANG = "Jahrgang (%d - %d): ";
 
     /**
      * Erzeugt ein neues TastaturEingabe Objekt.
@@ -71,7 +76,7 @@ public class TastaturEingabe {
         BufferedReader reader = new BufferedReader(rdr);
 
         do {
-            System.out.printf("Jahrgang (%d - %d): ",
+            System.out.printf(MSG_INFO_JAHRGANG,
                     this.MIN_JAHRGANG, this.MAX_JAHRGANG);
             sJahrgang = reader.readLine();
             try {
@@ -88,7 +93,7 @@ public class TastaturEingabe {
         } while (this.jahrgang == 0);
 
         do {
-            System.out.printf("Lagerdauer (%d - %d): ",
+            System.out.printf(MSG_INFO_LAGER,
                     this.MIN_LAGERDAUER, this.MAX_LAGERDAUER);
             sLagerdauer = reader.readLine();
             try {
