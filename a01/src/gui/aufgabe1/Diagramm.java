@@ -67,8 +67,8 @@ public class Diagramm extends JPanel {
         // Zeichnet die Reifestadien des Weins
        zeichneReifeStadien();
         
-        // Zeichnet das aktuelle Jahr ein.
-        zeichneAktuellesJahr();
+       // Zeichnet das aktuelle Jahr ein.
+       zeichneAktuellesJahr();
     }
     
     /**
@@ -188,11 +188,15 @@ public class Diagramm extends JPanel {
         
     }
     
+    /**
+     * Zeichnet das aktuelle Jahr farbig in das Diagramm ein.
+     */
       private void zeichneAktuellesJahr(){
         
         double aktuellesJahrBreite = this.b / (this.lagerdauer + 1);
         double aktuellesJahrPosition = (this.aktuellesJahr - this.jahrgang) 
                                         * aktuellesJahrBreite;
+        
         if(this.aktuellesJahr >= this.jahrgang && this.aktuellesJahr < beginnStadium) {
             // Zeichne Rahmen des aktuellen Jahrs und setze Beschriftung
             this.g.setPaint(FARBE_AKTUELLES_JAHR);
@@ -208,7 +212,7 @@ public class Diagramm extends JPanel {
 
             // Zuruecksetzen der Farbe
             this.g.setPaint(FARBE_RAHMEN);
-        }
+        } 
     }
     
     /**
@@ -238,9 +242,7 @@ public class Diagramm extends JPanel {
         this.setTextStil(g2);
         
         // Setzt die Werte des Diagramms
-        this.setWerte(this.getSize(), g2);
-        
-        
+        this.setWerte(getSize(), g2);
         
         super.paintComponent(g2);
         
