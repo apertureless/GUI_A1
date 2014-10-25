@@ -20,9 +20,9 @@ public class Diagramm extends JPanel {
     private static final Color FARBE_RAHMEN = Color.black;
     private static final Color FARBE_AKTUELLES_JAHR = Color.red;
     
-    private static final Color FARBE_ZU_FRUEH = Color.gray;
-    private static final Color FARBE_OPTIMAL = Color.green;
-    private static final Color FARBE_UEBERLAGERT = Color.yellow;
+    public static final Color FARBE_ZU_FRUEH = Color.gray;
+    public static final Color FARBE_OPTIMAL = Color.green;
+    public static final Color FARBE_UEBERLAGERT = Color.yellow;
     
     private static final Color FARBE_HINTERGRUND = Color.white;
     
@@ -31,6 +31,10 @@ public class Diagramm extends JPanel {
     // Konstanten zur Festlegung der Berechnung ob ein Wein Reif ist oder nicht.
     private static final float ANTEIL_ZU_FRUEH = 8f;
     private static final float ANTEIL_OPTIMAL = 2f;
+    
+    // Prozentualer Anteil der Diagramm Höhe und Breite
+    private static final int DIAGRAMM_BREITE = 80;
+    private static final int DIAGRAMM_HOEHE = 40;
     
     private Graphics2D g;
     
@@ -99,6 +103,8 @@ public class Diagramm extends JPanel {
      * @param g 
      */
     public void setWerte(Dimension d, Graphics2D g){
+        
+        // Fensterbreite setzen.
         this.fensterBreite = (double) d.width;
         this.fensterHoehe = (double) d.height;
         
@@ -107,8 +113,13 @@ public class Diagramm extends JPanel {
         FontMetrics metrics = g.getFontMetrics();      
         this.schriftgroesse = metrics.getHeight();
         
+        // Aktuelles Jahr setzen.
         this.aktuellesJahr = Calendar.getInstance().get(Calendar.YEAR);
+        
+        // Diagramm Größen setzen.
         this.setDiagramm();
+        
+        // Reifestadien setzen.
         this.setReifeStatien();
     }
     
@@ -119,9 +130,10 @@ public class Diagramm extends JPanel {
         // Position des Diagramms
         this.x = (this.fensterBreite * 10) / 100;
         this.y = (this.fensterHoehe * 10) / 100;
+        
         // Höhe und Breite des Diagramms
-        this.b = (this.fensterBreite * 80) / 100;
-        this.h = (this.fensterHoehe * 40) / 100;
+        this.b = (this.fensterBreite * DIAGRAMM_BREITE) / 100;
+        this.h = (this.fensterHoehe * DIAGRAMM_HOEHE) / 100;
         
         // Abzug für die Legende
         this.h -= this.schriftgroesse;
@@ -132,26 +144,27 @@ public class Diagramm extends JPanel {
      */
     private void setReifeStatien() {
         
-         double unreifDauer = Math.round(this.lagerdauer / ANTEIL_ZU_FRUEH );
-         double optimalDauer = Math.round(this.lagerdauer / ANTEIL_OPTIMAL);
-         double steigerungsfaehigDauer = Math.round(this.lagerdauer - 
+        // Berechnet die Dauer der einzelnen Stadien
+        double unreifDauer = Math.round(this.lagerdauer / ANTEIL_ZU_FRUEH );
+        double optimalDauer = Math.round(this.lagerdauer / ANTEIL_OPTIMAL);
+        double steigerungsfaehigDauer = Math.round(this.lagerdauer - 
                                 (optimalDauer + unreifDauer));
-         double ueberlagertDauer = 1;
+        double ueberlagertDauer = 1;
         
-         double breite = this.b / (this.lagerdauer +1);
+        double breite = this.b / (this.lagerdauer +1);
          
-         Stadium unreif = 
-                new Stadium("unreif", unreifDauer, this.farben[0],
+        Stadium unreif = 
+                new Stadium(unreifDauer, this.farben[0],
                         breite * unreifDauer, this.h, this.y, 0);
         Stadium steigernd = 
-                new Stadium("reifend", steigerungsfaehigDauer, this.farben[1],
-                        breite * steigerungsfaehigDauer, this.h, this.y, 1);
+                new Stadium(steigerungsfaehigDauer, this.farben[1],
+                breite * steigerungsfaehigDauer, this.h, this.y, 1);
         Stadium optimal = 
-                new Stadium("optimal", optimalDauer, this.farben[2],
-                        breite * optimalDauer, this.h, this.y, 2);
+                new Stadium(optimalDauer, this.farben[2],
+                breite * optimalDauer, this.h, this.y, 2);
         Stadium ueberlagert = 
-                new Stadium("überlagert", ueberlagertDauer, this.farben[3],
-                        breite * ueberlagertDauer, this.h, this.y, 3);
+                new Stadium(ueberlagertDauer, this.farben[3],
+                breite * ueberlagertDauer, this.h, this.y, 3);
 
         // Ablegen als globales Array
         this.stadien = new Stadium[4];
@@ -179,8 +192,10 @@ public class Diagramm extends JPanel {
         this.g.setPaint((Paint) s.farbe);
         this.g.fill(new Rectangle.Double(
                 position, this.y, s.breite, this.h));
+        
         // Zuruecksetzen der Farbe
-        this.g.setPaint(Color.black);
+        this.g.setPaint(FARBE_RAHMEN);
+        
         // Zeichne Rahmen des aktuellen Stadiums und setze die Beschriftung
         this.g.draw(new Rectangle.Double(
                 position, this.y, s.breite, this.h));
