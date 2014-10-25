@@ -30,8 +30,8 @@ public class TastaturEingabe {
     // Fehler und Informations Nachrichten
     private static final String MSG_ERR_FORMAT = "Fehler\n Falsches Format!";
     private static final String MSG_ERR_BEREICH = "Fehler\n\t Gültigkeitsbereich"
-                                                    + "nicht eingehalten.";
-    private static final String MSG_ERR_KURZ = "Lagerdauer zu Kurz.";
+                                                    + " nicht eingehalten.";
+    private static final String MSG_ERR_KURZ = "Lagerdauer zu kurz.";
     
     private static final String MSG_INFO_LAGER = "Lagerdauer (%d - %d): ";
     private static final String MSG_INFO_JAHRGANG = "Jahrgang (%d - %d): ";
