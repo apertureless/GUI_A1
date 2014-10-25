@@ -46,11 +46,15 @@ public class Stadium extends Diagramm {
         return this.yPos;
     }
     
+    public void setFarbe(Object farbe) {
+        this.farbe = farbe;
+    }
+    
     public boolean istImBreich(int x, int y) {
         boolean istInStadiumX = (x >= this.xPos && (x <= (this.xPos + this.breite)));
         boolean istInStadiumY = (y >= this.yPos && (y <= (this.yPos + this.hoehe)));
         
         return (istInStadiumY && istInStadiumY);
     }
-    
+
 }
