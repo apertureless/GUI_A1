@@ -13,8 +13,9 @@ import java.io.IOException;
  */
 public class Aufgabe1 {
     
-    public static int FENSTER_BREITE = 500;
-    public static int FENSTER_HOEHE = 300;
+    // Eigendschaften des Fensters
+    public static final int FENSTER_BREITE = 500;
+    public static final int FENSTER_HOEHE = 300;
     private static final String FENSTER_TITEL = "GUI Aufgabe 1";
     
     
