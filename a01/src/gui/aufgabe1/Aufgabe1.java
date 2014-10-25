@@ -13,9 +13,15 @@ import java.io.IOException;
  */
 public class Aufgabe1 {
     
+    public static int FENSTER_BREITE = 500;
+    public static int FENSTER_HOEHE = 300;
+    private static final String FENSTER_TITEL = "GUI Aufgabe 1";
+    
+    
     public static void main(String[] args) throws IOException {
         
-        Fenster f = new Fenster("GUI Aufgabe 1" , 20, 20, 500, 300);
+        Fenster f = new Fenster(FENSTER_TITEL , 20, 20, 
+                                FENSTER_BREITE, FENSTER_HOEHE);
         f.setVisible(true);   
         f.zeichneKomponenten(new Diagramm());
     }
