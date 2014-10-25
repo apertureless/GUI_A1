@@ -60,7 +60,7 @@ public class Stadium extends Diagramm {
         boolean istInStadiumX = (x >= this.xPos && (x <= (this.xPos + this.breite)));
         boolean istInStadiumY = (y >= this.yPos && (y <= (this.yPos + this.hoehe)));
         
-        return (istInStadiumY && istInStadiumY);
+        return (istInStadiumX && istInStadiumY);
     }
 
 }
