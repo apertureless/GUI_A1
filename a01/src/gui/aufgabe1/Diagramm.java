@@ -219,6 +219,7 @@ public class Diagramm extends JPanel {
 
         // Position des aktuellen Stadiums
         double aktPosition = this.x;
+        
         for (Stadium aktStadium : this.stadien) {
             // Setze x-Position und Beginn des aktuellen Stadiums
             aktStadium.setXPos(aktPosition);
@@ -230,9 +231,7 @@ public class Diagramm extends JPanel {
             beginnStadium += aktStadium.dauer;
             // Berechne neue Startposition
             aktPosition += aktStadium.breite;
-       
         }
-           
     }
     
     /**
