@@ -26,11 +26,7 @@ public class MausEvents implements MouseListener, MouseMotionListener {
     
     Elemente istInStadium;
     
- 
-       
-    
-    public MausEvents() {
-        
+    public MausEvents() {   
     }
     
     @Override
@@ -44,9 +40,7 @@ public class MausEvents implements MouseListener, MouseMotionListener {
 
         Elemente altesStadium = istInStadium;
         istInStadium = Elemente.ausserhalb;
-        
-        
-      
+         
         // Farben zurücksetzen.
         diagramm.farben[0] = Diagramm.FARBE_ZU_FRUEH;
         diagramm.farben[1] = new GradientPaint(0, 0, Diagramm.FARBE_ZU_FRUEH, 
@@ -94,31 +88,45 @@ public class MausEvents implements MouseListener, MouseMotionListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         
-        System.out.printf("\nClicked");
+        Diagramm diagramm = (Diagramm) e.getSource();
+        Stadium stadium;
         
-//        switch(istInStadium) {
-//            case unreif:
-//                System.out.printf("In den Jahren %d - %d ist es für den "
-//                            + "Wein noch zu früh.\n");
-//                break;
-//                
-//            case steigerungsfaehig:
-//                 System.out.printf("In den Jahren %d - %d ist es für den "
-//                        + "Wein noch zu früh.\n");
-//                break;
-//              
-//            case optimal:
-//                 System.out.printf("In den Jahren %d - %d ist es für den "
-//                        + "Wein noch zu früh.\n");
-//                break;
-//                
-//            case ueberlagert:
-//                 System.out.printf("In den Jahren %d - %d ist es für den "
-//                        + "Wein noch zu früh.\n");
-//                break;
+        switch(istInStadium) {
+            case unreif:
+                stadium = diagramm.stadien[0];
+                System.out.printf("\nIn den Jahren %d - %d ist es für den "
+                                + "Wein noch zu früh.\n", 
+                                stadium.beginn, 
+                                stadium.beginn + ((int) stadium.dauer) -1
+                            );
+                break;
+                
+            case steigerungsfaehig:
+                 stadium = diagramm.stadien[1];
+                 System.out.printf("\nIn den Jahren %d - %d kann sich der "
+                                + "Geschmack des Weines  noch verbessern.\n",
+                                stadium.beginn, 
+                                stadium.beginn + ((int) stadium.dauer) -1
+                        );
+                break;
               
-//        }
-     
+            case optimal:
+                 stadium = diagramm.stadien[2];
+                 System.out.printf("\nIn den Jahren %d - %d hat der Wein "
+                                + "sein geschmackliches Optimum.\n",
+                                stadium.beginn, 
+                                stadium.beginn + ((int) stadium.dauer) -1
+                        );
+                break;
+                
+            case ueberlagert:
+                 stadium = diagramm.stadien[3];
+                 System.out.printf("\nAb dem Jahr %d ist der Wein leider "
+                            + "überlagert.\n",
+                            stadium.beginn
+                            );
+                break;       
+        }
     }
 
     @Override
