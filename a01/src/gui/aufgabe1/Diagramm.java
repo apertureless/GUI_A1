@@ -2,6 +2,8 @@
 package gui.aufgabe1;
 
 import java.awt.*;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.Calendar;
 import javax.swing.JPanel;
 
@@ -43,17 +45,23 @@ public class Diagramm extends JPanel {
    
     // Reifestadien 
     private double unreif, optimal, ueberlagert, steigerungsfaehig;
-    private double[] reifeStadien;
+    public double[] reifeStadien;
    
      // Sammlung der Farben aller Stadien
-    private final Object[] COLORS = {Color.gray,
-        new GradientPaint(0, 0, Color.gray, 0, 0, Color.green),
-        Color.green, Color.yellow};
+    private final Object[] farben = {
+        FARBE_ZU_FRUEH,
+        new GradientPaint(0, 0, FARBE_ZU_FRUEH, 0, 0, FARBE_OPTIMAL),
+        FARBE_OPTIMAL, 
+        FARBE_UEBERLAGERT};
     
     /**
      * Konstruktor mit Testdaten für das Diagramm.
      */
-    public Diagramm() {}
+    public Diagramm() {
+        Object me = new MausEvents();
+        this.addMouseListener((MouseListener) me);
+        this.addMouseMotionListener((MouseMotionListener) me);
+    }
     
     /**
      * 
@@ -155,12 +163,12 @@ public class Diagramm extends JPanel {
             double breite = this.b * this.reifeStadien[i] / (this.lagerdauer + 1);
 
             // Setze Fuellfarbe
-            if (this.COLORS[i] instanceof GradientPaint) {
-                this.COLORS[i] = new GradientPaint(
+            if (this.farben[i] instanceof GradientPaint) {
+                this.farben[i] = new GradientPaint(
                         (int) aktuellePosition, (int) this.y, Color.gray,
                         (int) (aktuellePosition + breite), (int) this.y, Color.green);
             }
-            this.g.setPaint((Paint) this.COLORS[i]);
+            this.g.setPaint((Paint) this.farben[i]);
             this.g.fill(
                     new Rectangle.Double(aktuellePosition, this.y, breite, this.h));
 
