@@ -69,7 +69,7 @@ public class Diagramm extends JPanel {
     }
     
     /**
-     * 
+     * Erzeugt das Diagramm
      */
     public void erzeugeDiagramm() {
         
@@ -156,12 +156,15 @@ public class Diagramm extends JPanel {
         Stadium unreif = 
                 new Stadium(unreifDauer, this.farben[0],
                         breite * unreifDauer, this.h, this.y, 0);
+        
         Stadium steigernd = 
                 new Stadium(steigerungsfaehigDauer, this.farben[1],
                 breite * steigerungsfaehigDauer, this.h, this.y, 1);
+        
         Stadium optimal = 
                 new Stadium(optimalDauer, this.farben[2],
                 breite * optimalDauer, this.h, this.y, 2);
+        
         Stadium ueberlagert = 
                 new Stadium(ueberlagertDauer, this.farben[3],
                 breite * ueberlagertDauer, this.h, this.y, 3);
