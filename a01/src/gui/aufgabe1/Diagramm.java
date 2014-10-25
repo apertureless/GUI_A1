@@ -25,6 +25,8 @@ public class Diagramm extends JPanel {
     private static final Color FARBE_UEBERLAGERT = Color.yellow;
     
     private static final Color FARBE_HINTERGRUND = Color.white;
+    
+    private static final String SCHRIFTART = "Arial";
 
     // Konstanten zur Festlegung der Berechnung ob ein Wein Reif ist oder nicht.
     private static final float ANTEIL_ZU_FRUEH = 8f;
@@ -42,13 +44,12 @@ public class Diagramm extends JPanel {
     private int beginnStadium;
     
     private int aktuellesJahr;
-   
-    // Reifestadien 
-    private double unreif, optimal, ueberlagert, steigerungsfaehig;
-    public double[] reifeStadien;
+    
+    // Objekt mit den Stadien
+    public Stadium[] stadien;
    
      // Sammlung der Farben aller Stadien
-    private final Object[] farben = {
+    public Object[] farben = {
         FARBE_ZU_FRUEH,
         new GradientPaint(0, 0, FARBE_ZU_FRUEH, 0, 0, FARBE_OPTIMAL),
         FARBE_OPTIMAL, 
@@ -108,6 +109,7 @@ public class Diagramm extends JPanel {
         
         this.aktuellesJahr = Calendar.getInstance().get(Calendar.YEAR);
         this.setDiagramm();
+        this.setReifeStatien();
     }
     
     /**
@@ -128,22 +130,67 @@ public class Diagramm extends JPanel {
     /**
      * Berechnet und setzt die einzelnen Stadien der Trinkreife
      */
-    private void setzteReifeStatien() {
+    private void setReifeStatien() {
         
-        this.unreif = Math.round(this.lagerdauer / ANTEIL_ZU_FRUEH );
-        this.optimal = Math.round(this.lagerdauer / ANTEIL_OPTIMAL);
-        this.steigerungsfaehig = Math.round(this.lagerdauer - 
-                                (this.optimal + this.unreif));
-        this.ueberlagert = 1;
+         double unreifDauer = Math.round(this.lagerdauer / ANTEIL_ZU_FRUEH );
+         double optimalDauer = Math.round(this.lagerdauer / ANTEIL_OPTIMAL);
+         double steigerungsfaehigDauer = Math.round(this.lagerdauer - 
+                                (optimalDauer + unreifDauer));
+         double ueberlagertDauer = 1;
         
-        this.reifeStadien = new double[4];
-        this.reifeStadien[0] = this.unreif;
-        this.reifeStadien[1] = this.steigerungsfaehig;
-        this.reifeStadien[2] = this.optimal;
-        this.reifeStadien[3] = this.ueberlagert;
+         double breite = this.b / (this.lagerdauer +1);
+         
+         Stadium unreif = 
+                new Stadium("unreif", unreifDauer, this.farben[0],
+                        breite * unreifDauer, this.h, this.y, 0);
+        Stadium steigernd = 
+                new Stadium("reifend", steigerungsfaehigDauer, this.farben[1],
+                        breite * steigerungsfaehigDauer, this.h, this.y, 1);
+        Stadium optimal = 
+                new Stadium("optimal", optimalDauer, this.farben[2],
+                        breite * optimalDauer, this.h, this.y, 2);
+        Stadium ueberlagert = 
+                new Stadium("überlagert", ueberlagertDauer, this.farben[3],
+                        breite * ueberlagertDauer, this.h, this.y, 3);
+
+        // Ablegen als globales Array
+        this.stadien = new Stadium[4];
+        this.stadien[0] = unreif;
+        this.stadien[1] = steigernd;
+        this.stadien[2] = optimal;
+        this.stadien[3] = ueberlagert;
       
     }
  
+     /**
+     * Zeichnet das aktuelle Stadium.
+     * 
+     * @param s Stadium
+     * @param position Position
+     */
+    public void zeichneAktStadium(Stadium s, double position) {
+        // Setze Fuellfarbe
+        if (s.farbe instanceof GradientPaint) {
+            s.setFarbe(new GradientPaint((int) position, 
+                    (int) this.y, ((GradientPaint) s.farbe).getColor1(), 
+                    (int) (position + s.breite), 
+                    (int) this.y, ((GradientPaint) s.farbe).getColor2()));
+        }
+        this.g.setPaint((Paint) s.farbe);
+        this.g.fill(new Rectangle.Double(
+                position, this.y, s.breite, this.h));
+        // Zuruecksetzen der Farbe
+        this.g.setPaint(Color.black);
+        // Zeichne Rahmen des aktuellen Stadiums und setze die Beschriftung
+        this.g.draw(new Rectangle.Double(
+                position, this.y, s.breite, this.h));
+        if (beginnStadium != this.aktuellesJahr) {
+            this.g.drawString(
+                    Integer.toString(beginnStadium),
+                    (int) position,
+                    (int) (this.y + this.h + this.schriftgroesse));
+        }
+    }
   
     
     /**
@@ -152,48 +199,25 @@ public class Diagramm extends JPanel {
      */
     private void zeichneReifeStadien() {
         
-        // Berechnet die Reifestadien
-        this.setzteReifeStatien();
-        this.beginnStadium = this.jahrgang;
-        
-        double aktuellePosition = this.x;
-        
-        for (int i = 0; i < this.reifeStadien.length; i++) {
-            // Berechnung der Breite
-            double breite = this.b * this.reifeStadien[i] / (this.lagerdauer + 1);
+        // Setzt den Beginn des ersten Stadiums
+        this.beginnStadium = (int) this.jahrgang;
 
-            // Setze Fuellfarbe
-            if (this.farben[i] instanceof GradientPaint) {
-                this.farben[i] = new GradientPaint(
-                        (int) aktuellePosition, (int) this.y, Color.gray,
-                        (int) (aktuellePosition + breite), (int) this.y, Color.green);
-            }
-            this.g.setPaint((Paint) this.farben[i]);
-            this.g.fill(
-                    new Rectangle.Double(aktuellePosition, this.y, breite, this.h));
-
-            // Zuruecksetzen der Farbe
-            this.g.setPaint(Color.black);
-
-            // Zeichne Rahmen des aktuellen Stadiums und setze die Beschriftung
-            this.g.draw(
-                    new Rectangle.Double(aktuellePosition, this.y, breite, this.h));
-            //System.out.println(stadiumBeginn);
-            if(beginnStadium != this.aktuellesJahr) {
-                this.g.drawString(
-                        Integer.toString(beginnStadium),
-                        (int) aktuellePosition,
-                        (int) (this.y + this.h + this.schriftgroesse));
-            }
+        // Position des aktuellen Stadiums
+        double aktPosition = this.x;
+        for (Stadium aktStadium : this.stadien) {
+            // Setze x-Position und Beginn des aktuellen Stadiums
+            aktStadium.setXPos(aktPosition);
+            aktStadium.setBeginn(beginnStadium);
+            
+            this.zeichneAktStadium(aktStadium, aktPosition);
 
             // Berechnet Startjahr des naechsten Stadiums
-            beginnStadium += this.reifeStadien[i];
-
+            beginnStadium += aktStadium.dauer;
             // Berechne neue Startposition
-            aktuellePosition += breite;
+            aktPosition += aktStadium.breite;
+       
         }
-        
-        
+           
     }
     
     /**
@@ -223,6 +247,7 @@ public class Diagramm extends JPanel {
         } 
     }
     
+      
     /**
      * Methode legt die Schriftart sowie die Schriftgröße fest.
      * @param g 
@@ -230,7 +255,7 @@ public class Diagramm extends JPanel {
     public void setTextStil(Graphics2D g) {
         // Festlegen von Schriftart und Größe
         int fontSize = (int)Math.round(1.5 * this.getWidth() / 72.0);
-        Font font = new Font("Arial", Font.PLAIN, fontSize);
+        Font font = new Font(SCHRIFTART, Font.PLAIN, fontSize);
         g.setFont(font);
     }
     
@@ -254,6 +279,7 @@ public class Diagramm extends JPanel {
         
         super.paintComponent(g2);
         
+        // erzeugt das Diagramm.
         this.erzeugeDiagramm();
         
     }
