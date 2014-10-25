@@ -10,18 +10,17 @@ package gui.aufgabe1;
  */
 public class Stadium extends Diagramm {
     
-    public String name;
+
     public int beginn;
     public double dauer;
     public int position;
     public Object farbe;
     public double xPos, yPos, breite, hoehe;
     
-      public Stadium(String name, Double dauer, Object farbe, 
+    public Stadium(Double dauer, Object farbe, 
                         double breite, double hoehe, double yPos, 
                         int position) {
-          
-        this.name = name;
+         
         this.dauer = dauer;
         this.farbe = farbe;
         this.breite = breite;
