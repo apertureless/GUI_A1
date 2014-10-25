@@ -15,9 +15,9 @@ import javax.swing.JPanel;
 
 public class Diagramm extends JPanel {
     
-    
     // Konstanten zur Festlegung der Farben
     private static final Color FARBE_RAHMEN = Color.black;
+    private static final Color FARBE_TEXT = Color.black;
     private static final Color FARBE_AKTUELLES_JAHR = Color.red;
     
     public static final Color FARBE_ZU_FRUEH = Color.gray;
@@ -32,7 +32,7 @@ public class Diagramm extends JPanel {
     private static final float ANTEIL_ZU_FRUEH = 8f;
     private static final float ANTEIL_OPTIMAL = 2f;
     
-    // Prozentualer Anteil der Diagramm Höhe und Breite
+    // Prozentualer Anteil der Diagramm Höhe und Breite in %
     private static final int DIAGRAMM_BREITE = 80;
     private static final int DIAGRAMM_HOEHE = 40;
     
@@ -203,6 +203,7 @@ public class Diagramm extends JPanel {
         this.g.draw(new Rectangle.Double(
                 position, this.y, s.breite, this.h));
         if (beginnStadium != this.aktuellesJahr) {
+            this.g.setPaint(FARBE_TEXT);
             this.g.drawString(
                     Integer.toString(beginnStadium),
                     (int) position,
@@ -270,8 +271,9 @@ public class Diagramm extends JPanel {
      * @param g 
      */
     public void setTextStil(Graphics2D g) {
+        
         // Festlegen von Schriftart und Größe
-        int fontSize = (int)Math.round(1.5 * this.getWidth() / 72.0);
+        int fontSize = (int)Math.round(2 * this.getWidth() / 72.0);
         Font font = new Font(SCHRIFTART, Font.PLAIN, fontSize);
         g.setFont(font);
     }

@@ -77,7 +77,6 @@ public class Fenster extends JFrame {
     */
    public void zeichneKomponenten(Diagramm diagramm) throws IOException {
        
-       // JPanel zum JFrame hinzufügen.
        this.add(diagramm);
           
        TastaturEingabe te = new TastaturEingabe();

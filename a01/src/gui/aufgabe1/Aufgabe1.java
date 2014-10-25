@@ -23,7 +23,7 @@ public class Aufgabe1 {
         
         Fenster f = new Fenster(FENSTER_TITEL , 20, 20, 
                                 FENSTER_BREITE, FENSTER_HOEHE);
-        f.setVisible(true);   
-        f.zeichneKomponenten(new Diagramm());
+        f.setVisible(true);
+        f.zeichneKomponenten(new Diagramm()); 
     }
 }
