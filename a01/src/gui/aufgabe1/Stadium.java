@@ -49,6 +49,13 @@ public class Stadium extends Diagramm {
         this.farbe = farbe;
     }
     
+    /**
+     * Testet ob die Mausposition im Bereich eines Stadiums ist.
+     * 
+     * @param x X Position
+     * @param y Y Position
+     * @return true / false ob die Maus in einem Stadium Bereich ist.
+     */
     public boolean istImBreich(int x, int y) {
         boolean istInStadiumX = (x >= this.xPos && (x <= (this.xPos + this.breite)));
         boolean istInStadiumY = (y >= this.yPos && (y <= (this.yPos + this.hoehe)));
