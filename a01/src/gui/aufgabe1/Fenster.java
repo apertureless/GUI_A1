@@ -72,7 +72,7 @@ public class Fenster extends JFrame {
     * Methode die die Tastatureingabe abfragt und die Eingegebene Lagerdauer
     * und Jahrgang des Weines übergibt und repaint aufruft.
     * 
-    * @param komponenten
+     * @param diagramm
     * @throws IOException 
     */
    public void zeichneKomponenten(Diagramm diagramm) throws IOException {

@@ -16,7 +16,7 @@ import java.awt.event.MouseMotionListener;
  */
 public class MausEvents implements MouseListener, MouseMotionListener {
     
-   enum Elemente {
+   private enum Elemente {
         unreif,
         steigerungsfaehig,
         optimal,
