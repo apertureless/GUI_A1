@@ -15,6 +15,9 @@ public class Wein implements Lagergut {
     public double steigerungsAnteil;
     public double gutAnteil;
     
+    public int jahrgang;
+    public int lagerdauer;
+    
     
 
     @Override
@@ -38,6 +41,4 @@ public class Wein implements Lagergut {
     public void setDauer(int dauer) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
 }
