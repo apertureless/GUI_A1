@@ -29,13 +29,13 @@ public class Wein implements Lagergut {
     }
 
     @Override
-    public void setJahr(int jahrgang) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void setJahr(int erzeugungsjahr) {
+        jahrgang = erzeugungsjahr;
     }
 
     @Override
     public void setDauer(int lagerdauer) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        dauer = lagerdauer;
     }
     
     

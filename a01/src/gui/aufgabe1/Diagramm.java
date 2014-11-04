@@ -49,6 +49,8 @@ public class Diagramm extends JPanel {
     
     private int aktuellesJahr;
     
+ 
+    
     // Objekt mit den Stadien
     public Stadium[] stadien;
    
@@ -90,9 +92,9 @@ public class Diagramm extends JPanel {
      * @param jahrgang
      * @param lagedauer 
      */
-    public void setEingabe(int jahrgang, int lagedauer){
-        this.jahrgang = jahrgang;
-        this.lagerdauer = lagedauer;
+    public void setJahrgangUndDauer(Wein lagergut){
+        this.jahrgang = lagergut.jahrgang;
+        this.lagerdauer = lagergut.dauer;
     }
     
     /**

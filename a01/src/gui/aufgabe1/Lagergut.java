@@ -18,7 +18,7 @@ public interface Lagergut {
     public void setParameter(double warteAnteil, double steierungsAnteil, 
                             double gutAnteil);
     
-    public void setJahr(int jahrgang);
+    public void setJahr(int erzeugungsjahr);
     public void setDauer(int lagerdauer);
     
 }
