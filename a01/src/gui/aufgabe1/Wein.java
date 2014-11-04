@@ -16,29 +16,27 @@ public class Wein implements Lagergut {
     public double gutAnteil;
     
     public int jahrgang;
-    public int lagerdauer;
-    
-    
+    public int dauer;
 
     @Override
     public void setLagergut() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void setParameter(double warteAnteil, double steierungsAnteil, double gutAnteil) {
-       this.warteAnteil = warteAnteil;
-       this.steigerungsAnteil = steigerungsAnteil;
-       this.gutAnteil = gutAnteil;
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void setJahr(int jahr) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setJahr(int jahrgang) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void setDauer(int dauer) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setDauer(int lagerdauer) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
+    
+    
 }
