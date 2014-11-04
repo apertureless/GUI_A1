@@ -92,9 +92,9 @@ public class Diagramm extends JPanel {
      * @param jahrgang
      * @param lagedauer 
      */
-    public void setJahrgangUndDauer(Wein lagergut){
-        this.jahrgang = lagergut.jahrgang;
-        this.lagerdauer = lagergut.dauer;
+    public void setJahrgangUndDauer(Lagergut lg){
+      jahrgang = lg.getJahr();
+      lagerdauer = lg.getDauer();
     }
     
     /**

@@ -10,22 +10,24 @@ package gui.aufgabe1;
  * @author Jakub
  */
 public class Wein implements Lagergut {
+    private static float ANTEIL_ZU_FRUEH = 8f;
+    private static float ANTEIL_OPTIMAL = 2f;
+ 
+
+    private int jahrgang;
+    private int dauer;
+ 
     
-    public double warteAnteil;
-    public double steigerungsAnteil;
-    public double gutAnteil;
-    
-    public int jahrgang;
-    public int dauer;
 
     @Override
     public void setLagergut() {
-        throw new UnsupportedOperationException("Not supported yet.");
+   
     }
 
     @Override
-    public void setParameter(double warteAnteil, double steierungsAnteil, double gutAnteil) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void setParameter(float warteAnteil, float gutAnteil) {
+        ANTEIL_ZU_FRUEH = warteAnteil;
+        ANTEIL_OPTIMAL = gutAnteil;
     }
 
     @Override
@@ -36,6 +38,16 @@ public class Wein implements Lagergut {
     @Override
     public void setDauer(int lagerdauer) {
         dauer = lagerdauer;
+    }
+
+    @Override
+    public int getJahr() {
+        return jahrgang;
+    }
+
+    @Override
+    public int getDauer() {
+       return dauer;
     }
     
     

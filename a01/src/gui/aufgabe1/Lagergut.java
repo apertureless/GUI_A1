@@ -11,14 +11,13 @@ package gui.aufgabe1;
  */
 public interface Lagergut {
     
-    int lagerdauer = 0;
-    int erzeugungsjahr = 0;
-    
     public void setLagergut();
-    public void setParameter(double warteAnteil, double steierungsAnteil, 
-                            double gutAnteil);
+    public void setParameter(float warteAnteil, float gutAnteil);
     
     public void setJahr(int erzeugungsjahr);
     public void setDauer(int lagerdauer);
+    
+    public int getJahr();
+    public int getDauer();
     
 }

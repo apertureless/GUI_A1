@@ -83,10 +83,13 @@ public class Fenster extends JFrame {
        
        while (true) {
            te.pruefeEingabe();
-           Wein lagergut = new Wein();
-           lagergut.setJahr(te.jahrgang());
-           lagergut.setDauer(te.lagerdauer());
-           diagramm.setJahrgangUndDauer(lagergut);
+           
+           Lagergut lg = new Wein();
+           
+           lg.setJahr(te.jahrgang());
+           lg.setDauer(te.lagerdauer());
+           
+           diagramm.setJahrgangUndDauer(lg);
            this.repaint();
        }
    }
