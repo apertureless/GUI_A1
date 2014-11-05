@@ -89,8 +89,7 @@ public class Diagramm extends JPanel {
     /**
      * Benutzereigabe wird gesetzt.
      * 
-     * @param jahrgang
-     * @param lagedauer 
+     * @param lg
      */
     public void setJahrgangUndDauer(Lagergut lg){
       jahrgang = lg.getJahr();
