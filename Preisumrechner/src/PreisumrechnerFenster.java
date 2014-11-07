@@ -1,6 +1,9 @@
 
+import java.awt.event.KeyEvent;
 import java.text.NumberFormat;
 import java.text.ParseException;
+import java.util.Locale;
+import javax.swing.JOptionPane;
 
 /*
  * To change this template, choose Tools | Templates and open the template in
@@ -13,8 +16,8 @@ import java.text.ParseException;
  */
 public class PreisumrechnerFenster extends javax.swing.JFrame {
     
-    private static final String FEHLER_TITEL = "yolo";
-    private static final String FEHLER_MSG = "swag";
+    private static final String FEHLER_TITEL = "Keine Zahl";
+    private static final String FEHLER_MSG = "Bitte geben Sie eine Zahl im deutschen Format ein.";
     
     private static final EingabeCheck ec = new EingabeCheck();
 
@@ -69,6 +72,12 @@ public class PreisumrechnerFenster extends javax.swing.JFrame {
 
         jLFlaschenpreis.setText("Flaschenpreis");
 
+        jTPreisEingabe.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+        jTPreisEingabe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTPreisEingabeActionPerformed(evt);
+            }
+        });
         jTPreisEingabe.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jTEingabeKey(evt);
@@ -103,6 +112,7 @@ public class PreisumrechnerFenster extends javax.swing.JFrame {
         jLPreisProLiter.setText("Preis pro Liter");
 
         jTPreisAusgabe.setEditable(false);
+        jTPreisAusgabe.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
         jTPreisAusgabe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTPreisAusgabeActionPerformed(evt);
@@ -169,34 +179,66 @@ public class PreisumrechnerFenster extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jBDownActionPerformed
 
+    /**
+     * Berechent den Literpreis wenn der Button mit dem Pfeil nach Unten gedrückt wird.
+     * @param evt 
+     */
     private void jBUmrechnenUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBUmrechnenUpActionPerformed
-        // TODO add your handling code here:
+        Berechne();
     }//GEN-LAST:event_jBUmrechnenUpActionPerformed
 
     private void jTPreisAusgabeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTPreisAusgabeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTPreisAusgabeActionPerformed
-
+    /**
+     * Setzt die Preisausgabe zurück wenn die Combobox neu ausgewählt wird.
+     * @param evt 
+     */
     private void jCFlaschengroesseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCFlaschengroesseActionPerformed
-        // TODO add your handling code here:
+       jTPreisAusgabe.setText("" + 0);
     }//GEN-LAST:event_jCFlaschengroesseActionPerformed
-
+    /**
+     * Berechnet den Literpreis wenn Enter in der Combobox gedrückt wird.
+     * @param evt 
+     */
     private void jCFlaschengroesseKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCFlaschengroesseKeyPressed
-        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+           Berechne();
+       }
     }//GEN-LAST:event_jCFlaschengroesseKeyPressed
-
+    /**
+     * Berechnet den Literpreis wenn Enter im Textfeld gedrückt wird.
+     * @param evt 
+     */
     private void jTEingabeKey(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTEingabeKey
-        // TODO add your handling code here:
+       if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+           Berechne();
+       }
     }//GEN-LAST:event_jTEingabeKey
 
+    private void jTPreisEingabeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTPreisEingabeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTPreisEingabeActionPerformed
+
     private void Berechne() {
-        NumberFormat nf = NumberFormat.getInstance();
+        NumberFormat nf = NumberFormat.getInstance(Locale.GERMAN);
         String sPreis = jTPreisEingabe.getText().toString();
         
         try {
+            if (!ec.verify(jTPreisEingabe)) {
+                throw new ParseException ("Fehler", 0);
+            }
+            
+            double flaschengroesse = nf.parse(jCFlaschengroesse.getItemAt(jCFlaschengroesse.getSelectedIndex()).toString()).doubleValue();          
+            double preis = nf.parse(sPreis).doubleValue();
+            double literPreis = preis / flaschengroesse;
+            
+            jTPreisAusgabe.setText(nf.format(literPreis));
             
         } catch (ParseException e) {
-            
+            JOptionPane.showMessageDialog(null, FEHLER_MSG, FEHLER_TITEL, JOptionPane.WARNING_MESSAGE);
+            jTPreisEingabe.setText("");
+            jTPreisEingabe.requestFocusInWindow();
         }
     } 
     
