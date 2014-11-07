@@ -131,7 +131,11 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTPreisEingabe">
+          <Properties>
+            <Property name="horizontalAlignment" type="int" value="11"/>
+          </Properties>
           <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTPreisEingabeActionPerformed"/>
             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTEingabeKey"/>
           </Events>
         </Component>
@@ -189,6 +193,7 @@
         <Component class="javax.swing.JTextField" name="jTPreisAusgabe">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
+            <Property name="horizontalAlignment" type="int" value="11"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTPreisAusgabeActionPerformed"/>
