@@ -1,3 +1,7 @@
+
+import java.text.NumberFormat;
+import java.text.ParseException;
+
 /*
  * To change this template, choose Tools | Templates and open the template in
  * the editor.
@@ -8,6 +12,11 @@
  * @author Jakub Juszczak <juszczak.j@googlemail.com>
  */
 public class PreisumrechnerFenster extends javax.swing.JFrame {
+    
+    private static final String FEHLER_TITEL = "yolo";
+    private static final String FEHLER_MSG = "swag";
+    
+    private static final EingabeCheck ec = new EingabeCheck();
 
     /**
      * Creates new form PreisumrechnerFenster
@@ -180,6 +189,17 @@ public class PreisumrechnerFenster extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTEingabeKey
 
+    private void Berechne() {
+        NumberFormat nf = NumberFormat.getInstance();
+        String sPreis = jTPreisEingabe.getText().toString();
+        
+        try {
+            
+        } catch (ParseException e) {
+            
+        }
+    } 
+    
     /**
      * @param args the command line arguments
      */
