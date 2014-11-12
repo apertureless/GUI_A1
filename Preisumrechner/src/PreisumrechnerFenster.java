@@ -52,7 +52,7 @@ public class PreisumrechnerFenster extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Preisumrechner");
         setMaximumSize(new java.awt.Dimension(400, 300));
-        setName("Hauptfenster");
+        setName("Hauptfenster"); // NOI18N
         setResizable(false);
 
         jLFenstergroesse.setLabelFor(jCFlaschengroesse);
@@ -87,7 +87,6 @@ public class PreisumrechnerFenster extends javax.swing.JFrame {
         jLEuro.setText("€");
 
         jBUmrechnenUp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrow-down.png"))); // NOI18N
-        jBUmrechnenUp.setActionCommand("");
         jBUmrechnenUp.setMargin(new java.awt.Insets(0, 0, 0, 0));
         jBUmrechnenUp.setMaximumSize(new java.awt.Dimension(69, 69));
         jBUmrechnenUp.setMinimumSize(new java.awt.Dimension(69, 69));
@@ -98,7 +97,6 @@ public class PreisumrechnerFenster extends javax.swing.JFrame {
         });
 
         jBDown.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrow-up.png"))); // NOI18N
-        jBDown.setActionCommand("");
         jBDown.setEnabled(false);
         jBDown.setMargin(new java.awt.Insets(0, 0, 0, 0));
         jBDown.setMaximumSize(new java.awt.Dimension(69, 69));
@@ -159,9 +157,9 @@ public class PreisumrechnerFenster extends javax.swing.JFrame {
                     .addComponent(jTPreisEingabe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLEuro))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBUmrechnenUp, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBDown, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBDown, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBUmrechnenUp, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLPreisProLiter)
