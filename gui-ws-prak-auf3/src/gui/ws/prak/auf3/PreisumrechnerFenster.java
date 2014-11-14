@@ -1,11 +1,14 @@
 package gui.ws.prak.auf3;
 
 
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Locale;
-import javax.swing.JOptionPane;
+import javax.print.attribute.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
 
 /*
  * To change this template, choose Tools | Templates and open the template in
@@ -18,10 +21,56 @@ import javax.swing.JOptionPane;
  */
 public class PreisumrechnerFenster extends javax.swing.JFrame {
     
+     private static final String ERLAUBTE_ZEICHEN ="0123456789,.";
     
-    private static final String ERLAUBTE_ZEICHEN ="0123456789,.";
+    /**
+     * Klasse gibt alle gültigen Eingabezeichen JTPreisEingabe Feld vor.
+     */
+    private class EingabeDokument extends PlainDocument {
+       
+        public void insertString(int offs, String s, AttributeSet a) throws BadLocationException {
+            for (int i = 0; i < s.length(); i++) {
+                if (!ERLAUBTE_ZEICHEN.contains("" + s.charAt(i)) ){
+                    Toolkit.getDefaultToolkit().beep();
+                    return;
+                }
+            }
+            
+            if (!istButtonFlasche) {
+                jTPreisAusgabe.setText("");
+            }
+            
+            super.insertString(offs, s, null);
+        }
+    }
+    /**
+     * Klasse gibt alle gültigen Eingabezeichen für JTPreisAusgabe Feld vor.
+     */
+    private class AusgabeDokument extends PlainDocument {
+        
+         public void insertString(int offs, String s, AttributeSet a) throws BadLocationException {
+            for (int i = 0; i < s.length(); i++) {
+                if (!ERLAUBTE_ZEICHEN.contains("" + s.charAt(i)) ){
+                    Toolkit.getDefaultToolkit().beep();
+                    return;
+                }
+            }
+            
+            if (!istButtonLiter) {
+                jTPreisEingabe.setText("");
+            }
+            
+            super.insertString(offs, s, null);
+        }
+    }
     
     private static final EingabeCheck ec = new EingabeCheck();
+    private final EingabeDokument eingabeDokument = new EingabeDokument();
+    
+    private boolean istButtonFlasche = false;
+    private boolean istButtonLiter = false;
+    
+    
 
     /**
      * Creates new form PreisumrechnerFenster
