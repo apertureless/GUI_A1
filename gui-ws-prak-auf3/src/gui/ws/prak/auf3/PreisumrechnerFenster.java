@@ -65,7 +65,6 @@ public class PreisumrechnerFenster extends javax.swing.JFrame {
     }
     
     private static final EingabeCheck ec = new EingabeCheck();
-    private final EingabeDokument eingabeDokument = new EingabeDokument();
     
     private boolean istButtonFlasche = false;
     private boolean istButtonLiter = false;
@@ -77,6 +76,9 @@ public class PreisumrechnerFenster extends javax.swing.JFrame {
      */
     public PreisumrechnerFenster() {
         initComponents();
+        jTPreisEingabe.setDocument(new EingabeDokument());
+        jTPreisEingabe.setInputVerifier(ec);
+        jTPreisAusgabe.setDocument(new AusgabeDokument());
     }
 
     /** This method is called from within the constructor to
@@ -223,7 +225,7 @@ public class PreisumrechnerFenster extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDownActionPerformed
-        // TODO add your handling code here:
+       istButtonFlasche = true;
     }//GEN-LAST:event_jBDownActionPerformed
 
     /**
