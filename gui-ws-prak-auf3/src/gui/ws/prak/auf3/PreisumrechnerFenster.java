@@ -269,15 +269,15 @@ public class PreisumrechnerFenster extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTPreisEingabeActionPerformed
 
-    private void Berechne() {
+    private void berechneLiterpreis() {
         NumberFormat nf = NumberFormat.getInstance(Locale.GERMAN);
+        nf.setMaximumFractionDigits(2);
+        nf.setMinimumFractionDigits(2);
+        
         String sPreis = jTPreisEingabe.getText().toString();
         
         try {
-            if (!ec.verify(jTPreisEingabe)) {
-                throw new ParseException ("Fehler", 0);
-            }
-            
+                       
             double flaschengroesse = nf.parse(jCFlaschengroesse.getItemAt(jCFlaschengroesse.getSelectedIndex()).toString()).doubleValue();          
             double preis = nf.parse(sPreis).doubleValue();
             double literPreis = preis / flaschengroesse;
@@ -290,6 +290,26 @@ public class PreisumrechnerFenster extends javax.swing.JFrame {
             jTPreisEingabe.requestFocusInWindow();
         }
     } 
+    
+     private void berechneFlaschenpreis() {
+        NumberFormat nf = NumberFormat.getInstance(Locale.GERMAN);
+        String sPreis = jTPreisAusgabe.getText().toString();
+        
+        try {
+            
+            double flaschengroesse = nf.parse(jCFlaschengroesse.getItemAt(jCFlaschengroesse.getSelectedIndex()).toString()).doubleValue();          
+            double preis = nf.parse(sPreis).doubleValue();
+            double literPreis = preis * flaschengroesse;
+            
+            jTPreisAusgabe.setText(nf.format(literPreis));
+            
+        } catch (ParseException e) {
+            
+            jTPreisEingabe.setText("");
+            jTPreisEingabe.requestFocusInWindow();
+        }
+    } 
+    
     
     /**
      * @param args the command line arguments
