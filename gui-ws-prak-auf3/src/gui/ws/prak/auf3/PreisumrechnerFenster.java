@@ -276,6 +276,8 @@ public class PreisumrechnerFenster extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTPreisEingabeActionPerformed
 
+  
+    
     private void berechneLiterpreis() {
         NumberFormat nf = NumberFormat.getInstance(Locale.GERMAN);
         nf.setMaximumFractionDigits(2);
