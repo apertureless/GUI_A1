@@ -7,6 +7,7 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Locale;
 import javax.print.attribute.AttributeSet;
+import javax.swing.JOptionPane;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 
@@ -223,7 +224,11 @@ public class PreisumrechnerFenster extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    /**
+     * 
+     * @param evt 
+     */
     private void jBDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDownActionPerformed
        istButtonFlasche = true;
     }//GEN-LAST:event_jBDownActionPerformed
@@ -233,7 +238,8 @@ public class PreisumrechnerFenster extends javax.swing.JFrame {
      * @param evt 
      */
     private void jBUmrechnenUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBUmrechnenUpActionPerformed
-        Berechne();
+       istButtonLiter = true;
+       berechneLiterpreis();
     }//GEN-LAST:event_jBUmrechnenUpActionPerformed
 
     private void jTPreisAusgabeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTPreisAusgabeActionPerformed
@@ -252,7 +258,7 @@ public class PreisumrechnerFenster extends javax.swing.JFrame {
      */
     private void jCFlaschengroesseKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCFlaschengroesseKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-           Berechne();
+           berechneLiterpreis();
        }
     }//GEN-LAST:event_jCFlaschengroesseKeyPressed
     /**
@@ -261,7 +267,8 @@ public class PreisumrechnerFenster extends javax.swing.JFrame {
      */
     private void jTEingabeKey(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTEingabeKey
        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-           Berechne();
+           istButtonLiter = true;
+           berechneLiterpreis();
        }
     }//GEN-LAST:event_jTEingabeKey
 
@@ -285,14 +292,18 @@ public class PreisumrechnerFenster extends javax.swing.JFrame {
             jTPreisAusgabe.setText(nf.format(literPreis));
             
         } catch (ParseException e) {
-            
+            JOptionPane.showMessageDialog(null, "YOLO", "SWAG", JOptionPane.WARNING_MESSAGE);
             jTPreisEingabe.setText("");
             jTPreisEingabe.requestFocusInWindow();
         }
+        istButtonLiter = false;
     } 
     
      private void berechneFlaschenpreis() {
         NumberFormat nf = NumberFormat.getInstance(Locale.GERMAN);
+        nf.setMaximumFractionDigits(2);
+        nf.setMinimumFractionDigits(2);
+        
         String sPreis = jTPreisAusgabe.getText().toString();
         
         try {
@@ -304,10 +315,11 @@ public class PreisumrechnerFenster extends javax.swing.JFrame {
             jTPreisAusgabe.setText(nf.format(literPreis));
             
         } catch (ParseException e) {
-            
-            jTPreisEingabe.setText("");
-            jTPreisEingabe.requestFocusInWindow();
+            JOptionPane.showMessageDialog(null, "YOLO", "SWAG", JOptionPane.WARNING_MESSAGE);
+            jTPreisAusgabe.setText("");
+            jTPreisAusgabe.requestFocusInWindow();
         }
+        istButtonFlasche = false;
     } 
     
     
