@@ -363,9 +363,11 @@ public class PreisumrechnerFenster extends javax.swing.JFrame {
     }//GEN-LAST:event_jTPreisEingabeFocusLost
 
     private void jTPreisAusgabeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTPreisAusgabeKeyPressed
-       if (evt.getKeyCode() == KeyEvent.VK_ENTER && ec.shouldYieldFocus(jTPreisAusgabe)) {
+       if (evt.getKeyCode() == KeyEvent.VK_ENTER && jTPreisAusgabe.getText().matches(REGEX)) {
            istButtonFlasche = true;
            berechneFlaschenpreis();
+       } else if(evt.getKeyCode() == KeyEvent.VK_ENTER && !jTPreisAusgabe.getText().matches(REGEX)) {
+           JOptionPane.showMessageDialog(null, FEHLER_MSG, FEHLER_TITEL, JOptionPane.WARNING_MESSAGE);
        }
     }//GEN-LAST:event_jTPreisAusgabeKeyPressed
 
