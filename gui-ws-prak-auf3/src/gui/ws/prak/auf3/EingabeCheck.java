@@ -18,7 +18,7 @@ import javax.swing.JTextField;
 public class EingabeCheck extends InputVerifier {
 
     private static final String REGEX_KOMMA = "(\\d*,?\\d{0,2})|(\\d{0,3}(\\.\\d{3})*,?\\d{0,2})";
-    private static final String FEHLER_TITEL = "Keine gültige Zahl";
+    private static final String FEHLER_TITEL = "Keine gültige Zahl - Verify";
     private static final String FEHLER_MSG = "Bitte geben Sie eine Zahl im deutschen Format ein.";
     
     

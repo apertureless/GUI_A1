@@ -1,12 +1,13 @@
 package gui.ws.prak.auf3;
 
 
+import static com.oracle.jrockit.jfr.ContentType.Timestamp;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import java.sql.Timestamp;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Locale;
-import javax.print.attribute.AttributeSet;
 import javax.swing.JOptionPane;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
@@ -33,6 +34,8 @@ public class PreisumrechnerFenster extends javax.swing.JFrame {
     
     private boolean istButtonFlasche = false;
     private boolean istButtonLiter = false;
+    
+    private boolean isFocusLost = false;
    
     private static final String ERLAUBTE_ZEICHEN ="0123456789,.";
     private static final String REGEX = "(\\d*,?\\d*)|(\\d{0,3}(\\.\\d{3})*,?\\d*)";
@@ -201,6 +204,11 @@ public class PreisumrechnerFenster extends javax.swing.JFrame {
                 jTPreisAusgabeActionPerformed(evt);
             }
         });
+        jTPreisAusgabe.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTPreisAusgabeKeyPressed(evt);
+            }
+        });
 
         jLEuro1.setText("€");
 
@@ -265,7 +273,12 @@ public class PreisumrechnerFenster extends javax.swing.JFrame {
      */
     private void jBDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDownActionPerformed
        istButtonFlasche = true;
-       berechneFlaschenpreis();
+       
+       if(isFocusLost == true) {
+         berechneFlaschenpreis();  
+       }
+        isFocusLost = false;
+       
     }//GEN-LAST:event_jBDownActionPerformed
 
     /**
@@ -282,8 +295,7 @@ public class PreisumrechnerFenster extends javax.swing.JFrame {
      * @param evt 
      */
     private void jTPreisAusgabeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTPreisAusgabeActionPerformed
-        istButtonFlasche = true;
-        berechneFlaschenpreis();
+        
     }//GEN-LAST:event_jTPreisAusgabeActionPerformed
     /**
      * Setzt die Preisausgabe zurück wenn die Combobox neu ausgewählt wird.
@@ -325,14 +337,21 @@ public class PreisumrechnerFenster extends javax.swing.JFrame {
     }//GEN-LAST:event_jTPreisAusgabeFocusGained
 
     private void jTPreisAusgabeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTPreisAusgabeFocusLost
-        jTPreisAusgabe.select(0, 0);
+        //@todo: remove debug
+        java.util.Date date= new java.util.Date();
         
         if(!jTPreisAusgabe.getText().matches(REGEX)) {
             JOptionPane.showMessageDialog(null, FEHLER_MSG, FEHLER_TITEL, JOptionPane.WARNING_MESSAGE);
-            jTPreisAusgabe.setText("");
+            //jTPreisAusgabe.setText("");
             jTPreisAusgabe.requestFocusInWindow();
+            istButtonLiter = false;
+            isFocusLost = false;
+
+        } else {
+            isFocusLost = true;
         }  
-        
+          jTPreisAusgabe.select(0, 0);
+    
     }//GEN-LAST:event_jTPreisAusgabeFocusLost
 
     private void jTPreisEingabeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTPreisEingabeFocusGained
@@ -342,6 +361,13 @@ public class PreisumrechnerFenster extends javax.swing.JFrame {
     private void jTPreisEingabeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTPreisEingabeFocusLost
        jTPreisEingabe.select(0, 0);
     }//GEN-LAST:event_jTPreisEingabeFocusLost
+
+    private void jTPreisAusgabeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTPreisAusgabeKeyPressed
+       if (evt.getKeyCode() == KeyEvent.VK_ENTER && ec.shouldYieldFocus(jTPreisAusgabe)) {
+           istButtonFlasche = true;
+           berechneFlaschenpreis();
+       }
+    }//GEN-LAST:event_jTPreisAusgabeKeyPressed
 
   
     /***
@@ -362,7 +388,7 @@ public class PreisumrechnerFenster extends javax.swing.JFrame {
             jTPreisAusgabe.setText(nf.format(literPreis));
             
         } catch (ParseException e) {
-            JOptionPane.showMessageDialog(null, FEHLER_MSG, FEHLER_TITEL, JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Bitte geben Sie zuerst eine Zahl ein", FEHLER_TITEL, JOptionPane.WARNING_MESSAGE);
             jTPreisEingabe.setText("");
             jTPreisEingabe.requestFocusInWindow();
         }
@@ -382,12 +408,12 @@ public class PreisumrechnerFenster extends javax.swing.JFrame {
         try {
             double flaschengroesse = nf.parse(jCFlaschengroesse.getItemAt(jCFlaschengroesse.getSelectedIndex()).toString()).doubleValue();          
             double preis = nf.parse(sPreis).doubleValue();
-            double literPreis = preis * flaschengroesse;
+            double flaschenPreis = preis * flaschengroesse;
             
-            jTPreisEingabe.setText(nf.format(literPreis));
+            jTPreisEingabe.setText(nf.format(flaschenPreis));
             
         } catch (ParseException e) {
-            JOptionPane.showMessageDialog(null, FEHLER_MSG, FEHLER_TITEL, JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Bitte geben Sie zuerst eine Zahl ein", FEHLER_TITEL, JOptionPane.WARNING_MESSAGE);
             jTPreisAusgabe.setText("");
             jTPreisAusgabe.requestFocusInWindow();
         }
