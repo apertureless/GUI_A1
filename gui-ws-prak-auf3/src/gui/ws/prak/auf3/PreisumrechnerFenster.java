@@ -121,10 +121,10 @@ public class PreisumrechnerFenster extends javax.swing.JFrame {
         jTPreisEingabe = new javax.swing.JTextField();
         jLEuro = new javax.swing.JLabel();
         jBUmrechnenUp = new javax.swing.JButton();
-        jBDown = new javax.swing.JButton();
         jLPreisProLiter = new javax.swing.JLabel();
         jTPreisAusgabe = new javax.swing.JTextField();
         jLEuro1 = new javax.swing.JLabel();
+        jBDown = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Preisumrechner");
@@ -186,16 +186,6 @@ public class PreisumrechnerFenster extends javax.swing.JFrame {
             }
         });
 
-        jBDown.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/ws/prak/auf3/arrow-up.png"))); // NOI18N
-        jBDown.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        jBDown.setMaximumSize(new java.awt.Dimension(69, 69));
-        jBDown.setMinimumSize(new java.awt.Dimension(69, 69));
-        jBDown.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBDownActionPerformed(evt);
-            }
-        });
-
         jLPreisProLiter.setText("Preis pro Liter");
 
         jTPreisAusgabe.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
@@ -220,6 +210,16 @@ public class PreisumrechnerFenster extends javax.swing.JFrame {
 
         jLEuro1.setText("€");
 
+        jBDown.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/ws/prak/auf3/arrow-up.png"))); // NOI18N
+        jBDown.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        jBDown.setMaximumSize(new java.awt.Dimension(69, 69));
+        jBDown.setMinimumSize(new java.awt.Dimension(69, 69));
+        jBDown.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBDownActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -231,19 +231,21 @@ public class PreisumrechnerFenster extends javax.swing.JFrame {
                     .addComponent(jLFlaschenpreis)
                     .addComponent(jLPreisProLiter))
                 .addGap(34, 34, 34)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jBUmrechnenUp, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                        .addComponent(jBDown, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTPreisAusgabe, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jCFlaschengroesse, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTPreisEingabe))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBUmrechnenUp, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jTPreisAusgabe, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jCFlaschengroesse, 0, 129, Short.MAX_VALUE)
+                        .addComponent(jTPreisEingabe)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLEuro)
                     .addComponent(jLEuro1))
                 .addContainerGap(95, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jBDown, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(171, 171, 171))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -258,15 +260,15 @@ public class PreisumrechnerFenster extends javax.swing.JFrame {
                     .addComponent(jTPreisEingabe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLEuro))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jBDown, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBUmrechnenUp, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addComponent(jBUmrechnenUp, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLPreisProLiter)
                     .addComponent(jTPreisAusgabe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLEuro1))
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jBDown, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
@@ -274,22 +276,6 @@ public class PreisumrechnerFenster extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    /**
-     * Berechnet den Flaschenpreis wenn der Button mit dem Pfeil nach oben gedrückt wird.
-     * 
-     * @param evt 
-     */
-    private void jBDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDownActionPerformed
-       istButtonFlasche = true;
-       
-       if(isFocusLost == true) {
-         berechneFlaschenpreis();  
-         //jTPreisAusgabe.requestFocusInWindow();
-       }
-        isFocusLost = false;
-       
-    }//GEN-LAST:event_jBDownActionPerformed
-
     /**
      * Berechent den Literpreis wenn der Button mit dem Pfeil nach Unten gedrückt wird.
      * @param evt 
@@ -397,6 +383,10 @@ public class PreisumrechnerFenster extends javax.swing.JFrame {
         //jTPreisAusgabe.requestFocus();
         //jTPreisAusgabe.selectAll();
     }//GEN-LAST:event_jBUmrechnenUpFocusLost
+
+    private void jBDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDownActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBDownActionPerformed
 
   
     /***

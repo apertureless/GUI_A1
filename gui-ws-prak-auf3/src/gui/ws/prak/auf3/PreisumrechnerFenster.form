@@ -47,15 +47,13 @@
                       <Component id="jLPreisProLiter" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="jBUmrechnenUp" min="-2" pref="52" max="-2" attributes="0"/>
-                          <EmptySpace pref="25" max="32767" attributes="0"/>
-                          <Component id="jBDown" min="-2" pref="52" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jBUmrechnenUp" alignment="0" min="-2" pref="52" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jTPreisAusgabe" alignment="1" max="32767" attributes="0"/>
+                          <Component id="jCFlaschengroesse" alignment="0" pref="129" max="32767" attributes="0"/>
+                          <Component id="jTPreisEingabe" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="jTPreisAusgabe" alignment="1" max="32767" attributes="0"/>
-                      <Component id="jCFlaschengroesse" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jTPreisEingabe" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -63,6 +61,11 @@
                       <Component id="jLEuro1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="95" max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="jBDown" min="-2" pref="51" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="171" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -81,17 +84,16 @@
                       <Component id="jLEuro" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jBDown" alignment="0" min="-2" pref="49" max="-2" attributes="0"/>
-                      <Component id="jBUmrechnenUp" min="-2" pref="49" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="jBUmrechnenUp" min="-2" pref="49" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLPreisProLiter" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jTPreisAusgabe" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLEuro1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="82" max="32767" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="jBDown" min="-2" pref="49" max="-2" attributes="0"/>
+                  <EmptySpace pref="18" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -168,25 +170,6 @@
             <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jBUmrechnenUpFocusLost"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jBDown">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/gui/ws/prak/auf3/arrow-up.png"/>
-            </Property>
-            <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-              <Insets value="[0, 0, 0, 0]"/>
-            </Property>
-            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[69, 69]"/>
-            </Property>
-            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[69, 69]"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBDownActionPerformed"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JLabel" name="jLPreisProLiter">
           <Properties>
             <Property name="text" type="java.lang.String" value="Preis pro Liter"/>
@@ -207,6 +190,25 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x20ac;"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="jBDown">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/gui/ws/prak/auf3/arrow-up.png"/>
+            </Property>
+            <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+              <Insets value="[0, 0, 0, 0]"/>
+            </Property>
+            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[69, 69]"/>
+            </Property>
+            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[69, 69]"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBDownActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
