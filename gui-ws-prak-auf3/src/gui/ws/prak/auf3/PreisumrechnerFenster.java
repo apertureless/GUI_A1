@@ -35,6 +35,9 @@ public class PreisumrechnerFenster extends javax.swing.JFrame {
     private boolean istButtonFlasche = false;
     private boolean istButtonLiter = false;
     
+    private boolean istLiterBerechnung = false;
+    private boolean istFlaschenBerechnung = false; 
+    
     private boolean isFocusLost = false;
    
     private static final String ERLAUBTE_ZEICHEN ="0123456789,.";
@@ -177,6 +180,11 @@ public class PreisumrechnerFenster extends javax.swing.JFrame {
                 jBUmrechnenUpActionPerformed(evt);
             }
         });
+        jBUmrechnenUp.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jBUmrechnenUpFocusLost(evt);
+            }
+        });
 
         jBDown.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/ws/prak/auf3/arrow-up.png"))); // NOI18N
         jBDown.setMargin(new java.awt.Insets(0, 0, 0, 0));
@@ -276,6 +284,7 @@ public class PreisumrechnerFenster extends javax.swing.JFrame {
        
        if(isFocusLost == true) {
          berechneFlaschenpreis();  
+         //jTPreisAusgabe.requestFocusInWindow();
        }
         isFocusLost = false;
        
@@ -288,6 +297,8 @@ public class PreisumrechnerFenster extends javax.swing.JFrame {
     private void jBUmrechnenUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBUmrechnenUpActionPerformed
        istButtonLiter = true;
        berechneLiterpreis();
+       
+       //jTPreisEingabe.requestFocusInWindow();
     }//GEN-LAST:event_jBUmrechnenUpActionPerformed
 
     /**
@@ -302,10 +313,20 @@ public class PreisumrechnerFenster extends javax.swing.JFrame {
      * @param evt 
      */
     private void jCFlaschengroesseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCFlaschengroesseActionPerformed
+       if (istLiterBerechnung) {
         istButtonLiter = true;
-        berechneLiterpreis();
-        jTPreisEingabe.requestFocusInWindow();
-        jTPreisEingabe.selectAll();
+        berechneLiterpreis();  
+        //istLiterBerechnung = false;
+       }
+       
+       if (istFlaschenBerechnung) {
+           istButtonFlasche = true;
+           berechneFlaschenpreis();
+           //istFlaschenBerechnung = false;
+       }
+        
+       // jTPreisEingabe.requestFocusInWindow();
+        //jTPreisEingabe.selectAll();
 
     }//GEN-LAST:event_jCFlaschengroesseActionPerformed
     /**
@@ -360,6 +381,7 @@ public class PreisumrechnerFenster extends javax.swing.JFrame {
 
     private void jTPreisEingabeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTPreisEingabeFocusLost
        jTPreisEingabe.select(0, 0);
+      // jBUmrechnenUp.requestFocus();
     }//GEN-LAST:event_jTPreisEingabeFocusLost
 
     private void jTPreisAusgabeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTPreisAusgabeKeyPressed
@@ -370,6 +392,11 @@ public class PreisumrechnerFenster extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(null, FEHLER_MSG, FEHLER_TITEL, JOptionPane.WARNING_MESSAGE);
        }
     }//GEN-LAST:event_jTPreisAusgabeKeyPressed
+
+    private void jBUmrechnenUpFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jBUmrechnenUpFocusLost
+        //jTPreisAusgabe.requestFocus();
+        //jTPreisAusgabe.selectAll();
+    }//GEN-LAST:event_jBUmrechnenUpFocusLost
 
   
     /***
@@ -388,6 +415,9 @@ public class PreisumrechnerFenster extends javax.swing.JFrame {
             double literPreis = preis / flaschengroesse;
             
             jTPreisAusgabe.setText(nf.format(literPreis));
+            istLiterBerechnung = true;
+            istFlaschenBerechnung = false;
+            //jTPreisEingabe.requestFocusInWindow();
             
         } catch (ParseException e) {
             JOptionPane.showMessageDialog(null, "Bitte geben Sie zuerst eine Zahl ein", FEHLER_TITEL, JOptionPane.WARNING_MESSAGE);
@@ -413,6 +443,9 @@ public class PreisumrechnerFenster extends javax.swing.JFrame {
             double flaschenPreis = preis * flaschengroesse;
             
             jTPreisEingabe.setText(nf.format(flaschenPreis));
+            istFlaschenBerechnung = true;
+            istLiterBerechnung = false;
+            //jTPreisAusgabe.requestFocusInWindow();
             
         } catch (ParseException e) {
             JOptionPane.showMessageDialog(null, "Bitte geben Sie zuerst eine Zahl ein", FEHLER_TITEL, JOptionPane.WARNING_MESSAGE);
