@@ -20,18 +20,18 @@ import javax.swing.text.NumberFormatter;
  */
 public class Komponenten extends javax.swing.JPanel {
     
-    private final int MIN_LAGERDAUER = 1;
-    private final int MAX_LAGERDAUER = 25;
+    private static final int MIN_LAGERDAUER = 1;
+    private static final int MAX_LAGERDAUER = 25;
     
-    private final int AKTUELLES_JAHR = Calendar.getInstance().get(Calendar.YEAR);
+    private static final int AKTUELLES_JAHR = Calendar.getInstance().get(Calendar.YEAR);
     
-    private final int MIN_JAHRGANG = AKTUELLES_JAHR - MAX_LAGERDAUER;
-    private final int MAX_JAHRGANG = AKTUELLES_JAHR;
+    private static final int MIN_JAHRGANG = AKTUELLES_JAHR - MAX_LAGERDAUER;
+    private static final int MAX_JAHRGANG = AKTUELLES_JAHR;
 
     private static final String MSG_ERR_FORMAT = "Fehler\n Falsches Format!";
     
-    private static final String MSG_ERR_BEREICH_1 = "Fehler\n Der Jahrgang zu kurz";
-    private static final String MSG_ERR_BEREICH_2 = "Fehler\n Jahrgang liegt in der Zukunft. Das ist nicht möglich.";
+    private static final String MSG_ERR_BEREICH_1 = "Der Jahrgang muss zwischen dem Jahr " + MIN_JAHRGANG + " und " + MAX_JAHRGANG + " liegen";
+    private static final String MSG_ERR_BEREICH_2 = "Der Jahrgang liegt in der Zukunft. Das ist nicht möglich.";
     private static final String MSG_ERR_KURZ = "Lagerdauer zu kurz.";
     
     private static final String MSG_INFO_LAGER = "Lagerdauer (%d - %d): ";
@@ -67,6 +67,7 @@ public class Komponenten extends javax.swing.JPanel {
         nform.setMaximum(9999);
 
         jFTJahrgang.setFormatterFactory(dff);
+       
   
     }
     
@@ -167,25 +168,27 @@ public class Komponenten extends javax.swing.JPanel {
      */
     private void jFTJahrgangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFTJahrgangActionPerformed
 
-    EingabeCheckJahrgang();
-    if(isValid) {
-        SetSpinnerValues();
-        SetDiagrammValues();
-    }
+        EingabeCheckJahrgang();
+        if(isValid) {
+            SetSpinnerValues();
+            SetDiagrammValues();
+        }
      
     }//GEN-LAST:event_jFTJahrgangActionPerformed
 
     private void jFTJahrgangFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTJahrgangFocusLost
-      EingabeCheckJahrgang();
-       if(isValid) {
-            SetSpinnerValues();
-        SetDiagrammValues();
-    }
+        EingabeCheckJahrgang();
+        if(isValid) {
+            SetSpinnerValues(); 
+            SetDiagrammValues();
+        }
     
     }//GEN-LAST:event_jFTJahrgangFocusLost
 
     private void jSLagerdauerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSLagerdauerStateChanged
-        System.out.print("CHANGED");
+
+        lagerdauer = (int)jSLagerdauer.getValue() - (int)jahrgang;
+        SetDiagrammValues();
     }//GEN-LAST:event_jSLagerdauerStateChanged
     
     /**
@@ -240,6 +243,7 @@ public class Komponenten extends javax.swing.JPanel {
         SpinnerNumberModel lagerModel = new SpinnerNumberModel(value, min, max, step);
         JSpinner.NumberEditor ed = new JSpinner.NumberEditor(jSLagerdauer);
         ed.getFormat().setGroupingUsed(false);
+        
      
         //jSLagerdauer.setEditor(ed);
         jSLagerdauer.setModel(lagerModel);
@@ -253,7 +257,6 @@ public class Komponenten extends javax.swing.JPanel {
     private void SetDiagrammValues() {
         
         lg.setJahr((int)jahrgang);
-        //lg.setDauer((int)lagerdauer);
         lg.setDauer((int)lagerdauer);
 
         diagramm1.setJahrgangUndDauer(lg);

@@ -5,8 +5,6 @@
  */
 package gui.ws.prak.auf4;
 
-import java.io.IOException;
-
 /**
  *
  * @author NetGhost03
