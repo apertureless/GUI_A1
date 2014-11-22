@@ -32,6 +32,8 @@ public class Weindiagramm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        diagramm1.setBackground(new java.awt.Color(240, 240, 240));
+
         javax.swing.GroupLayout diagramm1Layout = new javax.swing.GroupLayout(diagramm1);
         diagramm1.setLayout(diagramm1Layout);
         diagramm1Layout.setHorizontalGroup(

@@ -24,7 +24,7 @@ public class Diagramm extends JPanel {
     public static final Color FARBE_OPTIMAL = Color.green;
     public static final Color FARBE_UEBERLAGERT = Color.yellow;
     
-    private static final Color FARBE_HINTERGRUND = Color.white;
+    private static final Color FARBE_HINTERGRUND = new Color(240, 240, 240);
     
     private static final String SCHRIFTART = "Arial";
 

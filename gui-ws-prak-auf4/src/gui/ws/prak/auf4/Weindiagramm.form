@@ -49,6 +49,11 @@
     <Component class="gui.ws.prak.auf4.Komponenten" name="komponenten1">
     </Component>
     <Container class="gui.ws.prak.auf4.Diagramm" name="diagramm1">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="f0" green="f0" red="f0" type="rgb"/>
+        </Property>
+      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">

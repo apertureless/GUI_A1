@@ -30,9 +30,7 @@ public class Komponenten extends javax.swing.JPanel {
         jFTJahrgang = new javax.swing.JFormattedTextField();
         jLJahrgang = new javax.swing.JLabel();
         jLLagerdauer = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
-
-        jFTJahrgang.setText("jFormattedTextField1");
+        jSLagerdauer = new javax.swing.JSpinner();
 
         jLJahrgang.setLabelFor(jFTJahrgang);
         jLJahrgang.setText("Jahrgang");
@@ -43,16 +41,16 @@ public class Komponenten extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(41, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLJahrgang)
                     .addComponent(jLLagerdauer))
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFTJahrgang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(96, 96, 96))
+                    .addComponent(jSLagerdauer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFTJahrgang, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(133, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -64,7 +62,7 @@ public class Komponenten extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLLagerdauer)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSLagerdauer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(43, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -74,6 +72,6 @@ public class Komponenten extends javax.swing.JPanel {
     private javax.swing.JFormattedTextField jFTJahrgang;
     private javax.swing.JLabel jLJahrgang;
     private javax.swing.JLabel jLLagerdauer;
-    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JSpinner jSLagerdauer;
     // End of variables declaration//GEN-END:variables
 }

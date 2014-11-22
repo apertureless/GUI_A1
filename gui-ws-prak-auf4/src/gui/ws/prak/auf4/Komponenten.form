@@ -16,18 +16,18 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="41" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLJahrgang" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="jLLagerdauer" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jSpinner1" min="-2" max="-2" attributes="0"/>
-                  <Component id="jFTJahrgang" min="-2" max="-2" attributes="0"/>
+                  <Component id="jSLagerdauer" min="-2" max="-2" attributes="0"/>
+                  <Component id="jFTJahrgang" min="-2" pref="65" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
+              <EmptySpace pref="133" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -42,7 +42,7 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLLagerdauer" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jSpinner1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jSLagerdauer" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="43" max="32767" attributes="0"/>
           </Group>
@@ -51,9 +51,6 @@
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JFormattedTextField" name="jFTJahrgang">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jFormattedTextField1"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLJahrgang">
       <Properties>
@@ -68,7 +65,7 @@
         <Property name="text" type="java.lang.String" value="Lagerdauer"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JSpinner" name="jSpinner1">
+    <Component class="javax.swing.JSpinner" name="jSLagerdauer">
     </Component>
   </SubComponents>
 </Form>
