@@ -27,8 +27,9 @@ public class Komponenten extends javax.swing.JPanel {
     private final int MAX_JAHRGANG = AKTUELLES_JAHR;
 
     private static final String MSG_ERR_FORMAT = "Fehler\n Falsches Format!";
-    private static final String MSG_ERR_BEREICH = "Fehler\n\t Gültigkeitsbereich"
-                                                    + " nicht eingehalten.";
+    
+    private static final String MSG_ERR_BEREICH_1 = "Fehler\n Der Jahrgang zu kurz";
+    private static final String MSG_ERR_BEREICH_2 = "Fehler\n Jahrgang liegt in der Zukunft. Das ist nicht möglich.";
     private static final String MSG_ERR_KURZ = "Lagerdauer zu kurz.";
     
     private static final String MSG_INFO_LAGER = "Lagerdauer (%d - %d): ";
@@ -72,6 +73,11 @@ public class Komponenten extends javax.swing.JPanel {
         jLLagerdauer = new javax.swing.JLabel();
         jSLagerdauer = new javax.swing.JSpinner();
 
+        jFTJahrgang.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jFTJahrgangFocusLost(evt);
+            }
+        });
         jFTJahrgang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFTJahrgangActionPerformed(evt);
@@ -93,9 +99,9 @@ public class Komponenten extends javax.swing.JPanel {
                     .addComponent(jLJahrgang)
                     .addComponent(jLLagerdauer))
                 .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSLagerdauer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFTJahrgang, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jFTJahrgang)
+                    .addComponent(jSLagerdauer, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE))
                 .addContainerGap(133, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -119,33 +125,50 @@ public class Komponenten extends javax.swing.JPanel {
      * @param evt 
      */
     private void jFTJahrgangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFTJahrgangActionPerformed
+
+     EingabeCheckJahrgang();
+    }//GEN-LAST:event_jFTJahrgangActionPerformed
+
+    private void jFTJahrgangFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTJahrgangFocusLost
         
+     EingabeCheckJahrgang();
+    }//GEN-LAST:event_jFTJahrgangFocusLost
+
+    /**
+     * Überprüft die Eingabe des Jahrganges.
+     */
+    private void EingabeCheckJahrgang() {
         NumberFormat nf;
         double jahrgangEingabe = 0;
         
         try {
             nf = NumberFormat.getInstance();
-
-            
             jahrgangEingabe = (nf.parse(jFTJahrgang.getText()).doubleValue());
             
         } catch (ParseException e) {
             
-            JOptionPane.showMessageDialog(this, "Fehler", "Fehler", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, MSG_ERR_FORMAT, "Fehler", JOptionPane.WARNING_MESSAGE);
             jFTJahrgang.requestFocusInWindow();
             jFTJahrgang.selectAll();
         }
         
         try {
-             if (jahrgangEingabe > MAX_JAHRGANG || jahrgangEingabe < MIN_JAHRGANG) {
-                JOptionPane.showMessageDialog(this, MSG_ERR_BEREICH, "Fehler", JOptionPane.WARNING_MESSAGE);
+            if (jahrgangEingabe < MIN_JAHRGANG) {
+                JOptionPane.showMessageDialog(this, MSG_ERR_BEREICH_1, "Fehler", JOptionPane.WARNING_MESSAGE);
+                jFTJahrgang.requestFocusInWindow();
+                jFTJahrgang.selectAll();
             }
+            
+             if (jahrgangEingabe > MAX_JAHRGANG) {
+                    JOptionPane.showMessageDialog(this, MSG_ERR_BEREICH_2, "Fehler", JOptionPane.WARNING_MESSAGE);
+                    jFTJahrgang.requestFocusInWindow();
+                    jFTJahrgang.selectAll();
+            }
+            
         } catch (NumberFormatException nfe) {
             JOptionPane.showMessageDialog(this, MSG_ERR_FORMAT, "Fehler", JOptionPane.WARNING_MESSAGE);
         }
-       
-    }//GEN-LAST:event_jFTJahrgangActionPerformed
-
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFormattedTextField jFTJahrgang;
