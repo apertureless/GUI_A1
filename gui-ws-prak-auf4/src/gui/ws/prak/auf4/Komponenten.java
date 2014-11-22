@@ -5,15 +5,12 @@
  */
 package gui.ws.prak.auf4;
 
-import java.io.IOException;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Calendar;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
-import javax.swing.SpinnerListModel;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.NumberFormatter;
 
@@ -42,7 +39,8 @@ public class Komponenten extends javax.swing.JPanel {
     
     double jahrgang;
     
-    
+    Lagergut lg = new Wein();
+    Diagramm dia = new Diagramm();
     
     
     /**
@@ -66,11 +64,7 @@ public class Komponenten extends javax.swing.JPanel {
         nform.setMaximum(9999);
 
         jFTJahrgang.setFormatterFactory(dff);
-        
-        Diagramm reifeDiagramm = new Diagramm();
-        
-        
-        
+  
     }
 
     /**
@@ -142,12 +136,13 @@ public class Komponenten extends javax.swing.JPanel {
     private void jFTJahrgangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFTJahrgangActionPerformed
 
      EingabeCheckJahrgang(); 
-  
+
     }//GEN-LAST:event_jFTJahrgangActionPerformed
 
     private void jFTJahrgangFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTJahrgangFocusLost
         
-     EingabeCheckJahrgang();
+       EingabeCheckJahrgang();
+      
      
     }//GEN-LAST:event_jFTJahrgangFocusLost
     
@@ -195,10 +190,20 @@ public class Komponenten extends javax.swing.JPanel {
     }
     
     private void SetSpinnerValues() {
-        Object[] lagerdauer = {"2009", "2010", "2011","2012"};
-        //SpinnerListModel lagerModel = new SpinnerListModel(lagerdauer);
+        int value = (int)jahrgang;
+        int min = value;
+        int max = value + MAX_LAGERDAUER;
+        int step = 1;
         
-        //jSLagerdauer.setModel(lagerModel);
+        SpinnerNumberModel lagerModel = new SpinnerNumberModel(value, min, max, step);
+        JSpinner.NumberEditor ed = new JSpinner.NumberEditor(jSLagerdauer);
+        ed.getFormat().setGroupingUsed(false);
+     
+        //jSLagerdauer.setEditor(ed);
+        jSLagerdauer.setModel(lagerModel);
+        jSLagerdauer.setEditor(new JSpinner.NumberEditor(jSLagerdauer,"####"));
+
+        jSLagerdauer.requestFocusInWindow();
         
     }
     
