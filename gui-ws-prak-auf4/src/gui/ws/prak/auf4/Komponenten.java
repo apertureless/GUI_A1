@@ -5,17 +5,57 @@
  */
 package gui.ws.prak.auf4;
 
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.Calendar;
+import javax.swing.JOptionPane;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.NumberFormatter;
+
 /**
  *
  * @author NetGhost03
  */
 public class Komponenten extends javax.swing.JPanel {
+    
+    private final int MIN_LAGERDAUER = 1;
+    private final int MAX_LAGERDAUER = 25;
+    
+    private final int AKTUELLES_JAHR = Calendar.getInstance().get(Calendar.YEAR);
+    
+    private final int MIN_JAHRGANG = AKTUELLES_JAHR - MAX_LAGERDAUER;
+    private final int MAX_JAHRGANG = AKTUELLES_JAHR;
 
+    private static final String MSG_ERR_FORMAT = "Fehler\n Falsches Format!";
+    private static final String MSG_ERR_BEREICH = "Fehler\n\t Gültigkeitsbereich"
+                                                    + " nicht eingehalten.";
+    private static final String MSG_ERR_KURZ = "Lagerdauer zu kurz.";
+    
+    private static final String MSG_INFO_LAGER = "Lagerdauer (%d - %d): ";
+    private static final String MSG_INFO_JAHRGANG = "Jahrgang (%d - %d): ";
+    
     /**
      * Creates new form Komponenten
      */
     public Komponenten() {
         initComponents();
+        
+        NumberFormat nf = NumberFormat.getInstance();
+        
+        NumberFormatter nform = new NumberFormatter(nf);
+        DefaultFormatterFactory dff = new DefaultFormatterFactory(nform);
+        nf.setMinimumFractionDigits(0);
+        nf.setMaximumFractionDigits(0);
+        nf.setGroupingUsed(false);
+        nform.setAllowsInvalid(false);
+        nform.setOverwriteMode(true);
+       
+        nform.setValueClass(Integer.class);
+        nform.setMinimum(0);
+        nform.setMaximum(9999);
+
+        jFTJahrgang.setFormatterFactory(dff);
+      
     }
 
     /**
@@ -31,6 +71,12 @@ public class Komponenten extends javax.swing.JPanel {
         jLJahrgang = new javax.swing.JLabel();
         jLLagerdauer = new javax.swing.JLabel();
         jSLagerdauer = new javax.swing.JSpinner();
+
+        jFTJahrgang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFTJahrgangActionPerformed(evt);
+            }
+        });
 
         jLJahrgang.setLabelFor(jFTJahrgang);
         jLJahrgang.setText("Jahrgang");
@@ -66,6 +112,39 @@ public class Komponenten extends javax.swing.JPanel {
                 .addContainerGap(43, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    /**
+     * Methode die Aufgerufen wird, wenn Werte im Jahrgang Feld geändert werden.
+     * 
+     * @param evt 
+     */
+    private void jFTJahrgangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFTJahrgangActionPerformed
+        
+        NumberFormat nf;
+        double jahrgangEingabe = 0;
+        
+        try {
+            nf = NumberFormat.getInstance();
+
+            
+            jahrgangEingabe = (nf.parse(jFTJahrgang.getText()).doubleValue());
+            
+        } catch (ParseException e) {
+            
+            JOptionPane.showMessageDialog(this, "Fehler", "Fehler", JOptionPane.WARNING_MESSAGE);
+            jFTJahrgang.requestFocusInWindow();
+            jFTJahrgang.selectAll();
+        }
+        
+        try {
+             if (jahrgangEingabe > MAX_JAHRGANG || jahrgangEingabe < MIN_JAHRGANG) {
+                JOptionPane.showMessageDialog(this, MSG_ERR_BEREICH, "Fehler", JOptionPane.WARNING_MESSAGE);
+            }
+        } catch (NumberFormatException nfe) {
+            JOptionPane.showMessageDialog(this, MSG_ERR_FORMAT, "Fehler", JOptionPane.WARNING_MESSAGE);
+        }
+       
+    }//GEN-LAST:event_jFTJahrgangActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
