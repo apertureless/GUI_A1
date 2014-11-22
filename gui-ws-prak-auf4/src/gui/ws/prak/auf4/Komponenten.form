@@ -27,7 +27,7 @@
                   <Component id="jFTJahrgang" max="32767" attributes="0"/>
                   <Component id="jSLagerdauer" pref="65" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="133" max="32767" attributes="0"/>
+              <EmptySpace pref="71" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

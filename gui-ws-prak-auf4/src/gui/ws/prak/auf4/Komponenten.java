@@ -102,7 +102,7 @@ public class Komponenten extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jFTJahrgang)
                     .addComponent(jSLagerdauer, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE))
-                .addContainerGap(133, Short.MAX_VALUE))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,6 +168,10 @@ public class Komponenten extends javax.swing.JPanel {
         } catch (NumberFormatException nfe) {
             JOptionPane.showMessageDialog(this, MSG_ERR_FORMAT, "Fehler", JOptionPane.WARNING_MESSAGE);
         }
+    }
+    
+    private void SetSpinnerValues() {
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
