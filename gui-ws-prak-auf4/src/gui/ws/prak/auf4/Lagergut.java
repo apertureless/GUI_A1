@@ -7,15 +7,15 @@ package gui.ws.prak.auf4;
 
 /**
  *
- * @author NetGhost03
+ * @author Jakub
  */
-public class GuiWsPrakAuf4 {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
+public interface Lagergut {
+    
+    
+    public void setJahr(int erzeugungsjahr);
+    public void setDauer(int lagerdauer);
+    
+    public int getJahr();
+    public int getDauer();
     
 }
