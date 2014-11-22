@@ -38,6 +38,9 @@ public class Komponenten extends javax.swing.JPanel {
     private static final String MSG_INFO_JAHRGANG = "Jahrgang (%d - %d): ";
     
     double jahrgang;
+    int lagerdauer = 0;
+    
+    boolean isValid = true;
     
     Lagergut lg = new Wein();
    
@@ -80,11 +83,22 @@ public class Komponenten extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        diagramm1 = new gui.ws.prak.auf4.Diagramm();
         jFTJahrgang = new javax.swing.JFormattedTextField();
         jLJahrgang = new javax.swing.JLabel();
         jLLagerdauer = new javax.swing.JLabel();
         jSLagerdauer = new javax.swing.JSpinner();
-        diagramm1 = new gui.ws.prak.auf4.Diagramm();
+
+        javax.swing.GroupLayout diagramm1Layout = new javax.swing.GroupLayout(diagramm1);
+        diagramm1.setLayout(diagramm1Layout);
+        diagramm1Layout.setHorizontalGroup(
+            diagramm1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 523, Short.MAX_VALUE)
+        );
+        diagramm1Layout.setVerticalGroup(
+            diagramm1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 228, Short.MAX_VALUE)
+        );
 
         jFTJahrgang.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jFTJahrgang.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -103,16 +117,11 @@ public class Komponenten extends javax.swing.JPanel {
 
         jLLagerdauer.setText("Lagerdauer");
 
-        javax.swing.GroupLayout diagramm1Layout = new javax.swing.GroupLayout(diagramm1);
-        diagramm1.setLayout(diagramm1Layout);
-        diagramm1Layout.setHorizontalGroup(
-            diagramm1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 570, Short.MAX_VALUE)
-        );
-        diagramm1Layout.setVerticalGroup(
-            diagramm1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 228, Short.MAX_VALUE)
-        );
+        jSLagerdauer.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSLagerdauerStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -121,31 +130,33 @@ public class Komponenten extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(diagramm1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLJahrgang)
-                            .addComponent(jLLagerdauer))
-                        .addGap(22, 22, 22)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jFTJahrgang)
-                            .addComponent(jSLagerdauer, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE))))
-                .addContainerGap(45, Short.MAX_VALUE))
+                    .addComponent(jLJahrgang)
+                    .addComponent(jLLagerdauer))
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jFTJahrgang)
+                    .addComponent(jSLagerdauer, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE))
+                .addGap(58, 58, 58)
+                .addComponent(diagramm1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(107, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jFTJahrgang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLJahrgang))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLLagerdauer)
-                    .addComponent(jSLagerdauer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
-                .addComponent(diagramm1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jFTJahrgang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLJahrgang))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLLagerdauer)
+                            .addComponent(jSLagerdauer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(diagramm1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -156,26 +167,34 @@ public class Komponenten extends javax.swing.JPanel {
      */
     private void jFTJahrgangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFTJahrgangActionPerformed
 
-     EingabeCheckJahrgang(); 
-
+    EingabeCheckJahrgang();
+    if(isValid) {
+        SetSpinnerValues();
+        SetDiagrammValues();
+    }
+     
     }//GEN-LAST:event_jFTJahrgangActionPerformed
 
     private void jFTJahrgangFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTJahrgangFocusLost
-        
-       EingabeCheckJahrgang();
-
-    }//GEN-LAST:event_jFTJahrgangFocusLost
-    
-    public double getJahrgang() {
-        
-        return this.jahrgang;
+      EingabeCheckJahrgang();
+       if(isValid) {
+            SetSpinnerValues();
+        SetDiagrammValues();
     }
+    
+    }//GEN-LAST:event_jFTJahrgangFocusLost
+
+    private void jSLagerdauerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSLagerdauerStateChanged
+        System.out.print("CHANGED");
+    }//GEN-LAST:event_jSLagerdauerStateChanged
+    
     /**
      * Überprüft die Eingabe des Jahrganges.
      */
     private void EingabeCheckJahrgang() {
         NumberFormat nf;
         double jahrgangEingabe = 0;
+        isValid = true;
         
         try {
             nf = NumberFormat.getInstance();
@@ -186,6 +205,7 @@ public class Komponenten extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, MSG_ERR_FORMAT, "Fehler", JOptionPane.WARNING_MESSAGE);
             jFTJahrgang.requestFocusInWindow();
             jFTJahrgang.selectAll();
+            isValid = false;
         }
         
         try {
@@ -193,24 +213,26 @@ public class Komponenten extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, MSG_ERR_BEREICH_1, "Fehler", JOptionPane.WARNING_MESSAGE);
                 jFTJahrgang.requestFocusInWindow();
                 jFTJahrgang.selectAll();
+                isValid = false;
             }
             
             if (jahrgangEingabe > MAX_JAHRGANG) {
                     JOptionPane.showMessageDialog(this, MSG_ERR_BEREICH_2, "Fehler", JOptionPane.WARNING_MESSAGE);
                     jFTJahrgang.requestFocusInWindow();
                     jFTJahrgang.selectAll();
+                    isValid = false;
             }
             
         } catch (NumberFormatException nfe) {
             JOptionPane.showMessageDialog(this, MSG_ERR_FORMAT, "Fehler", JOptionPane.WARNING_MESSAGE);
+            isValid = false;
         }
         
         jahrgang = jahrgangEingabe;
-        SetSpinnerValues();
     }
     
     private void SetSpinnerValues() {
-        int value = (int)jahrgang;
+        int value = (int)jahrgang + 1;
         int min = value;
         int max = value + MAX_LAGERDAUER;
         int step = 1;
@@ -225,12 +247,18 @@ public class Komponenten extends javax.swing.JPanel {
 
         jSLagerdauer.requestFocusInWindow();
         
+        lagerdauer = value - (int)jahrgang;
     }
     
-//    private String[] getLagerdauerValue() {
-//
-//       return 0;
-//    }
+    private void SetDiagrammValues() {
+        
+        lg.setJahr((int)jahrgang);
+        //lg.setDauer((int)lagerdauer);
+        lg.setDauer((int)lagerdauer);
+
+        diagramm1.setJahrgangUndDauer(lg);
+        this.repaint();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private gui.ws.prak.auf4.Diagramm diagramm1;

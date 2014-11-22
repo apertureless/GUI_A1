@@ -19,13 +19,7 @@ public class Weindiagramm extends javax.swing.JFrame {
      */
     public Weindiagramm() {
        initComponents(); 
-       Lagergut lg = new Wein();
-
-       lg.setJahr((int)komponenten1.getJahrgang());
-       lg.setDauer(23);
-
-       diagramm1.setJahrgangUndDauer(lg);
-       this.repaint();
+    
     }
     
 //    public void ZeichneKomponenten() throws IOException {
@@ -47,42 +41,26 @@ public class Weindiagramm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        diagramm1 = new gui.ws.prak.auf4.Diagramm();
         komponenten1 = new gui.ws.prak.auf4.Komponenten();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(850, 373));
-
-        javax.swing.GroupLayout diagramm1Layout = new javax.swing.GroupLayout(diagramm1);
-        diagramm1.setLayout(diagramm1Layout);
-        diagramm1Layout.setHorizontalGroup(
-            diagramm1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 481, Short.MAX_VALUE)
-        );
-        diagramm1Layout.setVerticalGroup(
-            diagramm1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 291, Short.MAX_VALUE)
-        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addComponent(diagramm1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(komponenten1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
+                .addComponent(komponenten1, javax.swing.GroupLayout.PREFERRED_SIZE, 741, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(79, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(komponenten1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(diagramm1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addComponent(komponenten1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         pack();
@@ -124,7 +102,6 @@ public class Weindiagramm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private gui.ws.prak.auf4.Diagramm diagramm1;
     private gui.ws.prak.auf4.Komponenten komponenten1;
     // End of variables declaration//GEN-END:variables
 }
