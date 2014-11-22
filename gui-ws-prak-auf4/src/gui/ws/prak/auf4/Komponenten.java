@@ -5,10 +5,15 @@
  */
 package gui.ws.prak.auf4;
 
+import java.io.IOException;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerListModel;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.NumberFormatter;
 
@@ -35,6 +40,11 @@ public class Komponenten extends javax.swing.JPanel {
     private static final String MSG_INFO_LAGER = "Lagerdauer (%d - %d): ";
     private static final String MSG_INFO_JAHRGANG = "Jahrgang (%d - %d): ";
     
+    double jahrgang;
+    
+    
+    
+    
     /**
      * Creates new form Komponenten
      */
@@ -56,7 +66,11 @@ public class Komponenten extends javax.swing.JPanel {
         nform.setMaximum(9999);
 
         jFTJahrgang.setFormatterFactory(dff);
-      
+        
+        Diagramm reifeDiagramm = new Diagramm();
+        
+        
+        
     }
 
     /**
@@ -73,6 +87,7 @@ public class Komponenten extends javax.swing.JPanel {
         jLLagerdauer = new javax.swing.JLabel();
         jSLagerdauer = new javax.swing.JSpinner();
 
+        jFTJahrgang.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jFTJahrgang.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jFTJahrgangFocusLost(evt);
@@ -126,14 +141,20 @@ public class Komponenten extends javax.swing.JPanel {
      */
     private void jFTJahrgangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFTJahrgangActionPerformed
 
-     EingabeCheckJahrgang();
+     EingabeCheckJahrgang(); 
+  
     }//GEN-LAST:event_jFTJahrgangActionPerformed
 
     private void jFTJahrgangFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTJahrgangFocusLost
         
      EingabeCheckJahrgang();
+     
     }//GEN-LAST:event_jFTJahrgangFocusLost
-
+    
+    public double getJahrgang() {
+        
+        return this.jahrgang;
+    }
     /**
      * Überprüft die Eingabe des Jahrganges.
      */
@@ -159,7 +180,7 @@ public class Komponenten extends javax.swing.JPanel {
                 jFTJahrgang.selectAll();
             }
             
-             if (jahrgangEingabe > MAX_JAHRGANG) {
+            if (jahrgangEingabe > MAX_JAHRGANG) {
                     JOptionPane.showMessageDialog(this, MSG_ERR_BEREICH_2, "Fehler", JOptionPane.WARNING_MESSAGE);
                     jFTJahrgang.requestFocusInWindow();
                     jFTJahrgang.selectAll();
@@ -168,11 +189,23 @@ public class Komponenten extends javax.swing.JPanel {
         } catch (NumberFormatException nfe) {
             JOptionPane.showMessageDialog(this, MSG_ERR_FORMAT, "Fehler", JOptionPane.WARNING_MESSAGE);
         }
+        
+        jahrgang = jahrgangEingabe;
+        SetSpinnerValues();
     }
     
     private void SetSpinnerValues() {
+        Object[] lagerdauer = {"2009", "2010", "2011","2012"};
+        //SpinnerListModel lagerModel = new SpinnerListModel(lagerdauer);
+        
+        //jSLagerdauer.setModel(lagerModel);
         
     }
+    
+//    private String[] getLagerdauerValue() {
+//
+//       return 0;
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFormattedTextField jFTJahrgang;
@@ -180,4 +213,7 @@ public class Komponenten extends javax.swing.JPanel {
     private javax.swing.JLabel jLLagerdauer;
     private javax.swing.JSpinner jSLagerdauer;
     // End of variables declaration//GEN-END:variables
+
+
+  
 }
