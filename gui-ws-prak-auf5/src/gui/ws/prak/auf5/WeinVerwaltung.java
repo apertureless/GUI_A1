@@ -5,6 +5,8 @@
  */
 package gui.ws.prak.auf5;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author NetGhost03
@@ -58,16 +60,39 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         jMenuHelp = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(800, 600));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         WeinAufnehmenFrame.setClosable(true);
         WeinAufnehmenFrame.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         WeinAufnehmenFrame.setIconifiable(true);
         WeinAufnehmenFrame.setMaximizable(true);
         WeinAufnehmenFrame.setResizable(true);
+        WeinAufnehmenFrame.setTitle("Wein aufnehmen");
         WeinAufnehmenFrame.setPreferredSize(new java.awt.Dimension(200, 330));
         WeinAufnehmenFrame.setVisible(false);
+        WeinAufnehmenFrame.addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+                WeinAufnehmenFrameInternalFrameClosing(evt);
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         jFTextfieldBestellnummer.setToolTipText("");
 
@@ -126,7 +151,7 @@ public class WeinVerwaltung extends javax.swing.JFrame {
                             .addComponent(jFTextfieldBestellnummer)
                             .addComponent(jComboBoxLand, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jComboBoxAlkoholgehalt, 0, 100, Short.MAX_VALUE))))
-                .addContainerGap(213, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         WeinDatenPanelLayout.setVerticalGroup(
             WeinDatenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,7 +184,7 @@ public class WeinVerwaltung extends javax.swing.JFrame {
                 .addGroup(WeinDatenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonSpeichern)
                     .addComponent(jButtonAbbrechen))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Weindaten", WeinDatenPanel);
@@ -168,11 +193,11 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 489, Short.MAX_VALUE)
+            .addGap(0, 499, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 296, Short.MAX_VALUE)
+            .addGap(0, 361, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("tab2", jPanel2);
@@ -197,9 +222,17 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         jDesktopPane1.add(WeinAufnehmenFrame);
         WeinAufnehmenFrame.setBounds(130, 60, 540, 440);
 
+        jMenuDatei.setMnemonic('D');
         jMenuDatei.setText("Datei");
 
+        jMenuItemBeenden.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItemBeenden.setMnemonic('B');
         jMenuItemBeenden.setText("Beenden");
+        jMenuItemBeenden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemBeendenActionPerformed(evt);
+            }
+        });
         jMenuDatei.add(jMenuItemBeenden);
 
         jMenuBar1.add(jMenuDatei);
@@ -243,7 +276,7 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -263,6 +296,32 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void jMenuItemBeendenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBeendenActionPerformed
+        CloseWithPrompt();
+    }//GEN-LAST:event_jMenuItemBeendenActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        CloseWithPrompt();
+    }//GEN-LAST:event_formWindowClosing
+
+    private void WeinAufnehmenFrameInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_WeinAufnehmenFrameInternalFrameClosing
+        CleanAndCloseFrame();
+    }//GEN-LAST:event_WeinAufnehmenFrameInternalFrameClosing
+
+    private void CloseWithPrompt() {
+        int close = JOptionPane.showConfirmDialog(null, "Anwendung wirklich beenden?", "Anwendung Beenden", JOptionPane.YES_NO_OPTION);
+        if (close == 0) {
+            System.exit(0);
+        }
+    }
+    
+    private void CleanAndCloseFrame() {
+        int confirm = JOptionPane.showConfirmDialog(null, "Anwendung wirklich beenden?", "Anwendung Beenden", JOptionPane.YES_NO_OPTION);
+        if (confirm == 0) {
+            WeinAufnehmenFrame.setVisible(false);
+        }
+        
+    }
     /**
      * @param args the command line arguments
      */
