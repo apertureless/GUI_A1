@@ -27,6 +27,7 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDesktopPane1 = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jDatei = new javax.swing.JMenu();
         jBeenden = new javax.swing.JMenuItem();
@@ -39,6 +40,20 @@ public class MainFrame extends javax.swing.JFrame {
         jInfo = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Wein Verwaltung");
+
+        jDesktopPane1.setBackground(new java.awt.Color(204, 204, 204));
+
+        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
+        jDesktopPane1.setLayout(jDesktopPane1Layout);
+        jDesktopPane1Layout.setHorizontalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 858, Short.MAX_VALUE)
+        );
+        jDesktopPane1Layout.setVerticalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 595, Short.MAX_VALUE)
+        );
 
         jDatei.setMnemonic('D');
         jDatei.setText("Datei");
@@ -59,6 +74,11 @@ public class MainFrame extends javax.swing.JFrame {
 
         jWeinAufnehmen.setMnemonic('A');
         jWeinAufnehmen.setText("Aufnehmen");
+        jWeinAufnehmen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jWeinAufnehmenActionPerformed(evt);
+            }
+        });
         jWein.add(jWeinAufnehmen);
 
         jWeinAendern.setMnemonic('n');
@@ -88,15 +108,21 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 638, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 401, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jWeinAufnehmenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jWeinAufnehmenActionPerformed
+        WeinAnlegenFrame w = new WeinAnlegenFrame();
+        this.jDesktopPane1.add(w);
+        w.setVisible(true);
+    }//GEN-LAST:event_jWeinAufnehmenActionPerformed
 
     /**
      * @param args the command line arguments
@@ -109,7 +135,7 @@ public class MainFrame extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -137,6 +163,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenu jBearbeiten;
     private javax.swing.JMenuItem jBeenden;
     private javax.swing.JMenu jDatei;
+    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jHelp;
     private javax.swing.JMenuItem jInfo;
     private javax.swing.JMenuBar jMenuBar1;
