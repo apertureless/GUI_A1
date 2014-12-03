@@ -28,7 +28,7 @@ public class Komponenten extends javax.swing.JPanel {
     private static final int MIN_JAHRGANG = AKTUELLES_JAHR - MAX_LAGERDAUER;
     private static final int MAX_JAHRGANG = AKTUELLES_JAHR;
 
-    private static final String MSG_ERR_FORMAT = "Fehler\n Falsches Format!";
+    private static final String MSG_ERR_FORMAT = "Jahrgang darf nicht leer sein";
     
     private static final String MSG_ERR_BEREICH_1 = "Der Jahrgang muss zwischen dem Jahr " + MIN_JAHRGANG + " und " + MAX_JAHRGANG + " liegen";
     private static final String MSG_ERR_BEREICH_2 = "Der Jahrgang liegt in der Zukunft. Das ist nicht möglich.";
@@ -67,6 +67,7 @@ public class Komponenten extends javax.swing.JPanel {
         nform.setMaximum(9999);
 
         jFTJahrgang.setFormatterFactory(dff);
+        diagramm1.setVisible(false);
        
   
     }
@@ -157,7 +158,7 @@ public class Komponenten extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addComponent(diagramm1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(73, Short.MAX_VALUE))
+                .addContainerGap(117, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -220,10 +221,10 @@ public class Komponenten extends javax.swing.JPanel {
             }
             
             if (jahrgangEingabe > MAX_JAHRGANG) {
-                    JOptionPane.showMessageDialog(this, MSG_ERR_BEREICH_2, "Fehler", JOptionPane.WARNING_MESSAGE);
-                    jFTJahrgang.requestFocusInWindow();
-                    jFTJahrgang.selectAll();
-                    isValid = false;
+                JOptionPane.showMessageDialog(this, MSG_ERR_BEREICH_2, "Fehler", JOptionPane.WARNING_MESSAGE);
+                jFTJahrgang.requestFocusInWindow();
+                jFTJahrgang.selectAll();
+                isValid = false;
             }
             
         } catch (NumberFormatException nfe) {
@@ -255,11 +256,13 @@ public class Komponenten extends javax.swing.JPanel {
     }
     
     private void SetDiagrammValues() {
+        diagramm1.setVisible(true);
         
         lg.setJahr((int)jahrgang);
         lg.setDauer((int)lagerdauer);
 
         diagramm1.setJahrgangUndDauer(lg);
+        
         this.repaint();
     }
 
