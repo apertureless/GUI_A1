@@ -28,16 +28,59 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        jDatei = new javax.swing.JMenu();
+        jBeenden = new javax.swing.JMenuItem();
+        jBearbeiten = new javax.swing.JMenu();
+        jWein = new javax.swing.JMenu();
+        jWeinAufnehmen = new javax.swing.JMenuItem();
+        jWeinAendern = new javax.swing.JMenuItem();
+        jWeinLoeschen = new javax.swing.JMenuItem();
+        jHelp = new javax.swing.JMenu();
+        jInfo = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
+        jDatei.setMnemonic('D');
+        jDatei.setText("Datei");
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        jBeenden.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
+        jBeenden.setMnemonic('B');
+        jBeenden.setText("Beenden");
+        jDatei.add(jBeenden);
+
+        jMenuBar1.add(jDatei);
+
+        jBearbeiten.setMnemonic('B');
+        jBearbeiten.setText("Bearbeiten");
+        jMenuBar1.add(jBearbeiten);
+
+        jWein.setMnemonic('W');
+        jWein.setText("Wein");
+
+        jWeinAufnehmen.setMnemonic('A');
+        jWeinAufnehmen.setText("Aufnehmen");
+        jWein.add(jWeinAufnehmen);
+
+        jWeinAendern.setMnemonic('n');
+        jWeinAendern.setText("Ändern");
+        jWein.add(jWeinAendern);
+
+        jWeinLoeschen.setMnemonic('L');
+        jWeinLoeschen.setText("Löschen");
+        jWein.add(jWeinLoeschen);
+
+        jMenuBar1.add(jWein);
+
+        jHelp.setMnemonic('?');
+        jHelp.setText("?");
+        jHelp.setToolTipText("");
+
+        jInfo.setMnemonic('I');
+        jInfo.setText("Info");
+        jInfo.setToolTipText("");
+        jHelp.add(jInfo);
+
+        jMenuBar1.add(jHelp);
 
         setJMenuBar(jMenuBar1);
 
@@ -91,8 +134,15 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jBearbeiten;
+    private javax.swing.JMenuItem jBeenden;
+    private javax.swing.JMenu jDatei;
+    private javax.swing.JMenu jHelp;
+    private javax.swing.JMenuItem jInfo;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jWein;
+    private javax.swing.JMenuItem jWeinAendern;
+    private javax.swing.JMenuItem jWeinAufnehmen;
+    private javax.swing.JMenuItem jWeinLoeschen;
     // End of variables declaration//GEN-END:variables
 }

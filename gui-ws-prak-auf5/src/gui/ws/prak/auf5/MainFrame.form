@@ -4,15 +4,70 @@
   <NonVisualComponents>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
-        <Menu class="javax.swing.JMenu" name="jMenu1">
+        <Menu class="javax.swing.JMenu" name="jDatei">
           <Properties>
-            <Property name="text" type="java.lang.String" value="File"/>
+            <Property name="mnemonic" type="int" value="68"/>
+            <Property name="text" type="java.lang.String" value="Datei"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jBeenden">
+              <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Ctrl+Q"/>
+                </Property>
+                <Property name="mnemonic" type="int" value="66"/>
+                <Property name="text" type="java.lang.String" value="Beenden"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jBearbeiten">
+          <Properties>
+            <Property name="mnemonic" type="int" value="66"/>
+            <Property name="text" type="java.lang.String" value="Bearbeiten"/>
           </Properties>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu2">
+        <Menu class="javax.swing.JMenu" name="jWein">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Edit"/>
+            <Property name="mnemonic" type="int" value="87"/>
+            <Property name="text" type="java.lang.String" value="Wein"/>
           </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jWeinAufnehmen">
+              <Properties>
+                <Property name="mnemonic" type="int" value="65"/>
+                <Property name="text" type="java.lang.String" value="Aufnehmen"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jWeinAendern">
+              <Properties>
+                <Property name="mnemonic" type="int" value="110"/>
+                <Property name="text" type="java.lang.String" value="&#xc4;ndern"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jWeinLoeschen">
+              <Properties>
+                <Property name="mnemonic" type="int" value="76"/>
+                <Property name="text" type="java.lang.String" value="L&#xf6;schen"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jHelp">
+          <Properties>
+            <Property name="mnemonic" type="int" value="63"/>
+            <Property name="text" type="java.lang.String" value="?"/>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jInfo">
+              <Properties>
+                <Property name="mnemonic" type="int" value="73"/>
+                <Property name="text" type="java.lang.String" value="Info"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
         </Menu>
       </SubComponents>
     </Menu>
