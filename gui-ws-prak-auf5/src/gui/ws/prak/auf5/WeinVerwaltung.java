@@ -5,19 +5,175 @@
  */
 package gui.ws.prak.auf5;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
 
 /**
  *
  * @author NetGhost03
  */
 public class WeinVerwaltung extends javax.swing.JFrame {
+    
+    private static final String CLOSE_TITEL = "Programm Beenden?";
+    private static final String CLOSE_MSG = "Sind Sie sicher, dass Sie das Programm beenden wollen?\nAlle Daten gehen verloren.";
+    private static final String ABORT_MSG = "Sind Sie sicher, dass Sie die Weinaufnahme beenden wollen?\nNicht gespeicherte Daten gehen verloren.";
+    private static final String ABORT_TITEL = "Weinaufnahme Beenden";
+    private int laufnummer = 0;
+
+    private final String[] LAENDER = new String[]{
+        "Land_1", "Land_2", "Land_3", "Land_4", "Land_5",
+        "Land_6", "Land_7", "Land_8", "Land_9", "Land_10",
+        "Land_11", "Land_12", "Land_13", "Land_14", "Land_15",
+        "Land_16", "Land_17", "Land_18", "Land_19", "Land_20"};
+    
+    private final String[] LAND_1 = new String[]{"L1_Region_1", "L1_Region_2", "L1_Region_3",
+        "L1_Region_4", "L1_Region_5", "L1_Region_6", "L1_Region_7", "L1_Region_8",
+        "L1_Region_9", "L1_Region_10", "L1_Region_11", "L1_Region_12", "L1_Region_13", "L1_Region_14",
+        "L1_Region_15", "L1_Region_16"};
+        
+    private final String[] LAND_2 = new String[]{"L2_Region_1", "L2_Region_2", "L2_Region_3",
+        "L2_Region_4", "L2_Region_5", "L2_Region_6", "L2_Region_7", "L2_Region_8",
+        "L2_Region_9", "L2_Region_10", "L2_Region_11", "L2_Region_12", "L2_Region_13", "L2_Region_14",
+        "L2_Region_15", "L2_Region_16"};
+
+    private final String[] LAND_3 = new String[]{"L3_Region_1", "L3_Region_2", "L3_Region_3",
+        "L3_Region_4", "L3_Region_5", "L3_Region_6", "L3_Region_7", "L3_Region_8",
+        "L3_Region_9", "L3_Region_10", "L3_Region_11", "L3_Region_12", "L3_Region_13", "L3_Region_14",
+        "L3_Region_15", "L3_Region_16"};
+    
+    private final String[] LAND_4 = new String[]{"L3_Region_1", "L3_Region_2", "L3_Region_3",
+        "L3_Region_4", "L3_Region_5", "L3_Region_6", "L3_Region_7", "L3_Region_8",
+        "L3_Region_9", "L3_Region_10", "L3_Region_11", "L3_Region_12", "L3_Region_13", "L3_Region_14",
+        "L3_Region_15", "L3_Region_16"};
+    
+    
+    private final String[] LAND_5 = new String[]{"L3_Region_1", "L3_Region_2", "L3_Region_3",
+        "L3_Region_4", "L3_Region_5", "L3_Region_6", "L3_Region_7", "L3_Region_8",
+        "L3_Region_9", "L3_Region_10", "L3_Region_11", "L3_Region_12", "L3_Region_13", "L3_Region_14",
+        "L3_Region_15", "L3_Region_16"};
+    
+    private final String[] LAND_6 = new String[]{"L3_Region_1", "L3_Region_2", "L3_Region_3",
+        "L3_Region_4", "L3_Region_5", "L3_Region_6", "L3_Region_7", "L3_Region_8",
+        "L3_Region_9", "L3_Region_10", "L3_Region_11", "L3_Region_12", "L3_Region_13", "L3_Region_14",
+        "L3_Region_15", "L3_Region_16"};
+    
+    private final String[] LAND_7 = new String[]{"L3_Region_1", "L3_Region_2", "L3_Region_3",
+        "L3_Region_4", "L3_Region_5", "L3_Region_6", "L3_Region_7", "L3_Region_8",
+        "L3_Region_9", "L3_Region_10", "L3_Region_11", "L3_Region_12", "L3_Region_13", "L3_Region_14",
+        "L3_Region_15", "L3_Region_16"};
+    
+    private final String[] LAND_8 = new String[]{"L3_Region_1", "L3_Region_2", "L3_Region_3",
+        "L3_Region_4", "L3_Region_5", "L3_Region_6", "L3_Region_7", "L3_Region_8",
+        "L3_Region_9", "L3_Region_10", "L3_Region_11", "L3_Region_12", "L3_Region_13", "L3_Region_14",
+        "L3_Region_15", "L3_Region_16"};
+    
+    private final String[] LAND_9 = new String[]{"L3_Region_1", "L3_Region_2", "L3_Region_3",
+        "L3_Region_4", "L3_Region_5", "L3_Region_6", "L3_Region_7", "L3_Region_8",
+        "L3_Region_9", "L3_Region_10", "L3_Region_11", "L3_Region_12", "L3_Region_13", "L3_Region_14",
+        "L3_Region_15", "L3_Region_16"};
+    
+    private final String[] LAND_10 = new String[]{"L3_Region_1", "L3_Region_2", "L3_Region_3",
+        "L3_Region_4", "L3_Region_5", "L3_Region_6", "L3_Region_7", "L3_Region_8",
+        "L3_Region_9", "L3_Region_10", "L3_Region_11", "L3_Region_12", "L3_Region_13", "L3_Region_14",
+        "L3_Region_15", "L3_Region_16"};
+    
+    private final String[] LAND_11 = new String[]{"L3_Region_1", "L3_Region_2", "L3_Region_3",
+        "L3_Region_4", "L3_Region_5", "L3_Region_6", "L3_Region_7", "L3_Region_8",
+        "L3_Region_9", "L3_Region_10", "L3_Region_11", "L3_Region_12", "L3_Region_13", "L3_Region_14",
+        "L3_Region_15", "L3_Region_16"};
+    
+    private final String[] LAND_12 = new String[]{"L3_Region_1", "L3_Region_2", "L3_Region_3",
+        "L3_Region_4", "L3_Region_5", "L3_Region_6", "L3_Region_7", "L3_Region_8",
+        "L3_Region_9", "L3_Region_10", "L3_Region_11", "L3_Region_12", "L3_Region_13", "L3_Region_14",
+        "L3_Region_15", "L3_Region_16"};
+    
+    private final String[] LAND_13 = new String[]{"L3_Region_1", "L3_Region_2", "L3_Region_3",
+        "L3_Region_4", "L3_Region_5", "L3_Region_6", "L3_Region_7", "L3_Region_8",
+        "L3_Region_9", "L3_Region_10", "L3_Region_11", "L3_Region_12", "L3_Region_13", "L3_Region_14",
+        "L3_Region_15", "L3_Region_16"};
+    
+    private final String[] LAND_14 = new String[]{"L3_Region_1", "L3_Region_2", "L3_Region_3",
+        "L3_Region_4", "L3_Region_5", "L3_Region_6", "L3_Region_7", "L3_Region_8",
+        "L3_Region_9", "L3_Region_10", "L3_Region_11", "L3_Region_12", "L3_Region_13", "L3_Region_14",
+        "L3_Region_15", "L3_Region_16"};
+    
+    private final String[] LAND_15 = new String[]{"L3_Region_1", "L3_Region_2", "L3_Region_3",
+        "L3_Region_4", "L3_Region_5", "L3_Region_6", "L3_Region_7", "L3_Region_8",
+        "L3_Region_9", "L3_Region_10", "L3_Region_11", "L3_Region_12", "L3_Region_13", "L3_Region_14",
+        "L3_Region_15", "L3_Region_16"};
+    
+    private final String[] LAND_16 = new String[]{"L3_Region_1", "L3_Region_2", "L3_Region_3",
+        "L3_Region_4", "L3_Region_5", "L3_Region_6", "L3_Region_7", "L3_Region_8",
+        "L3_Region_9", "L3_Region_10", "L3_Region_11", "L3_Region_12", "L3_Region_13", "L3_Region_14",
+        "L3_Region_15", "L3_Region_16"};
+    
+    private final String[] LAND_17 = new String[]{"L3_Region_1", "L3_Region_2", "L3_Region_3",
+        "L3_Region_4", "L3_Region_5", "L3_Region_6", "L3_Region_7", "L3_Region_8",
+        "L3_Region_9", "L3_Region_10", "L3_Region_11", "L3_Region_12", "L3_Region_13", "L3_Region_14",
+        "L3_Region_15", "L3_Region_16"};
+    
+    private final String[] LAND_18 = new String[]{"L3_Region_1", "L3_Region_2", "L3_Region_3",
+        "L3_Region_4", "L3_Region_5", "L3_Region_6", "L3_Region_7", "L3_Region_8",
+        "L3_Region_9", "L3_Region_10", "L3_Region_11", "L3_Region_12", "L3_Region_13", "L3_Region_14",
+        "L3_Region_15", "L3_Region_16"};
+    
+    private final String[] LAND_19 = new String[]{"L3_Region_1", "L3_Region_2", "L3_Region_3",
+        "L3_Region_4", "L3_Region_5", "L3_Region_6", "L3_Region_7", "L3_Region_8",
+        "L3_Region_9", "L3_Region_10", "L3_Region_11", "L3_Region_12", "L3_Region_13", "L3_Region_14",
+        "L3_Region_15", "L3_Region_16"};
+    
+    private final String[] LAND_20 = new String[]{"L3_Region_1", "L3_Region_2", "L3_Region_3",
+        "L3_Region_4", "L3_Region_5", "L3_Region_6", "L3_Region_7", "L3_Region_8",
+        "L3_Region_9", "L3_Region_10", "L3_Region_11", "L3_Region_12", "L3_Region_13", "L3_Region_14",
+        "L3_Region_15", "L3_Region_16"};
+
+    
+    private boolean comboBoxChanged = false;
+
+    private final ArrayList<String[]> REB_LAENDER
+            = new ArrayList<>();
+
+    private final HashMap<String, String[]> LAND_UND_REGION
+            = new HashMap<>();
 
     /**
      * Creates new form WeinVerwaltung
      */
     public WeinVerwaltung() {
         initComponents();
+        
+        fuelleRebLaender();
+        fuelleLandUndRegionBeziehung(REB_LAENDER);
+        
+        FillAnbaugebiet(LAENDER);
+        
+        MaskFormatter mf = null;
+        NumberFormat nf = new DecimalFormat("0000");
+  
+        // Maskformatter anlegen für das Bestellummer-Feld
+        // Im Format 01-ABCD-0001
+        try {
+            
+            mf = new MaskFormatter("##-UUU-" + nf.format(laufnummer + 1));
+            mf.setPlaceholderCharacter('_');
+            DefaultFormatterFactory dff = new DefaultFormatterFactory(mf);
+            jFTextfieldBestellnummer.setFormatterFactory(dff);
+            
+        } catch (ParseException ex) {
+            Logger.getLogger(WeinVerwaltung.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
 
@@ -102,16 +258,30 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         jLabel1.setLabelFor(jTextFieldName);
         jLabel1.setText("Name");
 
-        jComboBoxFarbe.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Rot", "Weiß", "Rose", " " }));
+        jComboBoxFarbe.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Rot", "Weiß", "Rose" }));
 
         jLabel2.setLabelFor(jComboBoxFarbe);
         jLabel2.setText("Farbe");
 
         jLabel3.setText("Anbaugebiet");
 
-        jComboBoxLand.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxLand.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxLandItemStateChanged(evt);
+            }
+        });
+        jComboBoxLand.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxLandActionPerformed(evt);
+            }
+        });
 
-        jComboBoxRegion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxRegion.setEnabled(false);
+        jComboBoxRegion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxRegionActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Region");
 
@@ -121,8 +291,18 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         jComboBoxAlkoholgehalt.setSelectedIndex(8);
 
         jButtonSpeichern.setText("Speichern");
+        jButtonSpeichern.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSpeichernActionPerformed(evt);
+            }
+        });
 
         jButtonAbbrechen.setText("Abbrechen");
+        jButtonAbbrechen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAbbrechenActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout WeinDatenPanelLayout = new javax.swing.GroupLayout(WeinDatenPanel);
         WeinDatenPanel.setLayout(WeinDatenPanelLayout);
@@ -298,30 +478,127 @@ public class WeinVerwaltung extends javax.swing.JFrame {
 
     private void jMenuItemBeendenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBeendenActionPerformed
         CloseWithPrompt();
+        resetFormular();
     }//GEN-LAST:event_jMenuItemBeendenActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         CloseWithPrompt();
+        WeinAufnehmenFrame.setVisible(false);
+        resetFormular();
     }//GEN-LAST:event_formWindowClosing
 
     private void WeinAufnehmenFrameInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_WeinAufnehmenFrameInternalFrameClosing
         CleanAndCloseFrame();
     }//GEN-LAST:event_WeinAufnehmenFrameInternalFrameClosing
 
+    private void jComboBoxRegionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxRegionActionPerformed
+      
+    }//GEN-LAST:event_jComboBoxRegionActionPerformed
+
+    private void jComboBoxLandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxLandActionPerformed
+        if(jComboBoxLand.getSelectedIndex() != 0) {
+            jComboBoxRegion.setEnabled(true);
+        } else {
+            jComboBoxRegion.setEnabled(false);
+        }
+    }//GEN-LAST:event_jComboBoxLandActionPerformed
+
+    private void jComboBoxLandItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxLandItemStateChanged
+          String anbaugebiet = jComboBoxLand.getSelectedItem().toString();
+          fillRegion(anbaugebiet);
+    }//GEN-LAST:event_jComboBoxLandItemStateChanged
+
+    private void jButtonAbbrechenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAbbrechenActionPerformed
+        // TODO add your handling code here:
+        CloseWithPrompt();
+        resetFormular();
+    }//GEN-LAST:event_jButtonAbbrechenActionPerformed
+
+    private void jButtonSpeichernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSpeichernActionPerformed
+        resetFormular();
+    }//GEN-LAST:event_jButtonSpeichernActionPerformed
+
     private void CloseWithPrompt() {
-        int close = JOptionPane.showConfirmDialog(null, "Anwendung wirklich beenden?", "Anwendung Beenden", JOptionPane.YES_NO_OPTION);
+        int close = JOptionPane.showConfirmDialog(null, CLOSE_MSG, CLOSE_TITEL, JOptionPane.YES_NO_OPTION);
         if (close == 0) {
             System.exit(0);
         }
     }
     
     private void CleanAndCloseFrame() {
-        int confirm = JOptionPane.showConfirmDialog(null, "Anwendung wirklich beenden?", "Anwendung Beenden", JOptionPane.YES_NO_OPTION);
+        int confirm = JOptionPane.showConfirmDialog(null, ABORT_MSG, ABORT_TITEL, JOptionPane.YES_NO_OPTION);
         if (confirm == 0) {
             WeinAufnehmenFrame.setVisible(false);
         }
         
     }
+    
+    private void FillAnbaugebiet(String[] laeneder) {
+          jComboBoxLand.addItem("Bitte Land auswählen");
+          
+        for (int i = 0; i < laeneder.length; i++) {
+            jComboBoxLand.addItem(laeneder[i]);
+        }
+    }
+    
+    private void fuelleRebLaender() {
+        boolean hinzugefuegt = true;
+        hinzugefuegt = REB_LAENDER.add(LAND_1);
+        hinzugefuegt = REB_LAENDER.add(LAND_2);
+        hinzugefuegt = REB_LAENDER.add(LAND_3);
+        hinzugefuegt = REB_LAENDER.add(LAND_4);
+        hinzugefuegt = REB_LAENDER.add(LAND_5);
+        hinzugefuegt = REB_LAENDER.add(LAND_6);
+        hinzugefuegt = REB_LAENDER.add(LAND_7);
+        hinzugefuegt = REB_LAENDER.add(LAND_8);
+        hinzugefuegt = REB_LAENDER.add(LAND_9);
+        hinzugefuegt = REB_LAENDER.add(LAND_10);
+        hinzugefuegt = REB_LAENDER.add(LAND_11);
+        hinzugefuegt = REB_LAENDER.add(LAND_12);
+        hinzugefuegt = REB_LAENDER.add(LAND_13);
+        hinzugefuegt = REB_LAENDER.add(LAND_14);
+        hinzugefuegt = REB_LAENDER.add(LAND_15);
+        hinzugefuegt = REB_LAENDER.add(LAND_16);
+        hinzugefuegt = REB_LAENDER.add(LAND_17);
+        hinzugefuegt = REB_LAENDER.add(LAND_18);
+        hinzugefuegt = REB_LAENDER.add(LAND_19);
+        hinzugefuegt = REB_LAENDER.add(LAND_20);
+    }
+    
+    private void fillRegion(String land) {
+      String[] rebsorten = LAND_UND_REGION.get(land);
+      jComboBoxRegion.removeAllItems();
+      jComboBoxRegion.addItem("Bitte auswählen");
+      if (rebsorten != null) {
+          for (int i = 0; i < rebsorten.length; i++) {
+              jComboBoxRegion.addItem(rebsorten[i]);
+          }
+      }
+  }
+    private void fuelleLandUndRegionBeziehung(ArrayList<String[]> beziehung) {
+      for (int i = 0; i < beziehung.size(); i++) {
+          LAND_UND_REGION.put(LAENDER[i], beziehung.get(i));
+      }
+    }
+    
+    /**
+     * Zurücksetzen der Formularfelder
+     */
+    private void resetFormular() {
+        jFTextfieldBestellnummer.setText("");
+        jTextFieldName.setText("");
+        jComboBoxFarbe.setSelectedIndex(0);
+        jComboBoxLand.setSelectedIndex(0);
+        jComboBoxRegion.setSelectedIndex(0);
+        jComboBoxAlkoholgehalt.setSelectedIndex(8);
+   
+    }
+    
+    private void closeFormular() {
+        
+    }
+    
+
     /**
      * @param args the command line arguments
      */
