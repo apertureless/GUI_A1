@@ -174,7 +174,7 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         } catch (ParseException ex) {
             Logger.getLogger(WeinVerwaltung.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+       
     }
 
     /**
@@ -373,7 +373,7 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 499, Short.MAX_VALUE)
+            .addGap(0, 328, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -388,7 +388,7 @@ public class WeinVerwaltung extends javax.swing.JFrame {
             WeinAufnehmenFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(WeinAufnehmenFrameLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
                 .addContainerGap())
         );
         WeinAufnehmenFrameLayout.setVerticalGroup(
@@ -482,9 +482,8 @@ public class WeinVerwaltung extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemBeendenActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        CloseWithPrompt();
-        WeinAufnehmenFrame.setVisible(false);
-        resetFormular();
+       CloseWithPrompt();
+       
     }//GEN-LAST:event_formWindowClosing
 
     private void WeinAufnehmenFrameInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_WeinAufnehmenFrameInternalFrameClosing
@@ -510,12 +509,17 @@ public class WeinVerwaltung extends javax.swing.JFrame {
 
     private void jButtonAbbrechenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAbbrechenActionPerformed
         // TODO add your handling code here:
-        CloseWithPrompt();
+        CleanAndCloseFrame();
         resetFormular();
     }//GEN-LAST:event_jButtonAbbrechenActionPerformed
 
     private void jButtonSpeichernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSpeichernActionPerformed
+        
+        laufnummer++;
         resetFormular();
+       
+
+        System.out.println(laufnummer);
     }//GEN-LAST:event_jButtonSpeichernActionPerformed
 
     private void CloseWithPrompt() {
@@ -586,11 +590,29 @@ public class WeinVerwaltung extends javax.swing.JFrame {
      */
     private void resetFormular() {
         jFTextfieldBestellnummer.setText("");
+        jFTextfieldBestellnummer.setValue("");
         jTextFieldName.setText("");
         jComboBoxFarbe.setSelectedIndex(0);
         jComboBoxLand.setSelectedIndex(0);
         jComboBoxRegion.setSelectedIndex(0);
         jComboBoxAlkoholgehalt.setSelectedIndex(8);
+        
+        MaskFormatter mf = null;
+        NumberFormat nf = new DecimalFormat("0000");
+  
+        // Maskformatter anlegen für das Bestellummer-Feld
+        // Im Format 01-ABCD-0001
+        try {
+            
+            mf = new MaskFormatter("##-UUU-" + nf.format(laufnummer + 1));
+            mf.setPlaceholderCharacter('_');
+            DefaultFormatterFactory dff = new DefaultFormatterFactory(mf);
+            jFTextfieldBestellnummer.setFormatterFactory(dff);
+            
+        } catch (ParseException ex) {
+            Logger.getLogger(WeinVerwaltung.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
    
     }
     
