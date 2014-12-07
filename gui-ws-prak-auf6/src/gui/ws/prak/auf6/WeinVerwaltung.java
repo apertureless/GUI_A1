@@ -955,6 +955,7 @@ public class WeinVerwaltung extends javax.swing.JFrame {
     }//GEN-LAST:event_jCFlaschengroesseKeyPressed
 
     private void jCFlaschengroesseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCFlaschengroesseActionPerformed
+        isComboBoxChanged = true;
         if (istLiterBerechnung) {
             istButtonLiter = true;
             berechneLiterpreis();  
