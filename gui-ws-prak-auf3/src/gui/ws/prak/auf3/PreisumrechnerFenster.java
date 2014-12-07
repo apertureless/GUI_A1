@@ -384,7 +384,8 @@ public class PreisumrechnerFenster extends javax.swing.JFrame {
     }//GEN-LAST:event_jBUmrechnenUpFocusLost
 
     private void jBDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDownActionPerformed
-        // TODO add your handling code here:
+            istButtonFlasche = true;
+           berechneFlaschenpreis();
     }//GEN-LAST:event_jBDownActionPerformed
 
   
