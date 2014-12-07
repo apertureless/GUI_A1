@@ -45,13 +45,13 @@ public class Wein implements Lagergut {
         wein = "Bestellnr: " + bestellnummer + "\n"
                 + "Name: " + name + "\n"
                 + "Jahrgang: " + jahrgang + "\n"
-                + "Lagerdauer: " + dauer + "\n"
+                + "Lagerdauer: " + dauer + " Jahre\n"
                 + "Farbe: " + farbe + "\n"
                 + "Anbaugebiet: " + anbaugebiet + "\n"
                 + "Region: " + region + "\n"
                 + "Alkoholgehalt: " + alkoholgehalt + "\n"
                 + "Flaschengröße: " + flaschengroeße + "\n"
-                + "Flaschenpreis: " + preis + "\n";
+                + "Flaschenpreis: " + preis + " €\n";
         return wein;
     }
 
