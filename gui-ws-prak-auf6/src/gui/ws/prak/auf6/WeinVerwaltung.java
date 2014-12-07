@@ -333,12 +333,12 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         jCFlaschengroesse = new javax.swing.JComboBox();
         jLFenstergroesse = new javax.swing.JLabel();
         jTPreisEingabe = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        jLFlaschenpreis = new javax.swing.JLabel();
         jLCurrency = new javax.swing.JLabel();
         jBUmrechnenUp = new javax.swing.JButton();
         jBDown = new javax.swing.JButton();
         jTPreisAusgabe = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        jLPreisLiter = new javax.swing.JLabel();
         jLCurrency1 = new javax.swing.JLabel();
         DiagrammPanel = new javax.swing.JPanel();
         diagramm1 = new gui.ws.prak.auf6.Diagramm();
@@ -509,7 +509,7 @@ public class WeinVerwaltung extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Flaschenpreis");
+        jLFlaschenpreis.setText("Flaschenpreis");
 
         jLCurrency.setText("€");
 
@@ -534,7 +534,7 @@ public class WeinVerwaltung extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Preis pro Liter");
+        jLPreisLiter.setText("Preis pro Liter");
 
         jLCurrency1.setText("€");
 
@@ -566,7 +566,7 @@ public class WeinVerwaltung extends javax.swing.JFrame {
                                     .addComponent(jLabelJahrgang)
                                     .addComponent(jLabelLagerdauer)
                                     .addComponent(jLFenstergroesse)
-                                    .addComponent(jLabel1))
+                                    .addComponent(jLFlaschenpreis))
                                 .addGroup(WeinDatenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(WeinDatenPanelLayout.createSequentialGroup()
                                         .addGap(40, 40, 40)
@@ -584,7 +584,7 @@ public class WeinVerwaltung extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jTPreisEingabe, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(WeinDatenPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addComponent(jLPreisLiter)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jTPreisAusgabe, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -636,7 +636,7 @@ public class WeinVerwaltung extends javax.swing.JFrame {
                 .addGroup(WeinDatenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTPreisEingabe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLCurrency)
-                    .addComponent(jLabel1))
+                    .addComponent(jLFlaschenpreis))
                 .addGap(15, 15, 15)
                 .addGroup(WeinDatenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jBUmrechnenUp, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -644,7 +644,7 @@ public class WeinVerwaltung extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(WeinDatenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTPreisAusgabe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
+                    .addComponent(jLPreisLiter)
                     .addComponent(jLCurrency1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(WeinDatenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -993,6 +993,8 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         jLRegion.setForeground(Color.BLACK);
         jLAlkohol.setForeground(Color.BLACK);
         jLabelJahrgang.setForeground(Color.BLACK);
+        jLFlaschenpreis.setForeground(Color.BLACK);
+        jLPreisLiter.setForeground(Color.BLACK);
     }
     
     private void fuelleRebLaender() {
@@ -1048,6 +1050,8 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         jComboBoxRegion.setSelectedIndex(0);
         jComboBoxAlkoholgehalt.setSelectedIndex(8);
         isComboBoxChanged = false;
+        jTPreisEingabe.setText("");
+        jTPreisAusgabe.setText("");
         
         jSLagerdauer.setValue(0);
         diagramm1.setVisible(false);
@@ -1097,13 +1101,21 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         if(!isChanged) {
             isChanged = !jFTJahrgang.getText().isEmpty();
         }
+        
+        if(!isChanged) {
+            isChanged = !jTPreisEingabe.getText().isEmpty();
+        }
+        
+         if(!isChanged) {
+            isChanged = !jTPreisAusgabe.getText().isEmpty();
+        }
        
         if(!isChanged && bnv.verify(jFTextfieldBestellnummer)){
             isChanged = true;
         }
         return isChanged;
     }
-    
+   
     private void closeFormular() {
         if (isFormularChanged()) {
             int abbrechen = JOptionPane.showInternalConfirmDialog(jDesktopPane1, ABORT_MSG,
@@ -1309,11 +1321,11 @@ public class WeinVerwaltung extends javax.swing.JFrame {
     private javax.swing.JLabel jLCurrency1;
     private javax.swing.JLabel jLFarbe;
     private javax.swing.JLabel jLFenstergroesse;
+    private javax.swing.JLabel jLFlaschenpreis;
     private javax.swing.JLabel jLLand;
     private javax.swing.JLabel jLName;
+    private javax.swing.JLabel jLPreisLiter;
     private javax.swing.JLabel jLRegion;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelJahrgang;
     private javax.swing.JLabel jLabelLagerdauer;
     private javax.swing.JMenuBar jMenuBar1;
