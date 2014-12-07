@@ -203,7 +203,7 @@
                                           <Component id="jLRegion" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLAlkohol" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabelJahrgang" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabelLagerdauer" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -243,7 +243,7 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jSLagerdauer" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabelLagerdauer" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -404,8 +404,13 @@
                     </Component>
                     <Component class="javax.swing.JFormattedTextField" name="jFTJahrgang">
                       <Properties>
+                        <Property name="horizontalAlignment" type="int" value="4"/>
                         <Property name="toolTipText" type="java.lang.String" value=""/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jFTJahrgangFocusLost"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jFTJahrgangActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabelJahrgang">
                       <Properties>
@@ -416,8 +421,14 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JSpinner" name="jSLagerdauer">
+                      <Properties>
+                        <Property name="enabled" type="boolean" value="false"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSLagerdauerStateChanged"/>
+                      </Events>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel1">
+                    <Component class="javax.swing.JLabel" name="jLabelLagerdauer">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Lagerdauer"/>
                       </Properties>

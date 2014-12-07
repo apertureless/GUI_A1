@@ -9,7 +9,7 @@ package gui.ws.prak.auf6;
  *
  * @author jakub juszczak
  */
-public class Wein {
+public class Wein implements Lagergut {
     
     private String bestellnummer;
     private String name;
@@ -17,6 +17,9 @@ public class Wein {
     private String anbaugebiet;
     private String region;
     private String alkoholgehalt;
+    private int jahrgang;
+    private int dauer;
+ 
     
     public Wein (String bestellnummer, String name, String farbe, String anbaugebiet, String region, String alkoholgehalt) {
         this.bestellnummer = bestellnummer;
@@ -25,6 +28,9 @@ public class Wein {
         this.anbaugebiet = anbaugebiet;
         this.alkoholgehalt = alkoholgehalt;
         this.region = region;
+    }
+    public Wein() {
+        
     }
     
     @Override
@@ -39,4 +45,25 @@ public class Wein {
                 + "Alkoholgehalt: " + alkoholgehalt + "\n";
         return wein;
     }
+
+    @Override
+    public void setJahr(int erzeugungsjahr) {
+        jahrgang = erzeugungsjahr;
+    }
+
+    @Override
+    public void setDauer(int lagerdauer) {
+        dauer = lagerdauer;
+    }
+
+    @Override
+    public int getJahr() {
+        return jahrgang;
+    }
+
+    @Override
+    public int getDauer() {
+       return dauer;
+    }
+    
 }

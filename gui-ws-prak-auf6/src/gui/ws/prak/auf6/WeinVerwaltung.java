@@ -62,6 +62,8 @@ public class WeinVerwaltung extends javax.swing.JFrame {
     private boolean comboBoxChanged = false;
     
     private final BestellnummerVerifier bnv;
+    
+    Lagergut lg = new Wein();
 
     private final String[] LAENDER = new String[]{
         "Land_1", "Land_2", "Land_3", "Land_4", "Land_5",
@@ -256,7 +258,7 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         jFTJahrgang = new javax.swing.JFormattedTextField();
         jLabelJahrgang = new javax.swing.JLabel();
         jSLagerdauer = new javax.swing.JSpinner();
-        jLabel1 = new javax.swing.JLabel();
+        jLabelLagerdauer = new javax.swing.JLabel();
         DiagrammPanel = new javax.swing.JPanel();
         diagramm1 = new gui.ws.prak.auf6.Diagramm();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -374,12 +376,30 @@ public class WeinVerwaltung extends javax.swing.JFrame {
             }
         });
 
+        jFTJahrgang.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jFTJahrgang.setToolTipText("");
+        jFTJahrgang.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jFTJahrgangFocusLost(evt);
+            }
+        });
+        jFTJahrgang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFTJahrgangActionPerformed(evt);
+            }
+        });
 
         jLabelJahrgang.setLabelFor(jFTJahrgang);
         jLabelJahrgang.setText("Jahrgang");
 
-        jLabel1.setText("Lagerdauer");
+        jSLagerdauer.setEnabled(false);
+        jSLagerdauer.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSLagerdauerStateChanged(evt);
+            }
+        });
+
+        jLabelLagerdauer.setText("Lagerdauer");
 
         javax.swing.GroupLayout WeinDatenPanelLayout = new javax.swing.GroupLayout(WeinDatenPanel);
         WeinDatenPanel.setLayout(WeinDatenPanelLayout);
@@ -401,7 +421,7 @@ public class WeinVerwaltung extends javax.swing.JFrame {
                             .addComponent(jLRegion)
                             .addComponent(jLAlkohol)
                             .addComponent(jLabelJahrgang)
-                            .addComponent(jLabel1))
+                            .addComponent(jLabelLagerdauer))
                         .addGap(40, 40, 40)
                         .addGroup(WeinDatenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jFTJahrgang)
@@ -432,7 +452,7 @@ public class WeinVerwaltung extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(WeinDatenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jSLagerdauer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabelLagerdauer))
                 .addGap(18, 18, 18)
                 .addGroup(WeinDatenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxFarbe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -694,6 +714,29 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         isComboBoxChanged = true;
     }//GEN-LAST:event_jComboBoxAlkoholgehaltActionPerformed
 
+    private void jFTJahrgangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFTJahrgangActionPerformed
+        EingabeCheckJahrgang();
+        if(isValid) {
+            jSLagerdauer.setEnabled(true);
+            SetSpinnerValues();
+            SetDiagrammValues();
+        }
+    }//GEN-LAST:event_jFTJahrgangActionPerformed
+
+    private void jFTJahrgangFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTJahrgangFocusLost
+        EingabeCheckJahrgang();
+        if(isValid) {
+            jSLagerdauer.setEnabled(true);
+            SetSpinnerValues(); 
+            SetDiagrammValues();
+        }
+    }//GEN-LAST:event_jFTJahrgangFocusLost
+
+    private void jSLagerdauerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSLagerdauerStateChanged
+        lagerdauer = (int)jSLagerdauer.getValue() - (int)jahrgang;
+        SetDiagrammValues();
+    }//GEN-LAST:event_jSLagerdauerStateChanged
+
     private void CloseWithPrompt() {
         int close = JOptionPane.showInternalConfirmDialog(jDesktopPane1, CLOSE_MSG, CLOSE_TITEL, JOptionPane.YES_NO_OPTION);
         if (close == 0) {
@@ -836,6 +879,49 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Überprüft die Eingabe des Jahrganges.
+     */
+    private void EingabeCheckJahrgang() {
+        NumberFormat nf;
+        double jahrgangEingabe = 0;
+        isValid = true;
+        
+        try {
+            nf = NumberFormat.getInstance();
+            jahrgangEingabe = (nf.parse(jFTJahrgang.getText()).doubleValue());
+            
+        } catch (ParseException e) {
+            
+            JOptionPane.showMessageDialog(this, MSG_ERR_FORMAT, "Fehler", JOptionPane.WARNING_MESSAGE);
+            jFTJahrgang.requestFocusInWindow();
+            jFTJahrgang.selectAll();
+            isValid = false;
+        }
+        
+        try {
+            if (jahrgangEingabe < MIN_JAHRGANG) {
+                JOptionPane.showMessageDialog(this, MSG_ERR_BEREICH_1, "Fehler", JOptionPane.WARNING_MESSAGE);
+                jFTJahrgang.requestFocusInWindow();
+                jFTJahrgang.selectAll();
+                isValid = false;
+            }
+            
+            if (jahrgangEingabe > MAX_JAHRGANG) {
+                JOptionPane.showMessageDialog(this, MSG_ERR_BEREICH_2, "Fehler", JOptionPane.WARNING_MESSAGE);
+                jFTJahrgang.requestFocusInWindow();
+                jFTJahrgang.selectAll();
+                isValid = false;
+            }
+            
+        } catch (NumberFormatException nfe) {
+            JOptionPane.showMessageDialog(this, MSG_ERR_FORMAT, "Fehler", JOptionPane.WARNING_MESSAGE);
+            isValid = false;
+        }
+        
+        jahrgang = jahrgangEingabe;
+    }
+    
     private void SetSpinnerValues() {
         int value = (int)jahrgang + 1;
         int min = value;
@@ -855,6 +941,18 @@ public class WeinVerwaltung extends javax.swing.JFrame {
 
         lagerdauer = value - (int)jahrgang;
     }
+    
+    private void SetDiagrammValues() {
+        diagramm1.setVisible(true);
+        
+        lg.setJahr((int)jahrgang);
+        lg.setDauer((int)lagerdauer);
+
+        diagramm1.setJahrgangUndDauer(lg);
+        
+        this.repaint();
+    }
+
 
     /**
      * @param args the command line arguments
@@ -912,8 +1010,8 @@ public class WeinVerwaltung extends javax.swing.JFrame {
     private javax.swing.JLabel jLLand;
     private javax.swing.JLabel jLName;
     private javax.swing.JLabel jLRegion;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelJahrgang;
+    private javax.swing.JLabel jLabelLagerdauer;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuBearbeiten;
     private javax.swing.JMenu jMenuDatei;
