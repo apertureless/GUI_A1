@@ -397,6 +397,11 @@ public class WeinVerwaltung extends javax.swing.JFrame {
                 jSLagerdauerStateChanged(evt);
             }
         });
+        jSLagerdauer.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jSLagerdauerFocusGained(evt);
+            }
+        });
 
         jLabelLagerdauer.setText("Lagerdauer");
 
@@ -734,6 +739,14 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         SetDiagrammValues();
     }//GEN-LAST:event_jSLagerdauerStateChanged
 
+    private void jSLagerdauerFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jSLagerdauerFocusGained
+//        EingabeCheckJahrgang();
+//        if(isValid) {
+//            SetSpinnerValues(); 
+//            SetDiagrammValues();
+//        }
+    }//GEN-LAST:event_jSLagerdauerFocusGained
+
     private void CloseWithPrompt() {
         int close = JOptionPane.showInternalConfirmDialog(jDesktopPane1, CLOSE_MSG, CLOSE_TITEL, JOptionPane.YES_NO_OPTION);
         if (close == 0) {
@@ -805,11 +818,14 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         jFTextfieldBestellnummer.setText("");
         jFTextfieldBestellnummer.setValue("");
         jTextFieldName.setText("");
+        jFTJahrgang.setValue(null);
         jComboBoxFarbe.setSelectedIndex(0);
         jComboBoxLand.setSelectedIndex(0);
         jComboBoxRegion.setSelectedIndex(0);
         jComboBoxAlkoholgehalt.setSelectedIndex(8);
         isComboBoxChanged = false;
+        
+        jSLagerdauer.setValue(0);
         
         MaskFormatter mf = null;
         NumberFormat nf = new DecimalFormat("0000");
