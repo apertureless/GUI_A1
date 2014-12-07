@@ -446,6 +446,7 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         jMenuBearbeiten.setText("Bearbeiten");
         jMenuBar1.add(jMenuBearbeiten);
 
+        jMenuWein.setMnemonic('W');
         jMenuWein.setText("Wein");
 
         jMenuItemAufnehmen.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.ALT_MASK));
@@ -546,8 +547,7 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         // Variable für Fehlerstatus
         boolean istFehlerGefunden = false;
         resetColors();
-        
-       
+  
         // Abfrage ob ein Fehler gefunden wurde.
          if (!bnv.verify(jFTextfieldBestellnummer)) {
             jLBestellnummer.setForeground(Color.RED);

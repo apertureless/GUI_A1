@@ -31,6 +31,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenuWein">
           <Properties>
+            <Property name="mnemonic" type="int" value="87"/>
             <Property name="text" type="java.lang.String" value="Wein"/>
           </Properties>
           <SubComponents>
