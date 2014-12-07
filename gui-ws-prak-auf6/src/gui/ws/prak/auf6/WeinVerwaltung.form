@@ -194,7 +194,7 @@
                                       <EmptySpace max="32767" attributes="0"/>
                                       <Component id="jButtonAbbrechen" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jLBestellnummer" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLName" min="-2" max="-2" attributes="0"/>
@@ -202,19 +202,23 @@
                                           <Component id="jLLand" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLRegion" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLAlkohol" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabelJahrgang" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="jFTJahrgang" max="32767" attributes="0"/>
                                           <Component id="jComboBoxRegion" max="32767" attributes="0"/>
                                           <Component id="jComboBoxFarbe" max="32767" attributes="0"/>
                                           <Component id="jTextFieldName" max="32767" attributes="0"/>
                                           <Component id="jFTextfieldBestellnummer" max="32767" attributes="0"/>
                                           <Component id="jComboBoxLand" max="32767" attributes="0"/>
                                           <Component id="jComboBoxAlkoholgehalt" pref="100" max="32767" attributes="0"/>
+                                          <Component id="jSLagerdauer" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="137" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -230,6 +234,16 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jTextFieldName" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLName" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jFTJahrgang" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabelJahrgang" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jSLagerdauer" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -251,12 +265,12 @@
                                   <Component id="jLAlkohol" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jComboBoxAlkoholgehalt" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace pref="57" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jButtonSpeichern" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jButtonAbbrechen" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -388,9 +402,29 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAbbrechenActionPerformed"/>
                       </Events>
                     </Component>
+                    <Component class="javax.swing.JFormattedTextField" name="jFTJahrgang">
+                      <Properties>
+                        <Property name="toolTipText" type="java.lang.String" value=""/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabelJahrgang">
+                      <Properties>
+                        <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                          <ComponentRef name="jFTJahrgang"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Jahrgang"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JSpinner" name="jSLagerdauer">
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabel1">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Lagerdauer"/>
+                      </Properties>
+                    </Component>
                   </SubComponents>
                 </Container>
-                <Container class="javax.swing.JPanel" name="jPanel2">
+                <Container class="javax.swing.JPanel" name="DiagrammPanel">
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
                       <JTabbedPaneConstraints tabName="Diagramm">
@@ -414,7 +448,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="diagramm1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="34" max="32767" attributes="0"/>
+                              <EmptySpace pref="87" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -425,7 +459,7 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="479" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="393" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
