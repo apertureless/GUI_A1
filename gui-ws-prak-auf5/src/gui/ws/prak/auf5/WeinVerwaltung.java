@@ -502,7 +502,7 @@ public class WeinVerwaltung extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemAufnehmenActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-       JOptionPane.showInternalConfirmDialog(jDesktopPane1, "TEST", "TEST", DEFAULT_OPTION);
+       JOptionPane.showInternalConfirmDialog(jDesktopPane1, "Weinverwaltung v.01", "Informationen", DEFAULT_OPTION);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItemBeendenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBeendenActionPerformed
@@ -689,6 +689,7 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         jComboBoxLand.setSelectedIndex(0);
         jComboBoxRegion.setSelectedIndex(0);
         jComboBoxAlkoholgehalt.setSelectedIndex(8);
+        isComboBoxChanged = false;
         
         MaskFormatter mf = null;
         NumberFormat nf = new DecimalFormat("0000");
@@ -707,7 +708,7 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         }
     }
     
-    private boolean isFormularChanged() {
+    private boolean isFormularChanged2() {
         boolean isChanged = false;
         for (Component c : WeinDatenPanel.getComponents()){
             if (!isChanged && c instanceof JTextField) {
@@ -716,6 +717,25 @@ public class WeinVerwaltung extends javax.swing.JFrame {
                 isChanged = isComboBoxChanged;
             }
         }   
+        return isChanged;
+    }
+    
+     private boolean isFormularChanged() {
+         
+        boolean isChanged = false;
+        for (Component c : WeinDatenPanel.getComponents()){
+            if (!isChanged && c instanceof JComboBox) {
+                isChanged = isComboBoxChanged;
+            }
+        }   
+        
+        if(!isChanged) {
+            isChanged = !jTextFieldName.getText().isEmpty();
+        }
+       
+        if(!isChanged && bnv.verify(jFTextfieldBestellnummer)){
+            isChanged = true;
+        }
         return isChanged;
     }
     
