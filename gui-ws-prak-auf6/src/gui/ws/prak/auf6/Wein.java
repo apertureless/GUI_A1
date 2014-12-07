@@ -19,9 +19,12 @@ public class Wein implements Lagergut {
     private String alkoholgehalt;
     private int jahrgang;
     private int dauer;
+    private String flaschengroeße;
+    private String preis;
  
     
-    public Wein (String bestellnummer, String name, int jahrgang, int dauer, String farbe, String anbaugebiet, String region, String alkoholgehalt) {
+    public Wein (String bestellnummer, String name, int jahrgang, int dauer, 
+                String farbe, String anbaugebiet, String region, String alkoholgehalt, String flaschengroeße, String preis) {
         this.bestellnummer = bestellnummer;
         this.name = name;
         this.jahrgang = jahrgang;
@@ -30,7 +33,8 @@ public class Wein implements Lagergut {
         this.anbaugebiet = anbaugebiet;
         this.alkoholgehalt = alkoholgehalt;
         this.region = region;
-
+        this.flaschengroeße = flaschengroeße;
+        this.preis = preis;
     }
     public Wein() { }
     
@@ -45,7 +49,9 @@ public class Wein implements Lagergut {
                 + "Farbe: " + farbe + "\n"
                 + "Anbaugebiet: " + anbaugebiet + "\n"
                 + "Region: " + region + "\n"
-                + "Alkoholgehalt: " + alkoholgehalt + "\n";
+                + "Alkoholgehalt: " + alkoholgehalt + "\n"
+                + "Flaschengröße: " + flaschengroeße + "\n"
+                + "Flaschenpreis: " + preis + "\n";
         return wein;
     }
 

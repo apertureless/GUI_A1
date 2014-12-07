@@ -567,23 +567,19 @@ public class WeinVerwaltung extends javax.swing.JFrame {
                                     .addComponent(jLabelLagerdauer)
                                     .addComponent(jLFenstergroesse)
                                     .addComponent(jLFlaschenpreis))
-                                .addGroup(WeinDatenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(WeinDatenPanelLayout.createSequentialGroup()
-                                        .addGap(40, 40, 40)
-                                        .addGroup(WeinDatenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jCFlaschengroesse, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jFTJahrgang)
-                                            .addComponent(jComboBoxRegion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jComboBoxFarbe, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jTextFieldName)
-                                            .addComponent(jFTextfieldBestellnummer)
-                                            .addComponent(jComboBoxLand, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jComboBoxAlkoholgehalt, 0, 100, Short.MAX_VALUE)
-                                            .addComponent(jSLagerdauer)))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, WeinDatenPanelLayout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTPreisEingabe, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                    .addGroup(WeinDatenPanelLayout.createSequentialGroup()
+                                .addGap(40, 40, 40)
+                                .addGroup(WeinDatenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jCFlaschengroesse, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jFTJahrgang)
+                                    .addComponent(jComboBoxRegion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jComboBoxFarbe, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jTextFieldName)
+                                    .addComponent(jFTextfieldBestellnummer)
+                                    .addComponent(jComboBoxLand, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jComboBoxAlkoholgehalt, 0, 100, Short.MAX_VALUE)
+                                    .addComponent(jSLagerdauer)
+                                    .addComponent(jTPreisEingabe, javax.swing.GroupLayout.Alignment.TRAILING)))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, WeinDatenPanelLayout.createSequentialGroup()
                         .addComponent(jLPreisLiter)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jTPreisAusgabe, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -860,6 +856,19 @@ public class WeinVerwaltung extends javax.swing.JFrame {
             istFehlerGefunden = true;
         }
         
+        if (jTPreisEingabe.getText().equals("") && jTPreisAusgabe.getText().equals("")) {
+            jLFlaschenpreis.setForeground(Color.RED);
+            if(!istFehlerGefunden) {
+               jTPreisEingabe.requestFocusInWindow();
+            }
+            istFehlerGefunden = true;
+        }
+        
+        if (jTPreisEingabe.getText().equals("") && !jTPreisAusgabe.getText().equals("")) {
+            istButtonFlasche = true;
+            berechneFlaschenpreis();
+        }
+        
         if (jComboBoxRegion.getSelectedIndex() == 0) {
             jLRegion.setForeground(Color.RED);
             if(!istFehlerGefunden) {
@@ -881,7 +890,9 @@ public class WeinVerwaltung extends javax.swing.JFrame {
                                         jComboBoxFarbe.getSelectedItem().toString(),
                                         jComboBoxLand.getSelectedItem().toString(),
                                         jComboBoxRegion.getSelectedItem().toString(),
-                                        jComboBoxAlkoholgehalt.getSelectedItem().toString()
+                                        jComboBoxAlkoholgehalt.getSelectedItem().toString(),
+                                        jCFlaschengroesse.getSelectedItem().toString(),
+                                        jTPreisEingabe.getText()
                                     );
             System.out.println(neuerWein.toString());
             laufnummer++;
