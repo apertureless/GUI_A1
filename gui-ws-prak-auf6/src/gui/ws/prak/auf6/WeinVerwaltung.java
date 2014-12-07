@@ -392,7 +392,6 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         jLabelJahrgang.setLabelFor(jFTJahrgang);
         jLabelJahrgang.setText("Jahrgang");
 
-        jSLagerdauer.setEnabled(false);
         jSLagerdauer.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jSLagerdauerStateChanged(evt);
@@ -717,7 +716,6 @@ public class WeinVerwaltung extends javax.swing.JFrame {
     private void jFTJahrgangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFTJahrgangActionPerformed
         EingabeCheckJahrgang();
         if(isValid) {
-            jSLagerdauer.setEnabled(true);
             SetSpinnerValues();
             SetDiagrammValues();
         }
@@ -726,7 +724,6 @@ public class WeinVerwaltung extends javax.swing.JFrame {
     private void jFTJahrgangFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTJahrgangFocusLost
         EingabeCheckJahrgang();
         if(isValid) {
-            jSLagerdauer.setEnabled(true);
             SetSpinnerValues(); 
             SetDiagrammValues();
         }

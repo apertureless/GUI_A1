@@ -421,9 +421,6 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JSpinner" name="jSLagerdauer">
-                      <Properties>
-                        <Property name="enabled" type="boolean" value="false"/>
-                      </Properties>
                       <Events>
                         <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSLagerdauerStateChanged"/>
                       </Events>
