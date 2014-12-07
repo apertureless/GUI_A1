@@ -7,6 +7,8 @@ package gui.ws.prak.auf6;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Container;
+import java.awt.FocusTraversalPolicy;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.text.DecimalFormat;
@@ -19,6 +21,7 @@ import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.DEFAULT_OPTION;
 import javax.swing.JSpinner;
@@ -246,6 +249,62 @@ public class WeinVerwaltung extends javax.swing.JFrame {
             super.insertString(offs, str, null);
         }
     }
+    
+     private class FocusOrder extends FocusTraversalPolicy {
+
+        ArrayList<JComponent> order;
+
+        public FocusOrder(ArrayList<JComponent> order) {
+            this.order = order;
+        }
+
+        @Override
+        public Component getComponentAfter(Container aContainer, Component aComponent) {
+            int index = order.indexOf(aComponent);
+            if(!order.get((index + 1) % order.size()).isEnabled()) {
+                boolean enabled = false;
+                while(!enabled) {
+                    index = (index + 1) % order.size();
+                    enabled = order.get(index).isEnabled();
+                }
+            } else {
+                index = (order.indexOf(aComponent) + 1) % order.size();
+            }
+            return order.get(index);
+        }
+
+        @Override
+        public Component getComponentBefore(Container aContainer, Component aComponent) {
+            int index = order.indexOf(aComponent);
+            if(!order.get((index - 1) % order.size()).isEnabled()) {
+                boolean enabled = false;
+                while(!enabled) {
+                    index = (index - 1) % order.size();
+                    enabled = order.get(index).isEnabled();
+                }
+            } else {
+                index = (order.indexOf(aComponent) - 1) % order.size();
+            }
+            return order.get(index);
+        }
+
+        @Override
+        public Component getFirstComponent(Container aContainer) {
+            return order.get(0);
+        }
+
+        @Override
+        public Component getLastComponent(Container aContainer) {
+            return order.get(order.size() - 1);
+        }
+
+        @Override
+        public Component getDefaultComponent(Container aContainer) {
+            return order.get(0);
+        }
+
+         
+     }
        
     /**
      * Creates new form WeinVerwaltung
@@ -387,6 +446,9 @@ public class WeinVerwaltung extends javax.swing.JFrame {
             public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
             }
         });
+
+        WeinDatenPanel.setFocusTraversalPolicy(new FocusOrder(getOrder()));
+        WeinDatenPanel.setFocusTraversalPolicyProvider(true);
 
         jFTextfieldBestellnummer.setToolTipText("");
 
@@ -967,13 +1029,13 @@ public class WeinVerwaltung extends javax.swing.JFrame {
 
     private void jCFlaschengroesseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCFlaschengroesseActionPerformed
         isComboBoxChanged = true;
-        if (istLiterBerechnung) {
+        if (istLiterBerechnung && !jTPreisEingabe.getText().isEmpty()) {
             istButtonLiter = true;
             berechneLiterpreis();  
             //istLiterBerechnung = false;
         }
 
-        if (istFlaschenBerechnung) {
+        if (istFlaschenBerechnung && !jTPreisAusgabe.getText().isEmpty()) {
            istButtonFlasche = true;
            berechneFlaschenpreis();
            //istFlaschenBerechnung = false;
@@ -981,6 +1043,31 @@ public class WeinVerwaltung extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jCFlaschengroesseActionPerformed
 
+    /**
+     * Setzt die Fokusreihenfolge fest.
+     *
+     * @return ArrayList<JComponent> - Fokusreihenfolge
+     */
+    private ArrayList<JComponent> getOrder() {
+        ArrayList<JComponent> order = new ArrayList<>();
+        order.add(jFTextfieldBestellnummer);
+        order.add(jTextFieldName);
+        order.add(jFTJahrgang);
+        order.add(jSLagerdauer);
+        order.add(jComboBoxFarbe);
+        order.add(jComboBoxLand);
+        order.add(jComboBoxRegion);
+        order.add(jComboBoxAlkoholgehalt);
+        order.add(jCFlaschengroesse);
+        order.add(jTPreisEingabe);
+        order.add(jBUmrechnenUp);
+        order.add(jTPreisAusgabe);
+        order.add(jBDown);
+        order.add(jButtonSpeichern);
+        order.add(jButtonAbbrechen);
+        return order;
+    }
+    
     private void CloseWithPrompt() {
         int close = JOptionPane.showInternalConfirmDialog(jDesktopPane1, CLOSE_MSG, CLOSE_TITEL, JOptionPane.YES_NO_OPTION);
         if (close == 0) {
