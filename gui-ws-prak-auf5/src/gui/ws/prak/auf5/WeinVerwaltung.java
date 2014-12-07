@@ -5,6 +5,8 @@
  */
 package gui.ws.prak.auf5;
 
+import java.awt.Color;
+import java.awt.Component;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -12,7 +14,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.DEFAULT_OPTION;
+import javax.swing.JTextField;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
 
@@ -26,7 +31,12 @@ public class WeinVerwaltung extends javax.swing.JFrame {
     private static final String CLOSE_MSG = "Sind Sie sicher, dass Sie das Programm beenden wollen?\nAlle Daten gehen verloren.";
     private static final String ABORT_MSG = "Sind Sie sicher, dass Sie die Weinaufnahme beenden wollen?\nNicht gespeicherte Daten gehen verloren.";
     private static final String ABORT_TITEL = "Weinaufnahme Beenden";
+    private static final String SAVE_ERR_MSG ="Wein konnte nicht gespeichert werden.\nEingabe unvollständig.";
+    private static final String SAVE_ERR_TITEL ="Fehler beim Speichern.";
+    
     private int laufnummer = 0;
+    
+    private boolean comboBoxChanged = false;
     
     private final BestellnummerVerifier bnv;
 
@@ -138,7 +148,7 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         "L3_Region_15", "L3_Region_16"};
 
     
-    private boolean comboBoxChanged = false;
+    private boolean isComboBoxChanged = false;
 
     private final ArrayList<String[]> REB_LAENDER
             = new ArrayList<>();
@@ -193,14 +203,14 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         jFTextfieldBestellnummer = new javax.swing.JFormattedTextField();
         jLBestellnummer = new javax.swing.JLabel();
         jTextFieldName = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        jLName = new javax.swing.JLabel();
         jComboBoxFarbe = new javax.swing.JComboBox();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jLFarbe = new javax.swing.JLabel();
+        jLLand = new javax.swing.JLabel();
         jComboBoxLand = new javax.swing.JComboBox();
         jComboBoxRegion = new javax.swing.JComboBox();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jLRegion = new javax.swing.JLabel();
+        jLAlkohol = new javax.swing.JLabel();
         jComboBoxAlkoholgehalt = new javax.swing.JComboBox();
         jButtonSpeichern = new javax.swing.JButton();
         jButtonAbbrechen = new javax.swing.JButton();
@@ -255,15 +265,26 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         jLBestellnummer.setLabelFor(jFTextfieldBestellnummer);
         jLBestellnummer.setText("Bestellnummer");
 
-        jLabel1.setLabelFor(jTextFieldName);
-        jLabel1.setText("Name");
+        jTextFieldName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextFieldNameFocusGained(evt);
+            }
+        });
+
+        jLName.setLabelFor(jTextFieldName);
+        jLName.setText("Name");
 
         jComboBoxFarbe.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Rot", "Weiß", "Rose" }));
+        jComboBoxFarbe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxFarbeActionPerformed(evt);
+            }
+        });
 
-        jLabel2.setLabelFor(jComboBoxFarbe);
-        jLabel2.setText("Farbe");
+        jLFarbe.setLabelFor(jComboBoxFarbe);
+        jLFarbe.setText("Farbe");
 
-        jLabel3.setText("Anbaugebiet");
+        jLLand.setText("Anbaugebiet");
 
         jComboBoxLand.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -283,12 +304,17 @@ public class WeinVerwaltung extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setText("Region");
+        jLRegion.setText("Region");
 
-        jLabel5.setText("Alkoholgehalt");
+        jLAlkohol.setText("Alkoholgehalt");
 
         jComboBoxAlkoholgehalt.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0 Vol%", "7,5 Vol%", "8 Vol%", "8,5 Vol%", "9 Vol%", "9,5 Vol%", "10 Vol%", "10,5 Vol%", "11 Vol%", "11,5 Vol%", "12 Vol%", "12,5 Vol%", "13 Vol%" }));
         jComboBoxAlkoholgehalt.setSelectedIndex(8);
+        jComboBoxAlkoholgehalt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxAlkoholgehaltActionPerformed(evt);
+            }
+        });
 
         jButtonSpeichern.setText("Speichern");
         jButtonSpeichern.addActionListener(new java.awt.event.ActionListener() {
@@ -318,11 +344,11 @@ public class WeinVerwaltung extends javax.swing.JFrame {
                     .addGroup(WeinDatenPanelLayout.createSequentialGroup()
                         .addGroup(WeinDatenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLBestellnummer)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
+                            .addComponent(jLName)
+                            .addComponent(jLFarbe)
+                            .addComponent(jLLand)
+                            .addComponent(jLRegion)
+                            .addComponent(jLAlkohol))
                         .addGap(40, 40, 40)
                         .addGroup(WeinDatenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jComboBoxRegion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -343,22 +369,22 @@ public class WeinVerwaltung extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(WeinDatenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(jLName))
                 .addGap(18, 18, 18)
                 .addGroup(WeinDatenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxFarbe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jLFarbe))
                 .addGap(24, 24, 24)
                 .addGroup(WeinDatenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
+                    .addComponent(jLLand)
                     .addComponent(jComboBoxLand, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(WeinDatenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxRegion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addComponent(jLRegion))
                 .addGap(18, 18, 18)
                 .addGroup(WeinDatenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
+                    .addComponent(jLAlkohol)
                     .addComponent(jComboBoxAlkoholgehalt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(WeinDatenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -422,6 +448,8 @@ public class WeinVerwaltung extends javax.swing.JFrame {
 
         jMenuWein.setText("Wein");
 
+        jMenuItemAufnehmen.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItemAufnehmen.setMnemonic('A');
         jMenuItemAufnehmen.setText("Aufnehmen");
         jMenuItemAufnehmen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -438,8 +466,11 @@ public class WeinVerwaltung extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenuWein);
 
+        jMenuHelp.setMnemonic('?');
         jMenuHelp.setText("?");
 
+        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.SHIFT_MASK));
+        jMenuItem3.setMnemonic('I');
         jMenuItem3.setText("Info");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -467,18 +498,15 @@ public class WeinVerwaltung extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItemAufnehmenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAufnehmenActionPerformed
-        
-      WeinAufnehmenFrame.setVisible(true);
-      
+        WeinAufnehmenFrame.setVisible(true);  
     }//GEN-LAST:event_jMenuItemAufnehmenActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        // TODO add your handling code here:
+       JOptionPane.showInternalConfirmDialog(jDesktopPane1, "TEST", "TEST", DEFAULT_OPTION);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItemBeendenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBeendenActionPerformed
         CloseWithPrompt();
-        resetFormular();
     }//GEN-LAST:event_jMenuItemBeendenActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -487,7 +515,7 @@ public class WeinVerwaltung extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void WeinAufnehmenFrameInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_WeinAufnehmenFrameInternalFrameClosing
-        CleanAndCloseFrame();
+       closeFormular();
     }//GEN-LAST:event_WeinAufnehmenFrameInternalFrameClosing
 
     private void jComboBoxRegionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxRegionActionPerformed
@@ -497,6 +525,7 @@ public class WeinVerwaltung extends javax.swing.JFrame {
     private void jComboBoxLandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxLandActionPerformed
         if(jComboBoxLand.getSelectedIndex() != 0) {
             jComboBoxRegion.setEnabled(true);
+            isComboBoxChanged = true;
         } else {
             jComboBoxRegion.setEnabled(false);
         }
@@ -509,26 +538,29 @@ public class WeinVerwaltung extends javax.swing.JFrame {
 
     private void jButtonAbbrechenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAbbrechenActionPerformed
         // TODO add your handling code here:
-        CleanAndCloseFrame();
-        resetFormular();
+        closeFormular();
     }//GEN-LAST:event_jButtonAbbrechenActionPerformed
 
     private void jButtonSpeichernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSpeichernActionPerformed
         
         // Variable für Fehlerstatus
         boolean istFehlerGefunden = false;
-        System.out.println(jFTextfieldBestellnummer.getText());
+        resetColors();
+        
+       
         // Abfrage ob ein Fehler gefunden wurde.
          if (!bnv.verify(jFTextfieldBestellnummer)) {
-            System.out.print("Fehler Bestellnummer");
+            jLBestellnummer.setForeground(Color.RED);
+            
             if(!istFehlerGefunden) {
+              
                jFTextfieldBestellnummer.requestFocusInWindow();
             }
             istFehlerGefunden = true;
         }
          
         if (jTextFieldName.getText().equals("")) {
-            System.out.print("Fehler Name");
+            jLName.setForeground(Color.RED);
             if(!istFehlerGefunden) {
                jTextFieldName.requestFocusInWindow();
             }
@@ -536,7 +568,7 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         }
         
         if (jComboBoxLand.getSelectedIndex() == 0) {
-            System.out.print("Fehler Anbaugebiet");
+            jLLand.setForeground(Color.RED);
             if(!istFehlerGefunden) {
                jComboBoxLand.requestFocusInWindow();
             }
@@ -544,7 +576,7 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         }
         
         if (jComboBoxRegion.getSelectedIndex() == 0) {
-            System.out.print("Fehler Anbaugebiet");
+            jLRegion.setForeground(Color.RED);
             if(!istFehlerGefunden) {
                jComboBoxRegion.requestFocusInWindow();
             }
@@ -553,7 +585,7 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         
         // Falls Fehler gefunden wurde
         if (istFehlerGefunden) {
-            JOptionPane.showMessageDialog(null, "Fehler bei der EIngabe", "Eingabe unvollständig", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showInternalMessageDialog(jDesktopPane1, SAVE_ERR_MSG, SAVE_ERR_TITEL, JOptionPane.ERROR_MESSAGE);
         } else {
             
             // Wein Objekt anlegen
@@ -568,26 +600,25 @@ public class WeinVerwaltung extends javax.swing.JFrame {
             laufnummer++;
             resetFormular();
         }
-           
-       
-       
-
-        System.out.println(laufnummer);
     }//GEN-LAST:event_jButtonSpeichernActionPerformed
 
+    private void jTextFieldNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldNameFocusGained
+        jTextFieldName.selectAll();
+    }//GEN-LAST:event_jTextFieldNameFocusGained
+
+    private void jComboBoxFarbeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFarbeActionPerformed
+       isComboBoxChanged = true;
+    }//GEN-LAST:event_jComboBoxFarbeActionPerformed
+
+    private void jComboBoxAlkoholgehaltActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxAlkoholgehaltActionPerformed
+        isComboBoxChanged = true;
+    }//GEN-LAST:event_jComboBoxAlkoholgehaltActionPerformed
+
     private void CloseWithPrompt() {
-        int close = JOptionPane.showConfirmDialog(null, CLOSE_MSG, CLOSE_TITEL, JOptionPane.YES_NO_OPTION);
+        int close = JOptionPane.showInternalConfirmDialog(jDesktopPane1, CLOSE_MSG, CLOSE_TITEL, JOptionPane.YES_NO_OPTION);
         if (close == 0) {
             System.exit(0);
         }
-    }
-    
-    private void CleanAndCloseFrame() {
-        int confirm = JOptionPane.showConfirmDialog(null, ABORT_MSG, ABORT_TITEL, JOptionPane.YES_NO_OPTION);
-        if (confirm == 0) {
-            WeinAufnehmenFrame.setVisible(false);
-        }
-        
     }
     
     private void FillAnbaugebiet(String[] laeneder) {
@@ -596,6 +627,15 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         for (int i = 0; i < laeneder.length; i++) {
             jComboBoxLand.addItem(laeneder[i]);
         }
+    }
+    
+    private void resetColors() {
+        jLBestellnummer.setForeground(Color.BLACK);
+        jLName.setForeground(Color.BLACK);
+        jLFarbe.setForeground(Color.BLACK);
+        jLLand.setForeground(Color.BLACK);
+        jLRegion.setForeground(Color.BLACK);
+        jLAlkohol.setForeground(Color.BLACK);
     }
     
     private void fuelleRebLaender() {
@@ -665,12 +705,35 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         } catch (ParseException ex) {
             Logger.getLogger(WeinVerwaltung.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-   
+    }
+    
+    private boolean isFormularChanged() {
+        boolean isChanged = false;
+        for (Component c : WeinDatenPanel.getComponents()){
+            if (!isChanged && c instanceof JTextField) {
+                isChanged = !((JTextField) c).getText().isEmpty();
+            } else if (!isChanged && c instanceof JComboBox) {
+                isChanged = isComboBoxChanged;
+            }
+        }   
+        return isChanged;
     }
     
     private void closeFormular() {
-        
+        if (isFormularChanged()) {
+            System.out.println("Changed");
+            int abbrechen = JOptionPane.showInternalConfirmDialog(jDesktopPane1, ABORT_MSG,
+                    ABORT_TITEL, JOptionPane.YES_NO_OPTION);
+            if (abbrechen == 0) {
+                WeinAufnehmenFrame.setVisible(false);
+                resetFormular();
+                resetColors();
+            }
+        } else {
+            WeinAufnehmenFrame.setVisible(false);
+            resetFormular();
+            resetColors();
+        }
     }
     
 
@@ -720,12 +783,12 @@ public class WeinVerwaltung extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBoxRegion;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JFormattedTextField jFTextfieldBestellnummer;
+    private javax.swing.JLabel jLAlkohol;
     private javax.swing.JLabel jLBestellnummer;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLFarbe;
+    private javax.swing.JLabel jLLand;
+    private javax.swing.JLabel jLName;
+    private javax.swing.JLabel jLRegion;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuBearbeiten;
     private javax.swing.JMenu jMenuDatei;
