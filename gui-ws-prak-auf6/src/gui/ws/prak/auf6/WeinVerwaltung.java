@@ -259,6 +259,16 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         jLabelJahrgang = new javax.swing.JLabel();
         jSLagerdauer = new javax.swing.JSpinner();
         jLabelLagerdauer = new javax.swing.JLabel();
+        jCFlaschengroesse = new javax.swing.JComboBox();
+        jLFenstergroesse = new javax.swing.JLabel();
+        jTPreisEingabe = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLCurrency = new javax.swing.JLabel();
+        jBUmrechnenUp = new javax.swing.JButton();
+        jBDown = new javax.swing.JButton();
+        jTPreisAusgabe = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLCurrency1 = new javax.swing.JLabel();
         DiagrammPanel = new javax.swing.JPanel();
         diagramm1 = new gui.ws.prak.auf6.Diagramm();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -273,7 +283,8 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(800, 600));
+        setTitle("Wein Verwaltung");
+        setMinimumSize(new java.awt.Dimension(1024, 768));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -286,7 +297,6 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         WeinAufnehmenFrame.setMaximizable(true);
         WeinAufnehmenFrame.setResizable(true);
         WeinAufnehmenFrame.setTitle("Wein aufnehmen");
-        WeinAufnehmenFrame.setPreferredSize(new java.awt.Dimension(200, 330));
         WeinAufnehmenFrame.setVisible(false);
         WeinAufnehmenFrame.addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
@@ -405,38 +415,81 @@ public class WeinVerwaltung extends javax.swing.JFrame {
 
         jLabelLagerdauer.setText("Lagerdauer");
 
+        jCFlaschengroesse.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0,187 l", "0,25 l", "0,375 l", "0,5 l", "0,62 l", "0,7 l", "0,75 l", "0,8 l", "1 l", "1,5 l " }));
+        jCFlaschengroesse.setSelectedIndex(6);
+
+        jLFenstergroesse.setText("Flaschengröße");
+
+        jTPreisEingabe.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
+        jLabel1.setText("Flaschenpreis");
+
+        jLCurrency.setText("€");
+
+        jBUmrechnenUp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/ws/prak/auf6/arrow-down.png"))); // NOI18N
+
+        jBDown.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/ws/prak/auf6/arrow-up.png"))); // NOI18N
+
+        jTPreisAusgabe.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
+        jLabel2.setText("Preis pro Liter");
+
+        jLCurrency1.setText("€");
+
         javax.swing.GroupLayout WeinDatenPanelLayout = new javax.swing.GroupLayout(WeinDatenPanel);
         WeinDatenPanel.setLayout(WeinDatenPanelLayout);
         WeinDatenPanelLayout.setHorizontalGroup(
             WeinDatenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(WeinDatenPanelLayout.createSequentialGroup()
                 .addGap(67, 67, 67)
-                .addGroup(WeinDatenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(WeinDatenPanelLayout.createSequentialGroup()
-                        .addComponent(jButtonSpeichern)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonAbbrechen))
-                    .addGroup(WeinDatenPanelLayout.createSequentialGroup()
-                        .addGroup(WeinDatenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLBestellnummer)
-                            .addComponent(jLName)
-                            .addComponent(jLFarbe)
-                            .addComponent(jLLand)
-                            .addComponent(jLRegion)
-                            .addComponent(jLAlkohol)
-                            .addComponent(jLabelJahrgang)
-                            .addComponent(jLabelLagerdauer))
-                        .addGap(40, 40, 40)
+                .addGroup(WeinDatenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(WeinDatenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, WeinDatenPanelLayout.createSequentialGroup()
+                            .addComponent(jBUmrechnenUp, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jBDown, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(WeinDatenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jFTJahrgang)
-                            .addComponent(jComboBoxRegion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBoxFarbe, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextFieldName)
-                            .addComponent(jFTextfieldBestellnummer)
-                            .addComponent(jComboBoxLand, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBoxAlkoholgehalt, 0, 100, Short.MAX_VALUE)
-                            .addComponent(jSLagerdauer))))
-                .addContainerGap(137, Short.MAX_VALUE))
+                            .addGroup(WeinDatenPanelLayout.createSequentialGroup()
+                                .addComponent(jButtonSpeichern)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButtonAbbrechen))
+                            .addGroup(WeinDatenPanelLayout.createSequentialGroup()
+                                .addGroup(WeinDatenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLBestellnummer)
+                                    .addComponent(jLName)
+                                    .addComponent(jLFarbe)
+                                    .addComponent(jLLand)
+                                    .addComponent(jLRegion)
+                                    .addComponent(jLAlkohol)
+                                    .addComponent(jLabelJahrgang)
+                                    .addComponent(jLabelLagerdauer)
+                                    .addComponent(jLFenstergroesse)
+                                    .addComponent(jLabel1))
+                                .addGroup(WeinDatenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(WeinDatenPanelLayout.createSequentialGroup()
+                                        .addGap(40, 40, 40)
+                                        .addGroup(WeinDatenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jCFlaschengroesse, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jFTJahrgang)
+                                            .addComponent(jComboBoxRegion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jComboBoxFarbe, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jTextFieldName)
+                                            .addComponent(jFTextfieldBestellnummer)
+                                            .addComponent(jComboBoxLand, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jComboBoxAlkoholgehalt, 0, 100, Short.MAX_VALUE)
+                                            .addComponent(jSLagerdauer)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, WeinDatenPanelLayout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTPreisEingabe, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                    .addGroup(WeinDatenPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jTPreisAusgabe, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(WeinDatenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLCurrency)
+                    .addComponent(jLCurrency1))
+                .addContainerGap(212, Short.MAX_VALUE))
         );
         WeinDatenPanelLayout.setVerticalGroup(
             WeinDatenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -473,7 +526,25 @@ public class WeinVerwaltung extends javax.swing.JFrame {
                 .addGroup(WeinDatenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLAlkohol)
                     .addComponent(jComboBoxAlkoholgehalt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(WeinDatenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCFlaschengroesse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLFenstergroesse))
+                .addGap(18, 18, 18)
+                .addGroup(WeinDatenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTPreisEingabe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLCurrency)
+                    .addComponent(jLabel1))
+                .addGap(15, 15, 15)
+                .addGroup(WeinDatenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jBUmrechnenUp, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBDown, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(WeinDatenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTPreisAusgabe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLCurrency1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
                 .addGroup(WeinDatenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonSpeichern)
                     .addComponent(jButtonAbbrechen))
@@ -486,7 +557,7 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         diagramm1.setLayout(diagramm1Layout);
         diagramm1Layout.setHorizontalGroup(
             diagramm1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 393, Short.MAX_VALUE)
+            .addGap(0, 479, Short.MAX_VALUE)
         );
         diagramm1Layout.setVerticalGroup(
             diagramm1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -507,7 +578,7 @@ public class WeinVerwaltung extends javax.swing.JFrame {
             .addGroup(DiagrammPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(diagramm1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addContainerGap(190, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Diagramm", DiagrammPanel);
@@ -518,14 +589,14 @@ public class WeinVerwaltung extends javax.swing.JFrame {
             WeinAufnehmenFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(WeinAufnehmenFrameLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1)
                 .addContainerGap())
         );
         WeinAufnehmenFrameLayout.setVerticalGroup(
             WeinAufnehmenFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(WeinAufnehmenFrameLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 545, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1023,8 +1094,11 @@ public class WeinVerwaltung extends javax.swing.JFrame {
     private javax.swing.JInternalFrame WeinAufnehmenFrame;
     private javax.swing.JPanel WeinDatenPanel;
     private gui.ws.prak.auf6.Diagramm diagramm1;
+    private javax.swing.JButton jBDown;
+    private javax.swing.JButton jBUmrechnenUp;
     private javax.swing.JButton jButtonAbbrechen;
     private javax.swing.JButton jButtonSpeichern;
+    private javax.swing.JComboBox jCFlaschengroesse;
     private javax.swing.JComboBox jComboBoxAlkoholgehalt;
     private javax.swing.JComboBox jComboBoxFarbe;
     private javax.swing.JComboBox jComboBoxLand;
@@ -1034,10 +1108,15 @@ public class WeinVerwaltung extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField jFTextfieldBestellnummer;
     private javax.swing.JLabel jLAlkohol;
     private javax.swing.JLabel jLBestellnummer;
+    private javax.swing.JLabel jLCurrency;
+    private javax.swing.JLabel jLCurrency1;
     private javax.swing.JLabel jLFarbe;
+    private javax.swing.JLabel jLFenstergroesse;
     private javax.swing.JLabel jLLand;
     private javax.swing.JLabel jLName;
     private javax.swing.JLabel jLRegion;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelJahrgang;
     private javax.swing.JLabel jLabelLagerdauer;
     private javax.swing.JMenuBar jMenuBar1;
@@ -1051,6 +1130,8 @@ public class WeinVerwaltung extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemBeenden;
     private javax.swing.JMenu jMenuWein;
     private javax.swing.JSpinner jSLagerdauer;
+    private javax.swing.JTextField jTPreisAusgabe;
+    private javax.swing.JTextField jTPreisEingabe;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextFieldName;
     // End of variables declaration//GEN-END:variables
