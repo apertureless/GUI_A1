@@ -136,6 +136,9 @@
             <Property name="maximizable" type="boolean" value="true"/>
             <Property name="resizable" type="boolean" value="true"/>
             <Property name="title" type="java.lang.String" value="Wein aufnehmen"/>
+            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[525, 655]"/>
+            </Property>
             <Property name="visible" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -143,7 +146,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="130" y="60" width="540" height="440"/>
+              <AbsoluteConstraints x="130" y="60" width="540" height="-1"/>
             </Constraint>
           </Constraints>
 
@@ -161,8 +164,8 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTabbedPane1" pref="545" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jTabbedPane1" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -246,7 +249,7 @@
                                   <Component id="jLCurrency" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLCurrency1" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="212" max="32767" attributes="0"/>
+                              <EmptySpace pref="197" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -315,7 +318,7 @@
                                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLCurrency1" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="60" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jButtonSpeichern" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jButtonAbbrechen" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -575,7 +578,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="diagramm1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="190" max="32767" attributes="0"/>
+                              <EmptySpace pref="245" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -586,7 +589,7 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="479" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="464" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
