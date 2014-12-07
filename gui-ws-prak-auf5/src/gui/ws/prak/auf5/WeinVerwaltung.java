@@ -12,11 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
 import javax.swing.JOptionPane;
-import javax.swing.JRadioButton;
-import javax.swing.JTextField;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
 
@@ -31,6 +27,8 @@ public class WeinVerwaltung extends javax.swing.JFrame {
     private static final String ABORT_MSG = "Sind Sie sicher, dass Sie die Weinaufnahme beenden wollen?\nNicht gespeicherte Daten gehen verloren.";
     private static final String ABORT_TITEL = "Weinaufnahme Beenden";
     private int laufnummer = 0;
+    
+    private final BestellnummerVerifier bnv;
 
     private final String[] LAENDER = new String[]{
         "Land_1", "Land_2", "Land_3", "Land_4", "Land_5",
@@ -158,6 +156,8 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         fuelleLandUndRegionBeziehung(REB_LAENDER);
         
         FillAnbaugebiet(LAENDER);
+        
+        bnv = new BestellnummerVerifier();
         
         MaskFormatter mf = null;
         NumberFormat nf = new DecimalFormat("0000");
@@ -515,8 +515,61 @@ public class WeinVerwaltung extends javax.swing.JFrame {
 
     private void jButtonSpeichernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSpeichernActionPerformed
         
-        laufnummer++;
-        resetFormular();
+        // Variable für Fehlerstatus
+        boolean istFehlerGefunden = false;
+        System.out.println(jFTextfieldBestellnummer.getText());
+        // Abfrage ob ein Fehler gefunden wurde.
+         if (!bnv.verify(jFTextfieldBestellnummer)) {
+            System.out.print("Fehler Bestellnummer");
+            if(!istFehlerGefunden) {
+               jFTextfieldBestellnummer.requestFocusInWindow();
+            }
+            istFehlerGefunden = true;
+        }
+         
+        if (jTextFieldName.getText().equals("")) {
+            System.out.print("Fehler Name");
+            if(!istFehlerGefunden) {
+               jTextFieldName.requestFocusInWindow();
+            }
+            istFehlerGefunden = true;
+        }
+        
+        if (jComboBoxLand.getSelectedIndex() == 0) {
+            System.out.print("Fehler Anbaugebiet");
+            if(!istFehlerGefunden) {
+               jComboBoxLand.requestFocusInWindow();
+            }
+            istFehlerGefunden = true;
+        }
+        
+        if (jComboBoxRegion.getSelectedIndex() == 0) {
+            System.out.print("Fehler Anbaugebiet");
+            if(!istFehlerGefunden) {
+               jComboBoxRegion.requestFocusInWindow();
+            }
+            istFehlerGefunden = true;
+        }
+        
+        // Falls Fehler gefunden wurde
+        if (istFehlerGefunden) {
+            JOptionPane.showMessageDialog(null, "Fehler bei der EIngabe", "Eingabe unvollständig", JOptionPane.ERROR_MESSAGE);
+        } else {
+            
+            // Wein Objekt anlegen
+            Wein neuerWein = new Wein(jFTextfieldBestellnummer.getText(),
+                                        jTextFieldName.getText(),
+                                        jComboBoxFarbe.getSelectedItem().toString(),
+                                        jComboBoxLand.getSelectedItem().toString(),
+                                        jComboBoxRegion.getSelectedItem().toString(),
+                                        jComboBoxAlkoholgehalt.getSelectedItem().toString()
+                                    );
+            System.out.println(neuerWein.toString());
+            laufnummer++;
+            resetFormular();
+        }
+           
+       
        
 
         System.out.println(laufnummer);
