@@ -21,17 +21,18 @@ public class Wein implements Lagergut {
     private int dauer;
  
     
-    public Wein (String bestellnummer, String name, String farbe, String anbaugebiet, String region, String alkoholgehalt) {
+    public Wein (String bestellnummer, String name, int jahrgang, int dauer, String farbe, String anbaugebiet, String region, String alkoholgehalt) {
         this.bestellnummer = bestellnummer;
         this.name = name;
+        this.jahrgang = jahrgang;
+        this.dauer = dauer;
         this.farbe = farbe;
         this.anbaugebiet = anbaugebiet;
         this.alkoholgehalt = alkoholgehalt;
         this.region = region;
+
     }
-    public Wein() {
-        
-    }
+    public Wein() { }
     
     @Override
     public String toString() {
@@ -39,6 +40,8 @@ public class Wein implements Lagergut {
 
         wein = "Bestellnr: " + bestellnummer + "\n"
                 + "Name: " + name + "\n"
+                + "Jahrgang: " + jahrgang + "\n"
+                + "Lagerdauer: " + dauer + "\n"
                 + "Farbe: " + farbe + "\n"
                 + "Anbaugebiet: " + anbaugebiet + "\n"
                 + "Region: " + region + "\n"

@@ -670,6 +670,14 @@ public class WeinVerwaltung extends javax.swing.JFrame {
             }
             istFehlerGefunden = true;
         }
+                
+        if (jFTJahrgang.getText().equals("")) {
+            jLabelJahrgang.setForeground(Color.RED);
+            if(!istFehlerGefunden) {
+               jFTJahrgang.requestFocusInWindow();
+            }
+            istFehlerGefunden = true;
+        }
         
         if (jComboBoxLand.getSelectedIndex() == 0) {
             jLLand.setForeground(Color.RED);
@@ -695,6 +703,8 @@ public class WeinVerwaltung extends javax.swing.JFrame {
             // Wein Objekt anlegen
             Wein neuerWein = new Wein(jFTextfieldBestellnummer.getText(),
                                         jTextFieldName.getText(),
+                                        (int)jahrgang,
+                                        (int)lagerdauer,
                                         jComboBoxFarbe.getSelectedItem().toString(),
                                         jComboBoxLand.getSelectedItem().toString(),
                                         jComboBoxRegion.getSelectedItem().toString(),
@@ -769,6 +779,7 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         jLLand.setForeground(Color.BLACK);
         jLRegion.setForeground(Color.BLACK);
         jLAlkohol.setForeground(Color.BLACK);
+        jLabelJahrgang.setForeground(Color.BLACK);
     }
     
     private void fuelleRebLaender() {
@@ -868,6 +879,10 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         if(!isChanged) {
             isChanged = !jTextFieldName.getText().isEmpty();
         }
+        
+        if(!isChanged) {
+            isChanged = !jFTJahrgang.getText().isEmpty();
+        }
        
         if(!isChanged && bnv.verify(jFTextfieldBestellnummer)){
             isChanged = true;
@@ -877,7 +892,6 @@ public class WeinVerwaltung extends javax.swing.JFrame {
     
     private void closeFormular() {
         if (isFormularChanged()) {
-            System.out.println("Changed");
             int abbrechen = JOptionPane.showInternalConfirmDialog(jDesktopPane1, ABORT_MSG,
                     ABORT_TITEL, JOptionPane.YES_NO_OPTION);
             if (abbrechen == 0) {
