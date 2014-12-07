@@ -837,6 +837,7 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         isComboBoxChanged = false;
         
         jSLagerdauer.setValue(0);
+        diagramm1.setVisible(false);
         
         MaskFormatter mf = null;
         NumberFormat nf = new DecimalFormat("0000");
