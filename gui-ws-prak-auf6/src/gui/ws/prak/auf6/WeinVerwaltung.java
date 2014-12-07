@@ -7,12 +7,15 @@ package gui.ws.prak.auf6;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
@@ -21,9 +24,11 @@ import static javax.swing.JOptionPane.DEFAULT_OPTION;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
 import javax.swing.text.NumberFormatter;
+import javax.swing.text.PlainDocument;
 
 /**
  *
@@ -59,7 +64,20 @@ public class WeinVerwaltung extends javax.swing.JFrame {
     int lagerdauer = 0;
     boolean isValid = true;
     private int laufnummer = 0; 
-    private boolean comboBoxChanged = false;
+    private boolean isComboBoxChanged = false;
+    
+    private static final EingabeCheck ec = new EingabeCheck();
+    
+    private boolean istButtonFlasche = false;
+    private boolean istButtonLiter = false;
+    
+    private boolean istLiterBerechnung = false;
+    private boolean istFlaschenBerechnung = false; 
+    
+    private boolean isFocusLost = false;
+   
+    private static final String ERLAUBTE_ZEICHEN ="0123456789,.";
+    private static final String REGEX = "(\\d*,?\\d*)|(\\d{0,3}(\\.\\d{3})*,?\\d*)";
     
     private final BestellnummerVerifier bnv;
     
@@ -172,15 +190,63 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         "L3_Region_9", "L3_Region_10", "L3_Region_11", "L3_Region_12", "L3_Region_13", "L3_Region_14",
         "L3_Region_15", "L3_Region_16"};
 
-    
-    private boolean isComboBoxChanged = false;
-
     private final ArrayList<String[]> REB_LAENDER
             = new ArrayList<>();
 
     private final HashMap<String, String[]> LAND_UND_REGION
             = new HashMap<>();
 
+        /**
+     * Klasse gibt alle gültigen Eingabezeichen JTPreisEingabe Feld vor.
+     */
+    public class EingabeDokument extends PlainDocument {
+       
+        /**
+         *
+         * @param offs
+         * @param s
+         * @param as
+         * @throws BadLocationException
+         */
+        @Override
+        public void insertString(int offs, String s, javax.swing.text.AttributeSet as) throws BadLocationException {
+       
+            for (int i = 0; i < s.length(); i++) {
+                if (!ERLAUBTE_ZEICHEN.contains("" + s.charAt(i)) ){
+                    Toolkit.getDefaultToolkit().beep();
+                    return;
+                }
+            }
+            
+            if (!istButtonFlasche) {
+                jTPreisAusgabe.setText("");
+            }
+            
+            super.insertString(offs, s, null);
+        }
+    }
+    /**
+     * Klasse gibt alle gültigen Eingabezeichen für JTPreisAusgabe Feld vor.
+     */
+    private class AusgabeDokument extends PlainDocument {
+        
+         @Override
+         public void insertString(int offs, String str, javax.swing.text.AttributeSet as) throws BadLocationException {
+            for (int i = 0; i < str.length(); i++) {
+                if (!ERLAUBTE_ZEICHEN.contains("" + str.charAt(i)) ){
+                    Toolkit.getDefaultToolkit().beep();
+                    return;
+                }
+            }
+            
+            if (!istButtonLiter) {
+                jTPreisEingabe.setText("");
+            }
+            
+            super.insertString(offs, str, null);
+        }
+    }
+       
     /**
      * Creates new form WeinVerwaltung
      */
@@ -196,6 +262,11 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         
         MaskFormatter mf = null;
         NumberFormat nf = new DecimalFormat("0000");
+        
+        jTPreisEingabe.setDocument(new EingabeDokument());
+        jTPreisEingabe.setInputVerifier(ec);
+        jTPreisAusgabe.setDocument(new AusgabeDokument());
+        jTPreisAusgabe.setInputVerifier(ec);
   
         // Maskformatter anlegen für das Bestellummer-Feld
         // Im Format 01-ABCD-0001
@@ -418,20 +489,50 @@ public class WeinVerwaltung extends javax.swing.JFrame {
 
         jCFlaschengroesse.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0,187 l", "0,25 l", "0,375 l", "0,5 l", "0,62 l", "0,7 l", "0,75 l", "0,8 l", "1 l", "1,5 l " }));
         jCFlaschengroesse.setSelectedIndex(6);
+        jCFlaschengroesse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCFlaschengroesseActionPerformed(evt);
+            }
+        });
+        jCFlaschengroesse.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jCFlaschengroesseKeyPressed(evt);
+            }
+        });
 
         jLFenstergroesse.setText("Flaschengröße");
 
         jTPreisEingabe.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jTPreisEingabe.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTPreisEingabeFocusGained(evt);
+            }
+        });
 
         jLabel1.setText("Flaschenpreis");
 
         jLCurrency.setText("€");
 
         jBUmrechnenUp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/ws/prak/auf6/arrow-down.png"))); // NOI18N
+        jBUmrechnenUp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBUmrechnenUpActionPerformed(evt);
+            }
+        });
 
         jBDown.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/ws/prak/auf6/arrow-up.png"))); // NOI18N
+        jBDown.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBDownActionPerformed(evt);
+            }
+        });
 
         jTPreisAusgabe.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jTPreisAusgabe.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTPreisAusgabeFocusGained(evt);
+            }
+        });
 
         jLabel2.setText("Preis pro Liter");
 
@@ -829,6 +930,45 @@ public class WeinVerwaltung extends javax.swing.JFrame {
 //        }
     }//GEN-LAST:event_jSLagerdauerFocusGained
 
+    private void jTPreisEingabeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTPreisEingabeFocusGained
+        jTPreisEingabe.selectAll();
+    }//GEN-LAST:event_jTPreisEingabeFocusGained
+
+    private void jTPreisAusgabeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTPreisAusgabeFocusGained
+        jTPreisAusgabe.selectAll();
+    }//GEN-LAST:event_jTPreisAusgabeFocusGained
+
+    private void jBUmrechnenUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBUmrechnenUpActionPerformed
+       istButtonLiter = true;
+       berechneLiterpreis();
+    }//GEN-LAST:event_jBUmrechnenUpActionPerformed
+
+    private void jBDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDownActionPerformed
+        istButtonFlasche = true;
+        berechneFlaschenpreis();
+    }//GEN-LAST:event_jBDownActionPerformed
+
+    private void jCFlaschengroesseKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCFlaschengroesseKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+           berechneLiterpreis();
+       }
+    }//GEN-LAST:event_jCFlaschengroesseKeyPressed
+
+    private void jCFlaschengroesseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCFlaschengroesseActionPerformed
+        if (istLiterBerechnung) {
+            istButtonLiter = true;
+            berechneLiterpreis();  
+            //istLiterBerechnung = false;
+        }
+
+        if (istFlaschenBerechnung) {
+           istButtonFlasche = true;
+           berechneFlaschenpreis();
+           //istFlaschenBerechnung = false;
+        }
+
+    }//GEN-LAST:event_jCFlaschengroesseActionPerformed
+
     private void CloseWithPrompt() {
         int close = JOptionPane.showInternalConfirmDialog(jDesktopPane1, CLOSE_MSG, CLOSE_TITEL, JOptionPane.YES_NO_OPTION);
         if (close == 0) {
@@ -1052,6 +1192,61 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         
         this.repaint();
     }
+/***
+     * Methode berechnet den Literpreis auf Basis des Flaschenpreises
+     */
+    private void berechneLiterpreis() {
+        NumberFormat nf = NumberFormat.getInstance(Locale.GERMAN);
+        nf.setMaximumFractionDigits(2);
+        nf.setMinimumFractionDigits(2);
+        
+        String sPreis = jTPreisEingabe.getText();
+        
+        try {           
+            double flaschengroesse = nf.parse(jCFlaschengroesse.getItemAt(jCFlaschengroesse.getSelectedIndex()).toString()).doubleValue();          
+            double preis = nf.parse(sPreis).doubleValue();
+            double literPreis = preis / flaschengroesse;
+            
+            jTPreisAusgabe.setText(nf.format(literPreis));
+            istLiterBerechnung = true;
+            istFlaschenBerechnung = false;
+            //jTPreisEingabe.requestFocusInWindow();
+            
+        } catch (ParseException e) {
+            JOptionPane.showMessageDialog(null, "Bitte geben Sie zuerst eine Zahl ein", "Eingabefehler", JOptionPane.WARNING_MESSAGE);
+            jTPreisEingabe.setText("");
+            jTPreisEingabe.requestFocusInWindow();
+        }
+        istButtonLiter = false;
+    } 
+    
+    /**
+     * Methode berechnet den Flaschenpreis auf Basis des Literpreises
+     */
+     private void berechneFlaschenpreis() {
+        NumberFormat nf = NumberFormat.getInstance(Locale.GERMAN);
+        nf.setMaximumFractionDigits(2);
+        nf.setMinimumFractionDigits(2);
+        
+        String sPreis = jTPreisAusgabe.getText();
+        
+        try {
+            double flaschengroesse = nf.parse(jCFlaschengroesse.getItemAt(jCFlaschengroesse.getSelectedIndex()).toString()).doubleValue();          
+            double preis = nf.parse(sPreis).doubleValue();
+            double flaschenPreis = preis * flaschengroesse;
+            
+            jTPreisEingabe.setText(nf.format(flaschenPreis));
+            istFlaschenBerechnung = true;
+            istLiterBerechnung = false;
+            //jTPreisAusgabe.requestFocusInWindow();
+            
+        } catch (ParseException e) {
+            JOptionPane.showMessageDialog(null, "Bitte geben Sie zuerst eine Zahl ein", "Eingabefehler", JOptionPane.WARNING_MESSAGE);
+            jTPreisAusgabe.setText("");
+            jTPreisAusgabe.requestFocusInWindow();
+        }
+        istButtonFlasche = false;
+    } 
 
 
     /**

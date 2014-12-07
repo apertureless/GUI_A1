@@ -1,4 +1,4 @@
-package gui.ws.prak.auf3;
+package gui.ws.prak.auf6;
 
 
 import javax.swing.InputVerifier;
