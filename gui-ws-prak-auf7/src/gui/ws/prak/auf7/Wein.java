@@ -21,6 +21,8 @@ public class Wein implements Lagergut {
     private int dauer;
     private String flaschengroeße;
     private String preis;
+    
+    private static String trenner = ";";
  
     
     public Wein (String bestellnummer, String name, int jahrgang, int dauer, 
@@ -37,21 +39,38 @@ public class Wein implements Lagergut {
         this.preis = preis;
     }
     public Wein() { }
+//    
+//    @Override
+//    public String toString() {
+//        String wein;
+//
+//        wein = "Bestellnr: " + bestellnummer + "\n"
+//                + "Name: " + name + "\n"
+//                + "Jahrgang: " + jahrgang + "\n"
+//                + "Lagerdauer: " + dauer + " Jahre\n"
+//                + "Farbe: " + farbe + "\n"
+//                + "Anbaugebiet: " + anbaugebiet + "\n"
+//                + "Region: " + region + "\n"
+//                + "Alkoholgehalt: " + alkoholgehalt + "\n"
+//                + "Flaschengröße: " + flaschengroeße + "\n"
+//                + "Flaschenpreis: " + preis + " €\n";
+//        return wein;
+//    }
     
-    @Override
+     @Override
     public String toString() {
         String wein;
 
-        wein = "Bestellnr: " + bestellnummer + "\n"
-                + "Name: " + name + "\n"
-                + "Jahrgang: " + jahrgang + "\n"
-                + "Lagerdauer: " + dauer + " Jahre\n"
-                + "Farbe: " + farbe + "\n"
-                + "Anbaugebiet: " + anbaugebiet + "\n"
-                + "Region: " + region + "\n"
-                + "Alkoholgehalt: " + alkoholgehalt + "\n"
-                + "Flaschengröße: " + flaschengroeße + "\n"
-                + "Flaschenpreis: " + preis + " €\n";
+        wein = bestellnummer + trenner
+                + name + trenner
+                + jahrgang + trenner
+                + dauer + trenner
+                + farbe + trenner
+                + anbaugebiet + trenner
+                + region + trenner
+                + alkoholgehalt + trenner
+                + flaschengroeße + trenner
+                + preis + trenner;
         return wein;
     }
 
