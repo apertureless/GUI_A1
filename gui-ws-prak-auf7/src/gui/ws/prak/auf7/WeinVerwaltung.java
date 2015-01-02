@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui.ws.prak.auf6;
+package gui.ws.prak.auf7;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -400,7 +400,7 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         jLPreisLiter = new javax.swing.JLabel();
         jLCurrency1 = new javax.swing.JLabel();
         DiagrammPanel = new javax.swing.JPanel();
-        diagramm1 = new gui.ws.prak.auf6.Diagramm();
+        diagramm1 = new gui.ws.prak.auf7.Diagramm();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuDatei = new javax.swing.JMenu();
         jMenuItemBeenden = new javax.swing.JMenuItem();
@@ -575,14 +575,14 @@ public class WeinVerwaltung extends javax.swing.JFrame {
 
         jLCurrency.setText("€");
 
-        jBUmrechnenUp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/ws/prak/auf6/arrow-down.png"))); // NOI18N
+        jBUmrechnenUp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/ws/prak/auf7/arrow-down.png"))); // NOI18N
         jBUmrechnenUp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBUmrechnenUpActionPerformed(evt);
             }
         });
 
-        jBDown.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/ws/prak/auf6/arrow-up.png"))); // NOI18N
+        jBDown.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/ws/prak/auf7/arrow-up.png"))); // NOI18N
         jBDown.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBDownActionPerformed(evt);
@@ -717,11 +717,11 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         diagramm1.setLayout(diagramm1Layout);
         diagramm1Layout.setHorizontalGroup(
             diagramm1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 489, Short.MAX_VALUE)
+            .addGap(0, 479, Short.MAX_VALUE)
         );
         diagramm1Layout.setVerticalGroup(
             diagramm1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 251, Short.MAX_VALUE)
+            .addGap(0, 263, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout DiagrammPanelLayout = new javax.swing.GroupLayout(DiagrammPanel);
@@ -730,14 +730,15 @@ public class WeinVerwaltung extends javax.swing.JFrame {
             DiagrammPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DiagrammPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(diagramm1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(diagramm1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         DiagrammPanelLayout.setVerticalGroup(
             DiagrammPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DiagrammPanelLayout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addGap(22, 22, 22)
                 .addComponent(diagramm1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(289, Short.MAX_VALUE))
+                .addContainerGap(300, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Diagramm", DiagrammPanel);
@@ -760,7 +761,7 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         );
 
         jDesktopPane1.add(WeinAufnehmenFrame);
-        WeinAufnehmenFrame.setBounds(130, 60, 540, 660);
+        WeinAufnehmenFrame.setBounds(130, 60, 540, 665);
 
         jMenuDatei.setMnemonic('D');
         jMenuDatei.setText("Datei");
@@ -1386,6 +1387,8 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -1399,7 +1402,7 @@ public class WeinVerwaltung extends javax.swing.JFrame {
     private javax.swing.JPanel DiagrammPanel;
     private javax.swing.JInternalFrame WeinAufnehmenFrame;
     private javax.swing.JPanel WeinDatenPanel;
-    private gui.ws.prak.auf6.Diagramm diagramm1;
+    private gui.ws.prak.auf7.Diagramm diagramm1;
     private javax.swing.JButton jBDown;
     private javax.swing.JButton jBUmrechnenUp;
     private javax.swing.JButton jButtonAbbrechen;

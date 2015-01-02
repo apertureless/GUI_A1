@@ -532,7 +532,7 @@
                     <Component class="javax.swing.JButton" name="jBUmrechnenUp">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/gui/ws/prak/auf6/arrow-down.png"/>
+                          <Image iconType="3" name="/gui/ws/prak/auf7/arrow-down.png"/>
                         </Property>
                       </Properties>
                       <Events>
@@ -542,7 +542,7 @@
                     <Component class="javax.swing.JButton" name="jBDown">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/gui/ws/prak/auf6/arrow-up.png"/>
+                          <Image iconType="3" name="/gui/ws/prak/auf7/arrow-up.png"/>
                         </Property>
                       </Properties>
                       <Events>
@@ -584,31 +584,32 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="diagramm1" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                               <Component id="diagramm1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="289" max="32767" attributes="0"/>
+                              <EmptySpace pref="300" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Container class="gui.ws.prak.auf6.Diagramm" name="diagramm1">
+                    <Container class="gui.ws.prak.auf7.Diagramm" name="diagramm1">
 
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="489" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="479" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="251" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="263" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                       </Layout>
