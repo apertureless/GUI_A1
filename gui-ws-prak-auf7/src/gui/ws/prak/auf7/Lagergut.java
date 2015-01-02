@@ -17,5 +17,6 @@ public interface Lagergut {
     
     public int getJahr();
     public int getDauer();
+    public String getBestellnummer();
     
 }

@@ -267,6 +267,25 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         }
     }
     
+    private class NameDocument extends PlainDocument {
+        private static final String BLOCK_CHAR = ";";
+         @Override
+         public void insertString(int offs, String str, javax.swing.text.AttributeSet as) throws BadLocationException {
+            for (int i = 0; i < str.length(); i++) {
+                if (BLOCK_CHAR.contains("" + str.charAt(i)) ){
+                    Toolkit.getDefaultToolkit().beep();
+                    return;
+                }
+            }
+            
+            if (!istButtonLiter) {
+                jTPreisEingabe.setText("");
+            }
+            
+            super.insertString(offs, str, null);
+        }
+    }
+    
      private class FocusOrder extends FocusTraversalPolicy {
 
         ArrayList<JComponent> order;
@@ -343,6 +362,7 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         jTPreisEingabe.setInputVerifier(ec);
         jTPreisAusgabe.setDocument(new AusgabeDokument());
         jTPreisAusgabe.setInputVerifier(ec);
+        jTextFieldName.setDocument(new NameDocument());
   
         // Maskformatter anlegen für das Bestellummer-Feld
         // Im Format 01-ABCD-0001
@@ -1185,45 +1205,42 @@ public class WeinVerwaltung extends javax.swing.JFrame {
                         }
                     }
                     eingabe.close();
-                    resetInternalFrameKunde();
-                    resetInternalFrameWein();
-                    if (!(weinDaten.isEmpty() && kundenDaten.isEmpty())
-                            && !speichernMenuItem.isEnabled()
-                            && !speichernUnterMenuItem.isEnabled()) {
-                        speichernMenuItem.setEnabled(true);
-                        speichernUnterMenuItem.setEnabled(true);
-                    } else if (weinDaten.isEmpty() && kundenDaten.isEmpty()
-                            && speichernMenuItem.isEnabled()
-                            && speichernUnterMenuItem.isEnabled()) {
-                        speichernMenuItem.setEnabled(false);
-                        speichernUnterMenuItem.setEnabled(false);
+
+                    resetFormular();
+                    if (!weinDaten.isEmpty() && !dateiSpeichern.isEnabled() && !dateiSpeichernUnter.isEnabled()) {
+                        dateiSpeichern.setEnabled(true);
+                        dateiSpeichernUnter.setEnabled(true);
+                    } else if (weinDaten.isEmpty() && dateiSpeichern.isEnabled() && dateiSpeichernUnter.isEnabled()) {
+                        dateiSpeichern.setEnabled(false);
+                        dateiSpeichernUnter.setEnabled(false);
                     }
                 } catch (FileNotFoundException fe) {
-                    JOptionPane.showMessageDialog(this, KEINE_DATEI_GEFUNDEN_MESSAGE,
-                            KEINE_DATEI_GEFUNDEN_TITLE, JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Keine Datei gefunden",
+                            "Keine Datei", JOptionPane.ERROR_MESSAGE);
                     fehler = true;
                 } catch (IOException e) {
-                    JOptionPane.showMessageDialog(this, FEHLER_LESEN_MESSAGE,
-                            FEHLER_LESEN_TITLE, JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Fehler beim Einlesen",
+                            "Fehler", JOptionPane.ERROR_MESSAGE);
                     fehler = true;
                 }
 
                 if (!fehler) {
                     if (anzahlWerte == 0) {
-                        JOptionPane.showMessageDialog(this, NICHTS_EINGELESEN_MESSAGE,
-                                NICHTS_EINGELESEN_TITLE, JOptionPane.ERROR_MESSAGE);
-                    } else if (anzahlFehler == 0 || kundenDaten.isEmpty() && weinDaten.isEmpty()) {
-                        JOptionPane.showMessageDialog(this, ALLES_OK_MESSAGE, ALLES_OK_TITLE,
+                        JOptionPane.showMessageDialog(this, "Nichts eingelesen. Leer.",
+                                "Datei Leer", JOptionPane.ERROR_MESSAGE);
+                        
+                    } else if (anzahlFehler == 0 || weinDaten.isEmpty()) {
+                        JOptionPane.showMessageDialog(this, "Ok", "DONE",
                                 JOptionPane.INFORMATION_MESSAGE);
                     } else {
-                        JOptionPane.showMessageDialog(this, FEHELER_BEIM_LESEN_MESSAGE,
-                                FEHLER_BEIM_LESEN_TITLE, JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(this, "Fehler beim einlesen",
+                                "Fehler beim lesen", JOptionPane.ERROR_MESSAGE);
                     }
                     if (!weinDaten.isEmpty()) {
-
-                        bestellNr = Integer.parseInt(weinDaten.getWeinDaten()
+                        laufnummer = Integer.parseInt(weinDaten.getWeinDaten()
                                 .get(weinDaten.getWeinDaten().size() - 1)
-                                .getBestellnummer().substring(2, 3)) + 1;
+                                .getBestellnummer().substring(8, 11));
+                         resetFormular();
                     }
                     aktuelleDatei = gewaehlt;
                     System.out.println(weinDaten.toString());

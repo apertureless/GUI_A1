@@ -5,6 +5,8 @@
  */
 package gui.ws.prak.auf7;
 
+import java.util.Objects;
+
 /**
  *
  * @author jakub juszczak
@@ -24,7 +26,8 @@ public class Wein implements Lagergut {
     
     private static String trenner = ";";
     private static int anzahlDaten = 10;
-     private static final String BESTELLNUMMER = "[0-9]{2}-[A-Z]{3}-[0-9]{42}";
+     private static final String BESTELLNUMMER = "[0-9]{2}-[A-Z]{3}-[0-9]{4}";
+                                                
  
     
     public Wein (String bestellnummer, String name, int jahrgang, int dauer, 
@@ -96,6 +99,11 @@ public class Wein implements Lagergut {
        return dauer;
     }
     
+    @Override
+    public String getBestellnummer() {
+       return bestellnummer; 
+    }
+    
      public static Wein valueOf(String[] str) throws IllegalArgumentException {
         Wein wein = null;
         
@@ -121,6 +129,21 @@ public class Wein implements Lagergut {
         }
         
         return wein;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Wein other = (Wein) obj;
+        if (!Objects.equals(this.bestellnummer, other.bestellnummer)) {
+            return false;
+        }
+        return true;
     }
     
 }
