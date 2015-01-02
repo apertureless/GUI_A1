@@ -11,8 +11,11 @@ import java.awt.Container;
 import java.awt.FocusTraversalPolicy;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -206,10 +209,11 @@ public class WeinVerwaltung extends javax.swing.JFrame {
             = new HashMap<>();
     
     private static final String DATEIENDUNG = "wd";
+    private static final String TRENNER = ";";
     private WeinDaten weinDaten = null;
     private File aktuelleDatei = null;
     
-    private final FileNameExtensionFilter filter = new FileNameExtensionFilter("Weindatenbank", DATEIENDUNG);
+    private final FileNameExtensionFilter filter = new FileNameExtensionFilter("Weindatenbank (.wd)", DATEIENDUNG);
     private JFileChooser dateiAuswahl = new JFileChooser();
 
     /**
@@ -373,8 +377,8 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         dateiAuswahl.addChoosableFileFilter(filter);
         dateiAuswahl.setAcceptAllFileFilterUsed(true);
         dateiAuswahl.setFileFilter(filter);
-        DateiSpeichern.setEnabled(false);
-        DateiSpeichernUnter.setEnabled(false);
+        dateiSpeichern.setEnabled(false);
+        dateiSpeichernUnter.setEnabled(false);
     }
 
     /**
@@ -422,9 +426,9 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         diagramm1 = new gui.ws.prak.auf7.Diagramm();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuDatei = new javax.swing.JMenu();
-        DateiOeffnen = new javax.swing.JMenuItem();
-        DateiSpeichern = new javax.swing.JMenuItem();
-        DateiSpeichernUnter = new javax.swing.JMenuItem();
+        dateiOeffnen = new javax.swing.JMenuItem();
+        dateiSpeichern = new javax.swing.JMenuItem();
+        dateiSpeichernUnter = new javax.swing.JMenuItem();
         jMenuItemBeenden = new javax.swing.JMenuItem();
         jMenuBearbeiten = new javax.swing.JMenu();
         jMenuWein = new javax.swing.JMenu();
@@ -788,32 +792,32 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         jMenuDatei.setMnemonic('D');
         jMenuDatei.setText("Datei");
 
-        DateiOeffnen.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        DateiOeffnen.setText("Öffnen");
-        DateiOeffnen.addActionListener(new java.awt.event.ActionListener() {
+        dateiOeffnen.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        dateiOeffnen.setText("Öffnen");
+        dateiOeffnen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DateiOeffnenActionPerformed(evt);
+                dateiOeffnenActionPerformed(evt);
             }
         });
-        jMenuDatei.add(DateiOeffnen);
+        jMenuDatei.add(dateiOeffnen);
 
-        DateiSpeichern.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
-        DateiSpeichern.setText("Speichern");
-        DateiSpeichern.addActionListener(new java.awt.event.ActionListener() {
+        dateiSpeichern.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        dateiSpeichern.setText("Speichern");
+        dateiSpeichern.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DateiSpeichernActionPerformed(evt);
+                dateiSpeichernActionPerformed(evt);
             }
         });
-        jMenuDatei.add(DateiSpeichern);
+        jMenuDatei.add(dateiSpeichern);
 
-        DateiSpeichernUnter.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        DateiSpeichernUnter.setText("Speichern Unter");
-        DateiSpeichernUnter.addActionListener(new java.awt.event.ActionListener() {
+        dateiSpeichernUnter.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        dateiSpeichernUnter.setText("Speichern Unter");
+        dateiSpeichernUnter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DateiSpeichernUnterActionPerformed(evt);
+                dateiSpeichernUnterActionPerformed(evt);
             }
         });
-        jMenuDatei.add(DateiSpeichernUnter);
+        jMenuDatei.add(dateiSpeichernUnter);
 
         jMenuItemBeenden.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItemBeenden.setMnemonic('B');
@@ -1006,9 +1010,30 @@ public class WeinVerwaltung extends javax.swing.JFrame {
                                         jCFlaschengroesse.getSelectedItem().toString(),
                                         jTPreisEingabe.getText()
                                     );
+            
+            // Schauen ob die Arraylist leer ist.
+            
+            if (weinDaten == null) {
+                // Neues Weindaten Objekt anlegen
+                weinDaten = new WeinDaten();
+            }
+            
+            // Aktuellen Wein hinzufügen
+            weinDaten.addWeinDaten(neuerWein);
+            
             System.out.println(neuerWein.toString());
             laufnummer++;
             resetFormular();
+            
+            // Aktivieren der Speicher-Menüpunkte
+            
+            if (weinDaten != null && !dateiSpeichern.isEnabled() && !dateiSpeichernUnter.isEnabled()) {
+                dateiSpeichern.setEnabled(true);
+                dateiSpeichernUnter.setEnabled(true);
+            } else if (weinDaten == null && dateiSpeichern.isEnabled() && dateiSpeichernUnter.isEnabled() ) {
+                dateiSpeichern.setEnabled(false);
+                dateiSpeichernUnter.setEnabled(false);
+            }
         }
     }//GEN-LAST:event_jButtonSpeichernActionPerformed
 
@@ -1093,21 +1118,119 @@ public class WeinVerwaltung extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jCFlaschengroesseActionPerformed
 
-    private void DateiSpeichernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DateiSpeichernActionPerformed
+    private void dateiSpeichernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateiSpeichernActionPerformed
         if (aktuelleDatei != null) {
             speichern(aktuelleDatei);
         } else {
-            DateiSpeichernUnterActionPerformed(evt);
+            dateiSpeichernUnterActionPerformed(evt);
         }
-    }//GEN-LAST:event_DateiSpeichernActionPerformed
+    }//GEN-LAST:event_dateiSpeichernActionPerformed
 
-    private void DateiSpeichernUnterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DateiSpeichernUnterActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_DateiSpeichernUnterActionPerformed
+    private void dateiSpeichernUnterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateiSpeichernUnterActionPerformed
+        int response = dateiAuswahl.showSaveDialog(this);
+        if (response == JFileChooser.APPROVE_OPTION) {
+            speichern(dateiAuswahl.getSelectedFile());
+        }
+    }//GEN-LAST:event_dateiSpeichernUnterActionPerformed
 
-    private void DateiOeffnenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DateiOeffnenActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_DateiOeffnenActionPerformed
+    private void dateiOeffnenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateiOeffnenActionPerformed
+        boolean dateiAusgewaehlt = true;
+        File gewaehlt = null;
+        Wein wein = null;
+
+        int antwort = dateiAuswahl.showOpenDialog(this);
+        if (antwort == JFileChooser.APPROVE_OPTION) {
+            gewaehlt = dateiAuswahl.getSelectedFile();
+            System.out.println("Ausgewählt: " + gewaehlt.getName());
+        } else {
+            dateiAusgewaehlt = false;
+            System.out.println("Ausgewählt: nichts");
+        }
+
+        if (dateiAusgewaehlt) {
+            boolean abbrechen = false;
+            if (isFormularChanged()) {
+                int speichern = JOptionPane.showConfirmDialog(this, "Datei Speichern?001", "Speichern", JOptionPane.YES_NO_CANCEL_OPTION);
+                if (speichern == JOptionPane.YES_OPTION) {
+                    speichern(aktuelleDatei);
+                } else {
+                    abbrechen = speichern == JOptionPane.CANCEL_OPTION;
+                }
+            }
+
+            if (!abbrechen) {
+                boolean fehler = false;
+                aktuelleDatei = null;
+                weinDaten = new WeinDaten();
+    
+                int anzahlWerte = 0;
+                int anzahlFehler = 0;
+                String zeile;
+                try {
+                    BufferedReader eingabe = new BufferedReader(new FileReader(gewaehlt));
+                    while (eingabe.ready()) {
+                        zeile = eingabe.readLine();
+                        String[] daten = zeile.split(TRENNER);
+
+                   
+                        if (daten[0].equals("Wein")) {
+                            try {
+                                weinDaten.addWeinDaten(Wein
+                                        .valueOf(daten));
+                                anzahlWerte++;
+                            } catch (IllegalArgumentException we) {
+                                anzahlFehler++;
+                                System.out.println(we.getMessage());
+                            }
+                        }
+                    }
+                    eingabe.close();
+                    resetInternalFrameKunde();
+                    resetInternalFrameWein();
+                    if (!(weinDaten.isEmpty() && kundenDaten.isEmpty())
+                            && !speichernMenuItem.isEnabled()
+                            && !speichernUnterMenuItem.isEnabled()) {
+                        speichernMenuItem.setEnabled(true);
+                        speichernUnterMenuItem.setEnabled(true);
+                    } else if (weinDaten.isEmpty() && kundenDaten.isEmpty()
+                            && speichernMenuItem.isEnabled()
+                            && speichernUnterMenuItem.isEnabled()) {
+                        speichernMenuItem.setEnabled(false);
+                        speichernUnterMenuItem.setEnabled(false);
+                    }
+                } catch (FileNotFoundException fe) {
+                    JOptionPane.showMessageDialog(this, KEINE_DATEI_GEFUNDEN_MESSAGE,
+                            KEINE_DATEI_GEFUNDEN_TITLE, JOptionPane.ERROR_MESSAGE);
+                    fehler = true;
+                } catch (IOException e) {
+                    JOptionPane.showMessageDialog(this, FEHLER_LESEN_MESSAGE,
+                            FEHLER_LESEN_TITLE, JOptionPane.ERROR_MESSAGE);
+                    fehler = true;
+                }
+
+                if (!fehler) {
+                    if (anzahlWerte == 0) {
+                        JOptionPane.showMessageDialog(this, NICHTS_EINGELESEN_MESSAGE,
+                                NICHTS_EINGELESEN_TITLE, JOptionPane.ERROR_MESSAGE);
+                    } else if (anzahlFehler == 0 || kundenDaten.isEmpty() && weinDaten.isEmpty()) {
+                        JOptionPane.showMessageDialog(this, ALLES_OK_MESSAGE, ALLES_OK_TITLE,
+                                JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(this, FEHELER_BEIM_LESEN_MESSAGE,
+                                FEHLER_BEIM_LESEN_TITLE, JOptionPane.ERROR_MESSAGE);
+                    }
+                    if (!weinDaten.isEmpty()) {
+
+                        bestellNr = Integer.parseInt(weinDaten.getWeinDaten()
+                                .get(weinDaten.getWeinDaten().size() - 1)
+                                .getBestellnummer().substring(2, 3)) + 1;
+                    }
+                    aktuelleDatei = gewaehlt;
+                    System.out.println(weinDaten.toString());
+                }
+            }
+        }
+    }//GEN-LAST:event_dateiOeffnenActionPerformed
 
     /**
      * Setzt die Fokusreihenfolge fest.
@@ -1486,12 +1609,12 @@ public class WeinVerwaltung extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem DateiOeffnen;
-    private javax.swing.JMenuItem DateiSpeichern;
-    private javax.swing.JMenuItem DateiSpeichernUnter;
     private javax.swing.JPanel DiagrammPanel;
     private javax.swing.JInternalFrame WeinAufnehmenFrame;
     private javax.swing.JPanel WeinDatenPanel;
+    private javax.swing.JMenuItem dateiOeffnen;
+    private javax.swing.JMenuItem dateiSpeichern;
+    private javax.swing.JMenuItem dateiSpeichernUnter;
     private gui.ws.prak.auf7.Diagramm diagramm1;
     private javax.swing.JButton jBDown;
     private javax.swing.JButton jBUmrechnenUp;

@@ -23,6 +23,8 @@ public class Wein implements Lagergut {
     private String preis;
     
     private static String trenner = ";";
+    private static int anzahlDaten = 10;
+     private static final String BESTELLNUMMER = "[0-9]{2}-[A-Z]{3}-[0-9]{42}";
  
     
     public Wein (String bestellnummer, String name, int jahrgang, int dauer, 
@@ -92,6 +94,33 @@ public class Wein implements Lagergut {
     @Override
     public int getDauer() {
        return dauer;
+    }
+    
+     public static Wein valueOf(String[] str) throws IllegalArgumentException {
+        Wein wein = null;
+        
+        if (str.length < anzahlDaten) {
+            throw new IllegalArgumentException("Datensatz unvollständig.");
+        }
+        
+        for (int i = 0; i < str.length; i++) {
+            str[i] = str[i].trim();
+        }
+        
+        if (!str[1].matches(BESTELLNUMMER)) {
+            System.out.println(str[1]);
+            throw new IllegalArgumentException("Ungueltige Bestellnummer!");
+        }
+        
+        try {
+            wein = new Wein(str[1], str[2], Integer.parseInt(str[3]),Integer.parseInt(str[4]), str[5], str[6], 
+                     str[7], str[8], str[9], str[10]); 
+                    
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Ungueltiger Wert!");
+        }
+        
+        return wein;
     }
     
 }

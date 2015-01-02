@@ -18,7 +18,7 @@ public class WeinDaten {
         weinDaten = new ArrayList<>();
     }
     
-    public boolean weinDatenHinzufuegn(Wein wein) {
+    public boolean addWeinDaten(Wein wein) {
         return weinDaten.add(wein);
     }
     
@@ -31,7 +31,7 @@ public class WeinDaten {
         String inhalt = "";
         
         for (int i = 0; i < weinDaten.size(); i++) {
-            inhalt += "Wein;" + weinDaten.get(i).toString() + "\n";
+            inhalt += weinDaten.get(i).toString() + "\n";
         }
         
         return inhalt;
