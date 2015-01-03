@@ -747,7 +747,7 @@ public class WeinVerwaltung extends javax.swing.JFrame {
                 .addGroup(WeinDatenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLCurrency)
                     .addComponent(jLCurrency1))
-                .addContainerGap(109, Short.MAX_VALUE))
+                .addContainerGap(165, Short.MAX_VALUE))
         );
         WeinDatenPanelLayout.setVerticalGroup(
             WeinDatenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -808,7 +808,7 @@ public class WeinVerwaltung extends javax.swing.JFrame {
                     .addComponent(jTPreisAusgabe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLPreisLiter)
                     .addComponent(jLCurrency1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addGroup(WeinDatenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonSpeichern)
                     .addComponent(jButtonAbbrechen))
@@ -842,7 +842,7 @@ public class WeinVerwaltung extends javax.swing.JFrame {
             .addGroup(DiagrammPanelLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(diagramm1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(300, Short.MAX_VALUE))
+                .addContainerGap(369, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Diagramm", DiagrammPanel);
@@ -860,12 +860,12 @@ public class WeinVerwaltung extends javax.swing.JFrame {
             WeinAufnehmenFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(WeinAufnehmenFrameLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 682, Short.MAX_VALUE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jDesktopPane1.add(WeinAufnehmenFrame);
-        WeinAufnehmenFrame.setBounds(130, 60, 540, 668);
+        WeinAufnehmenFrame.setBounds(130, 60, 540, 737);
 
         jMenuDatei.setMnemonic('D');
         jMenuDatei.setText("Datei");
@@ -1124,7 +1124,8 @@ public class WeinVerwaltung extends javax.swing.JFrame {
                 laufnummer++;
                 resetFormular(); 
             } else {
-                JOptionPane.showMessageDialog(null, SPEICHERN_ACK_MSG, SPEICHERN_ACK_TITEL, JOptionPane.INFORMATION_MESSAGE);
+                //JOptionPane.showMessageDialog(null, SPEICHERN_ACK_MSG, SPEICHERN_ACK_TITEL, JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showInternalMessageDialog(jDesktopPane1, SPEICHERN_ACK_MSG, SPEICHERN_ACK_TITEL, JOptionPane.INFORMATION_MESSAGE);
             }
           
             

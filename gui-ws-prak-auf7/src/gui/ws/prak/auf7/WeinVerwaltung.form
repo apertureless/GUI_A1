@@ -205,7 +205,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTabbedPane1" max="32767" attributes="0"/>
+                      <Component id="jTabbedPane1" pref="682" max="32767" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -299,7 +299,7 @@
                                   <Component id="jLCurrency" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLCurrency1" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="109" max="32767" attributes="0"/>
+                              <EmptySpace pref="165" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -375,7 +375,7 @@
                                   <Component id="jLPreisLiter" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLCurrency1" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="62" max="32767" attributes="0"/>
+                              <EmptySpace pref="52" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jButtonSpeichern" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jButtonAbbrechen" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -688,7 +688,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                               <Component id="diagramm1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="300" max="32767" attributes="0"/>
+                              <EmptySpace pref="369" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
