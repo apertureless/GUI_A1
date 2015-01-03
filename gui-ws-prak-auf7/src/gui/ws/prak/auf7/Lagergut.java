@@ -26,4 +26,12 @@ public interface Lagergut {
     public String getAlkohol();
     public String getFlasche();
     
+    public String setName();
+    public String setPreis();
+    public String setLand();
+    public String setRegion();
+    public String setFarbe();
+    public String setAlkohol();
+    public String setFlasche();
+    
 }
