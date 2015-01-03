@@ -76,6 +76,7 @@ public class WeinVerwaltung extends javax.swing.JFrame {
     int lagerdauer = 0;
     boolean isValid = true;
     private int laufnummer = 0; 
+    private int laufnummerDB = 0; 
     private boolean isComboBoxChanged = false;
     
     private static final EingabeCheck ec = new EingabeCheck();
@@ -214,6 +215,7 @@ public class WeinVerwaltung extends javax.swing.JFrame {
     private static final String TRENNER = ";";
     private WeinDaten weinDaten = null;
     private File aktuelleDatei = null;
+    private static boolean isChangeForm = false;
     
     private final FileNameExtensionFilter filter = new FileNameExtensionFilter("Weindatenbank (.wd)", DATEIENDUNG);
     private JFileChooser dateiAuswahl = new JFileChooser();
@@ -1100,8 +1102,13 @@ public class WeinVerwaltung extends javax.swing.JFrame {
                 weinDaten = new WeinDaten();
             }
             
-            // Aktuellen Wein hinzufügen
+            if (isChangeForm) {
+                weinDaten.setWeinDaten(WeinDatenIndex, neuerWein);
+            } else {
+                // Aktuellen Wein hinzufügen
             weinDaten.addWeinDaten(neuerWein);
+            }
+            
             
             System.out.println(neuerWein.toString());
             laufnummer++;
@@ -1324,6 +1331,7 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         jBLastItem.setVisible(true);
         WeinAufnehmenFrame.setVisible(true); 
         WeinAufnehmenFrame.setTitle("Wein Ändern");
+        isChangeForm = true;
   
         jFTextfieldBestellnummer.setEditable(false);
         initChangeValues(0);
@@ -1587,11 +1595,13 @@ public class WeinVerwaltung extends javax.swing.JFrame {
                     ABORT_TITEL, JOptionPane.YES_NO_OPTION);
             if (abbrechen == 0) {
                 WeinAufnehmenFrame.setVisible(false);
+                isChangeForm = false;
                 resetFormular();
                 resetColors();
             }
         } else {
             WeinAufnehmenFrame.setVisible(false);
+            isChangeForm = false;
             resetFormular();
             resetColors();
         }

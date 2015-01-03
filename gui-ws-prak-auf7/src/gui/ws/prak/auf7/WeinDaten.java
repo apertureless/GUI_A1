@@ -22,6 +22,10 @@ public class WeinDaten {
         return weinDaten.add(wein);
     }
     
+    public void setWeinDaten(int i, Wein wein) {
+         weinDaten.set(i, wein);
+    }
+    
     public ArrayList<Wein> getWeinDaten() {
         return weinDaten;
     }
