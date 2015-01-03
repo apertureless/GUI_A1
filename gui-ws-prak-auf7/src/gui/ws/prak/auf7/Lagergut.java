@@ -18,5 +18,10 @@ public interface Lagergut {
     public int getJahr();
     public int getDauer();
     public String getBestellnummer();
+    public String getName();
+    public String getPreis();
+    public String getLand();
+    public String getRegion();
+    public String getFarbe();
     
 }
