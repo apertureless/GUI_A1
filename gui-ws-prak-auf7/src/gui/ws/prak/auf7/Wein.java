@@ -104,6 +104,42 @@ public class Wein implements Lagergut {
        return bestellnummer; 
     }
     
+        @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public String getPreis() {
+       return preis;
+    }
+
+    @Override
+    public String getLand() {
+       return anbaugebiet;
+    }
+
+    @Override
+    public String getRegion() {
+        return region;
+    }
+
+    @Override
+    public String getFarbe() {
+       return farbe;
+    }
+    
+    @Override
+    public String getAlkohol() {
+        return alkoholgehalt;
+    }
+
+    @Override
+    public String getFlasche() {
+       return flaschengroeße;
+    }
+
+    
      public static Wein valueOf(String[] str) throws IllegalArgumentException {
         Wein wein = null;
         
