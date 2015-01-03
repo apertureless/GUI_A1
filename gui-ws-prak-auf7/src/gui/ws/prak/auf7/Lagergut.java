@@ -23,5 +23,7 @@ public interface Lagergut {
     public String getLand();
     public String getRegion();
     public String getFarbe();
+    public String getAlkohol();
+    public String getFlasche();
     
 }
