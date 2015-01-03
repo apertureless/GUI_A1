@@ -72,6 +72,11 @@ public class WeinVerwaltung extends javax.swing.JFrame {
     private static final String MSG_INFO_LAGER = "Lagerdauer (%d - %d): ";
     private static final String MSG_INFO_JAHRGANG = "Jahrgang (%d - %d): ";
     
+    private static final String SPEICHERN_ACK_MSG = "Die Speicherung Ihrer Daten war erfolgreich.";
+    private static final String SPEICHERN_ACK_TITEL ="Speichern erfolgreich.";
+    private static final String SPEICHERN_ERR_MSG = "Leider ist ein Fehler beim Speichern Ihrer Daten aufgetreten.";
+    private static final String SPEICHERN_ERR_TITEL = "Speichern nicht erfolgreich!";
+    
     double jahrgang;
     int lagerdauer = 0;
     boolean isValid = true;
@@ -282,10 +287,6 @@ public class WeinVerwaltung extends javax.swing.JFrame {
                 }
             }
             
-            if (!istButtonLiter) {
-                jTPreisEingabe.setText("");
-            }
-            
             super.insertString(offs, str, null);
         }
     }
@@ -362,11 +363,12 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         MaskFormatter mf = null;
         NumberFormat nf = new DecimalFormat("0000");
         
+        jTextFieldName.setDocument(new NameDocument());
         jTPreisEingabe.setDocument(new EingabeDokument());
         jTPreisEingabe.setInputVerifier(ec);
         jTPreisAusgabe.setDocument(new AusgabeDokument());
         jTPreisAusgabe.setInputVerifier(ec);
-        jTextFieldName.setDocument(new NameDocument());
+        
         
         jBFirstItem.setVisible(false);
         jBPrevItem.setVisible(false);
@@ -970,8 +972,14 @@ public class WeinVerwaltung extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItemAufnehmenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAufnehmenActionPerformed
+        laufnummer = laufnummerDB;
+        
+        resetFormular();
+        jFTextfieldBestellnummer.setEnabled(true);
         WeinAufnehmenFrame.setVisible(true);  
         WeinAufnehmenFrame.setTitle("Wein Aufnehmen");
+        
+        
     }//GEN-LAST:event_jMenuItemAufnehmenActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -1111,8 +1119,11 @@ public class WeinVerwaltung extends javax.swing.JFrame {
             
             
             System.out.println(neuerWein.toString());
-            laufnummer++;
-            resetFormular();
+            if (!isChangeForm) {
+                laufnummer++;
+                resetFormular(); 
+            }
+          
             
             // Aktivieren der Speicher-Menüpunkte
             
@@ -1313,6 +1324,7 @@ public class WeinVerwaltung extends javax.swing.JFrame {
                         laufnummer = Integer.parseInt(weinDaten.getWeinDaten()
                                 .get(weinDaten.getWeinDaten().size() - 1)
                                 .getBestellnummer().substring(8, 11));
+                        laufnummerDB = laufnummer;
                          resetFormular();
                     }
                     aktuelleDatei = gewaehlt;
@@ -1340,6 +1352,7 @@ public class WeinVerwaltung extends javax.swing.JFrame {
     private void jBPrevItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPrevItemActionPerformed
             if(WeinDatenIndex == 1) {
             jBPrevItem.setEnabled(false);
+            jBFirstItem.setEnabled(false);
             WeinDatenIndex = 0;
             
         } else {
@@ -1415,18 +1428,23 @@ public class WeinVerwaltung extends javax.swing.JFrame {
     }
     
     private void initChangeValues(int i) {
+        laufnummer = Integer.parseInt(weinDaten.getWeinDaten().get(i).getBestellnummer().substring(8, 11)) - 1;
+        resetFormular();
+        lagerdauer = weinDaten.getWeinDaten().get(i).getDauer() ;
+        jahrgang = weinDaten.getWeinDaten().get(i).getJahr();
+        SetSpinnerValues();
+        
         jFTextfieldBestellnummer.setText(weinDaten.getWeinDaten().get(i).getBestellnummer());
         jTextFieldName.setText(weinDaten.getWeinDaten().get(i).getName());
         jFTJahrgang.setValue(weinDaten.getWeinDaten().get(i).getJahr());
         jTPreisEingabe.setText(weinDaten.getWeinDaten().get(i).getPreis());
         jComboBoxFarbe.setSelectedItem(weinDaten.getWeinDaten().get(i).getFarbe());
-        jSLagerdauer.setValue(weinDaten.getWeinDaten().get(i).getJahr() + weinDaten.getWeinDaten().get(i).getDauer());
+        jSLagerdauer.setValue(weinDaten.getWeinDaten().get(i).getDauer() + weinDaten.getWeinDaten().get(i).getJahr());
         jComboBoxLand.setSelectedItem(weinDaten.getWeinDaten().get(i).getLand());
         jComboBoxRegion.setSelectedItem(weinDaten.getWeinDaten().get(i).getRegion());
         jComboBoxAlkoholgehalt.setSelectedItem(weinDaten.getWeinDaten().get(i).getAlkohol());
         jCFlaschengroesse.setSelectedItem(weinDaten.getWeinDaten().get(i).getFlasche());
-        
-        SetSpinnerValues();
+       
     }
     
     private void CloseWithPrompt() {
@@ -1524,10 +1542,6 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         jSLagerdauer.setValue(0);
         diagramm1.setVisible(false);
         
-        jBFirstItem.setVisible(false);
-        jBPrevItem.setVisible(false);
-        jBNextItem.setVisible(false);
-        jBLastItem.setVisible(false);
         
         MaskFormatter mf = null;
         NumberFormat nf = new DecimalFormat("0000");
@@ -1598,12 +1612,22 @@ public class WeinVerwaltung extends javax.swing.JFrame {
                 isChangeForm = false;
                 resetFormular();
                 resetColors();
+                jBFirstItem.setVisible(false);
+                jBPrevItem.setVisible(false);
+                jBNextItem.setVisible(false);
+                jBLastItem.setVisible(false);
+                jFTextfieldBestellnummer.setEditable(true);
             }
         } else {
             WeinAufnehmenFrame.setVisible(false);
             isChangeForm = false;
             resetFormular();
             resetColors();
+            jBFirstItem.setVisible(false);
+            jBPrevItem.setVisible(false);
+            jBNextItem.setVisible(false);
+            jBLastItem.setVisible(false);
+            jFTextfieldBestellnummer.setEditable(true);
         }
     }
     
@@ -1750,11 +1774,11 @@ public class WeinVerwaltung extends javax.swing.JFrame {
                     ausgabe.newLine();
                 }
             }
-            
+           
             ausgabe.close();
-            JOptionPane.showMessageDialog(this, "Speichern Erfolgreich", "Alles jut", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, SPEICHERN_ACK_MSG, SPEICHERN_ACK_TITEL, JOptionPane.INFORMATION_MESSAGE);
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(this, "Speichern Fehlerhaft", "ohoh", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, SPEICHERN_ERR_MSG, SPEICHERN_ERR_TITEL, JOptionPane.ERROR_MESSAGE);
         }
     }
 
