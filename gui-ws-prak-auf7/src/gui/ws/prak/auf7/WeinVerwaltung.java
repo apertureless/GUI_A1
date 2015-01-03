@@ -93,6 +93,8 @@ public class WeinVerwaltung extends javax.swing.JFrame {
     
     private final BestellnummerVerifier bnv;
     
+    private int WeinDatenIndex = 0;
+    
     Lagergut lg = new Wein();
 
     private final String[] LAENDER = new String[]{
@@ -656,12 +658,32 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         jLCurrency1.setText("€");
 
         jBFirstItem.setText("<<");
+        jBFirstItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBFirstItemActionPerformed(evt);
+            }
+        });
 
         jBLastItem.setText(">>");
+        jBLastItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBLastItemActionPerformed(evt);
+            }
+        });
 
         jBPrevItem.setText("<");
+        jBPrevItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBPrevItemActionPerformed(evt);
+            }
+        });
 
         jBNextItem.setText(">");
+        jBNextItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBNextItemActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout WeinDatenPanelLayout = new javax.swing.GroupLayout(WeinDatenPanel);
         WeinDatenPanel.setLayout(WeinDatenPanelLayout);
@@ -1303,6 +1325,36 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         initChangeValues(0);
     }//GEN-LAST:event_jMenuItemAendernActionPerformed
 
+    private void jBPrevItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPrevItemActionPerformed
+        if(WeinDatenIndex == 0) {
+            WeinDatenIndex = 0;
+        } else {
+            WeinDatenIndex--;
+        }
+            
+        initChangeValues(WeinDatenIndex);
+    }//GEN-LAST:event_jBPrevItemActionPerformed
+
+    private void jBFirstItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBFirstItemActionPerformed
+        WeinDatenIndex = 0;
+        initChangeValues(WeinDatenIndex);
+    }//GEN-LAST:event_jBFirstItemActionPerformed
+
+    private void jBNextItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNextItemActionPerformed
+       
+        if(WeinDatenIndex == weinDaten.getWeinDaten().size()-1 ) {
+            WeinDatenIndex = weinDaten.getWeinDaten().size()-1;
+        } else {
+            WeinDatenIndex++;
+        }
+        initChangeValues(WeinDatenIndex);
+    }//GEN-LAST:event_jBNextItemActionPerformed
+
+    private void jBLastItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLastItemActionPerformed
+        WeinDatenIndex = weinDaten.getWeinDaten().size()-1;
+        initChangeValues(WeinDatenIndex);
+    }//GEN-LAST:event_jBLastItemActionPerformed
+
     /**
      * Setzt die Fokusreihenfolge fest.
      *
@@ -1343,7 +1395,7 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         jComboBoxRegion.setSelectedItem(weinDaten.getWeinDaten().get(i).getRegion());
         jComboBoxAlkoholgehalt.setSelectedItem(weinDaten.getWeinDaten().get(i).getAlkohol());
         jCFlaschengroesse.setSelectedItem(weinDaten.getWeinDaten().get(i).getFlasche());
-        
+        SetSpinnerValues();
     }
     
     private void CloseWithPrompt() {
