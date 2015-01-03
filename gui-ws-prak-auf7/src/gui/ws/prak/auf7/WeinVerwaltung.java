@@ -516,6 +516,7 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         jLBestellnummer.setLabelFor(jFTextfieldBestellnummer);
         jLBestellnummer.setText("Bestellnummer");
 
+        jTextFieldName.setMaximumSize(new java.awt.Dimension(6, 20));
         jTextFieldName.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jTextFieldNameFocusGained(evt);
@@ -728,16 +729,16 @@ public class WeinVerwaltung extends javax.swing.JFrame {
                                     .addComponent(jFTJahrgang, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jComboBoxRegion, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jComboBoxFarbe, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jTextFieldName, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jFTextfieldBestellnummer, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jComboBoxLand, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jComboBoxAlkoholgehalt, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jSLagerdauer, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTPreisEingabe, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTPreisEingabe, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                                     .addGroup(WeinDatenPanelLayout.createSequentialGroup()
                                         .addComponent(jBNextItem)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jBLastItem))))))
+                                        .addComponent(jBLastItem))
+                                    .addComponent(jTextFieldName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, WeinDatenPanelLayout.createSequentialGroup()
                         .addComponent(jLPreisLiter)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1122,6 +1123,8 @@ public class WeinVerwaltung extends javax.swing.JFrame {
             if (!isChangeForm) {
                 laufnummer++;
                 resetFormular(); 
+            } else {
+                JOptionPane.showMessageDialog(null, SPEICHERN_ACK_MSG, SPEICHERN_ACK_TITEL, JOptionPane.INFORMATION_MESSAGE);
             }
           
             
@@ -1252,7 +1255,7 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         if (dateiAusgewaehlt) {
             boolean abbrechen = false;
             if (isFormularChanged()) {
-                int speichern = JOptionPane.showConfirmDialog(this, "Datei Speichern?001", "Speichern", JOptionPane.YES_NO_CANCEL_OPTION);
+                int speichern = JOptionPane.showConfirmDialog(this, "Wollen Sie Ihren Fortschritt Speichern?", "Speichern", JOptionPane.YES_NO_CANCEL_OPTION);
                 if (speichern == JOptionPane.YES_OPTION) {
                     speichern(aktuelleDatei);
                 } else {
@@ -1310,14 +1313,15 @@ public class WeinVerwaltung extends javax.swing.JFrame {
 
                 if (!fehler) {
                     if (anzahlWerte == 0) {
-                        JOptionPane.showMessageDialog(this, "Nichts eingelesen. Leer.",
+                        JOptionPane.showMessageDialog(this, "Die Weindatenbank Datei, ist leer und konnte nicht eingelesen werden.",
                                 "Datei Leer", JOptionPane.ERROR_MESSAGE);
                         
                     } else if (anzahlFehler == 0 || weinDaten.isEmpty()) {
-                        JOptionPane.showMessageDialog(this, "Ok", "DONE",
+                        JOptionPane.showMessageDialog(this, "Weindatenbank erfolgreich eingelesen.", "Erfolg.",
                                 JOptionPane.INFORMATION_MESSAGE);
                     } else {
-                        JOptionPane.showMessageDialog(this, "Fehler beim einlesen",
+                        JOptionPane.showMessageDialog(this, "Ihre Weindatenbank ist Fehlerhaft. Es wurden zu viele oder zu wenige Attribute gefunden.\n" +
+                                "Bitte wählen Sie eine andere Datei aus.",
                                 "Fehler beim lesen", JOptionPane.ERROR_MESSAGE);
                     }
                     if (!weinDaten.isEmpty()) {

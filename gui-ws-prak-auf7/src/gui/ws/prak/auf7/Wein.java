@@ -142,7 +142,7 @@ public class Wein implements Lagergut {
     
      public static Wein valueOf(String[] str) throws IllegalArgumentException {
         Wein wein = null;
-        
+            
         if (str.length < anzahlDaten) {
             throw new IllegalArgumentException("Datensatz unvollständig.");
         }
@@ -180,6 +180,13 @@ public class Wein implements Lagergut {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 83 * hash + Objects.hashCode(this.bestellnummer);
+        return hash;
     }
 
     @Override

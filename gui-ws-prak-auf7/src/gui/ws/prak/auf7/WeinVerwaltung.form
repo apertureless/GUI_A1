@@ -273,17 +273,17 @@
                                                   <Component id="jFTJahrgang" alignment="0" max="32767" attributes="0"/>
                                                   <Component id="jComboBoxRegion" alignment="0" max="32767" attributes="0"/>
                                                   <Component id="jComboBoxFarbe" alignment="0" max="32767" attributes="0"/>
-                                                  <Component id="jTextFieldName" alignment="0" max="32767" attributes="0"/>
                                                   <Component id="jFTextfieldBestellnummer" alignment="0" max="32767" attributes="0"/>
                                                   <Component id="jComboBoxLand" alignment="0" max="32767" attributes="0"/>
                                                   <Component id="jComboBoxAlkoholgehalt" alignment="0" max="32767" attributes="0"/>
                                                   <Component id="jSLagerdauer" alignment="0" max="32767" attributes="0"/>
-                                                  <Component id="jTPreisEingabe" alignment="1" min="-2" pref="100" max="-2" attributes="0"/>
+                                                  <Component id="jTPreisEingabe" alignment="0" pref="100" max="32767" attributes="0"/>
                                                   <Group type="102" attributes="0">
                                                       <Component id="jBNextItem" min="-2" max="-2" attributes="0"/>
                                                       <EmptySpace max="-2" attributes="0"/>
                                                       <Component id="jBLastItem" min="-2" max="-2" attributes="0"/>
                                                   </Group>
+                                                  <Component id="jTextFieldName" alignment="0" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
@@ -400,6 +400,11 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="jTextFieldName">
+                      <Properties>
+                        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="[6, 20]"/>
+                        </Property>
+                      </Properties>
                       <Events>
                         <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTextFieldNameFocusGained"/>
                       </Events>
