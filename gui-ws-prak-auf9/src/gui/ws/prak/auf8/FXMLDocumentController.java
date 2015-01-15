@@ -7,10 +7,11 @@ package gui.ws.prak.auf8;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
+import javafx.scene.control.ComboBox;
 
 /**
  *
@@ -19,17 +20,25 @@ import javafx.scene.control.Label;
 public class FXMLDocumentController implements Initializable {
     
     @FXML
-    private Label label;
+    private ComboBox<String> bottleSize;
     
-    @FXML
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
-    }
+    // Liste mit Flaschengrößen
+    ObservableList<String> bottleList = FXCollections.observableArrayList(
+        "0,187 l", 
+        "0,25 l", 
+        "0,375 l", 
+        "0,5 l", 
+        "0,62 l", 
+        "0,7 l", 
+        "0,75 l", 
+        "0,8 l", 
+        "1 l", 
+        "1,5 l" 
+    );
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        bottleSize.setItems(bottleList);
     }    
     
 }

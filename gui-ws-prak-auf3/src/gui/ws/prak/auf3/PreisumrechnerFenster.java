@@ -135,7 +135,7 @@ public class PreisumrechnerFenster extends javax.swing.JFrame {
         jLFenstergroesse.setLabelFor(jCFlaschengroesse);
         jLFenstergroesse.setText("Flaschengröße");
 
-        jCFlaschengroesse.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0,187 l", "0,25 l", "0,375 l", "0,5 l", "0,62 l", "0,7 l", "0,75 l", "0,8 l", "1 l", "1,5 l " }));
+        jCFlaschengroesse.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "187 l", "0", "25 l", "0", "375 l", "0", "5 l", "0", "62 l", "0", "7 l", "0", "75 l", "0", "8 l", "1 l", "1", "5 l" }));
         jCFlaschengroesse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCFlaschengroesseActionPerformed(evt);
@@ -175,31 +175,31 @@ public class PreisumrechnerFenster extends javax.swing.JFrame {
         jBUmrechnenUp.setMargin(new java.awt.Insets(0, 0, 0, 0));
         jBUmrechnenUp.setMaximumSize(new java.awt.Dimension(69, 69));
         jBUmrechnenUp.setMinimumSize(new java.awt.Dimension(69, 69));
-        jBUmrechnenUp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBUmrechnenUpActionPerformed(evt);
-            }
-        });
         jBUmrechnenUp.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jBUmrechnenUpFocusLost(evt);
+            }
+        });
+        jBUmrechnenUp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBUmrechnenUpActionPerformed(evt);
             }
         });
 
         jLPreisProLiter.setText("Preis pro Liter");
 
         jTPreisAusgabe.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
-        jTPreisAusgabe.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTPreisAusgabeActionPerformed(evt);
-            }
-        });
         jTPreisAusgabe.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jTPreisAusgabeFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jTPreisAusgabeFocusLost(evt);
+            }
+        });
+        jTPreisAusgabe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTPreisAusgabeActionPerformed(evt);
             }
         });
         jTPreisAusgabe.addKeyListener(new java.awt.event.KeyAdapter() {
