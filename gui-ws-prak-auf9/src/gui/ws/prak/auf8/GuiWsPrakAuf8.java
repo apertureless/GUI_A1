@@ -25,6 +25,7 @@ public class GuiWsPrakAuf8 extends Application {
         stage.setTitle("Preisumrechner FX");
         stage.setScene(scene);
         stage.show();
+        
     }
 
     /**
