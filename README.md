@@ -35,13 +35,14 @@ MDI Dokument mit Formularfenster für die Weinaufnahme. Und Funktionalen Menüpu
 Erweiterung der Applikation aus Aufgabe 5. Der Preisrechner aus Aufgabe 3 wurde integriert und das Diagramm wurde integriert, in einem zweiten Tab.
 
 ## Aufgabe 7
-![Screenshot 6](https://github.com/apertureless/GUI_PRAKTIKUM/blob/master/img/auf6.jpg)
+![Screenshot 7](https://github.com/apertureless/GUI_PRAKTIKUM/blob/master/img/auf6.jpg)
 
 Applikation wurde um eine Speichern Funktion erweitert. Die Weine werden in einer internen Datenstruktur gespeichert und können über den Menüpunkt Datei Speichern, als *.wd Datei gespeichert und geladen werden. 
 Fehlerbehandlung bei korrupten Dateien oder falsch formatierten Dateien.
 Außerdem wurde der Menüpunkt Wein - Ändern hinzugefügt und funktional belegt mit einem Formular zum ändern der einzelnen Weine in der Datenbank.
 
 ## Aufgabe 8
+![Screenshot 8](https://github.com/apertureless/GUI_PRAKTIKUM/blob/master/img/auf7.jpg)
 
 Applikation aus Aufgabe 3, der Preisumrechner wurde nun in JavaFX neu implementiert.
 
