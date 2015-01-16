@@ -20,6 +20,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javax.swing.JOptionPane;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
@@ -51,7 +53,7 @@ public class FXMLDocumentController implements Initializable {
     private boolean isLiterCalcLast = false;
     private static final String REGEX = "(\\d*,?\\d*)|(\\d{0,3}(\\.\\d{3})*,?\\d*)";
     
-
+    
     
     @FXML
     private void buttonDownAction(ActionEvent event) {
@@ -90,8 +92,13 @@ public class FXMLDocumentController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        Image imgDown = new Image(getClass().getResourceAsStream("circle-down.png"));
+        Image imgUp = new Image(getClass().getResourceAsStream("circle-up.png"));
+
         bottleSize.setItems(bottleList);
         bottleSize.setValue("0,75");
+        buttonUp.setGraphic(new ImageView(imgUp));
+        buttonDown.setGraphic(new ImageView(imgDown));
     }    
     
     private void calculateLiterPrice() {
