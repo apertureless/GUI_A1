@@ -92,7 +92,6 @@ public class FXMLDocumentController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         bottleSize.setItems(bottleList);
         bottleSize.setValue("0,75");
-       
     }    
     
     private void calculateLiterPrice() {
@@ -119,7 +118,11 @@ public class FXMLDocumentController implements Initializable {
                 isLiterCalcLast = false;
             
             } catch (java.text.ParseException ex) {
-               JOptionPane.showMessageDialog(null, "Bitte geben Sie zuerst eine Zahl ein", "Zahl eingeben", JOptionPane.WARNING_MESSAGE);
+              Dialogs.create()
+                .title("Eingabefehler")
+                .masthead("Feld leer")
+                .message("Bitte geben Sie eine Zahl im Format x,xx ein.")
+                .showError();
                txfBottlePrice.selectAll();
                txfBottlePrice.requestFocus();
             }
@@ -150,7 +153,11 @@ public class FXMLDocumentController implements Initializable {
                 isLiterCalcLast = true;
 
             } catch (java.text.ParseException ex) {
-               JOptionPane.showMessageDialog(null, "Bitte geben Sie zuerst eine Zahl ein", "Zahl eingeben", JOptionPane.WARNING_MESSAGE);
+               Dialogs.create()
+                .title("Eingabefehler")
+                .masthead("Feld leer")
+                .message("Bitte geben Sie eine Zahl im Format x,xx ein.")
+                .showError();
                txfPriceLiter.selectAll();
                txfPriceLiter.requestFocus();
             }
