@@ -512,6 +512,11 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         WeinDatenPanel.setFocusTraversalPolicyProvider(true);
 
         jFTextfieldBestellnummer.setToolTipText("");
+        jFTextfieldBestellnummer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFTextfieldBestellnummerActionPerformed(evt);
+            }
+        });
 
         jLBestellnummer.setLabelFor(jFTextfieldBestellnummer);
         jLBestellnummer.setText("Bestellnummer");
@@ -865,7 +870,7 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         );
 
         jDesktopPane1.add(WeinAufnehmenFrame);
-        WeinAufnehmenFrame.setBounds(130, 60, 540, 737);
+        WeinAufnehmenFrame.setBounds(130, 60, 540, 738);
 
         jMenuDatei.setMnemonic('D');
         jMenuDatei.setText("Datei");
@@ -1402,6 +1407,10 @@ public class WeinVerwaltung extends javax.swing.JFrame {
         jBLastItem.setEnabled(false);
         initChangeValues(WeinDatenIndex);
     }//GEN-LAST:event_jBLastItemActionPerformed
+
+    private void jFTextfieldBestellnummerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFTextfieldBestellnummerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFTextfieldBestellnummerActionPerformed
 
     /**
      * Setzt die Fokusreihenfolge fest.
